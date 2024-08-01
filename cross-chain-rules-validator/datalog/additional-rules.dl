@@ -1,0 +1,39 @@
+#include "misc-rules.dl"
+
+/**********************************************************************************************************************************/
+/******************************* WITHDRAWALS WITH MATCH CONSIDERING ADDITIONAL DATA (TARGET CHAIN) ********************************/
+/**********************************************************************************************************************************/
+
+.decl TC_WithdrawalsMatchWithAdditionalData(origin_chain_id:unsigned, origin_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, withdrawal_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
+.output TC_WithdrawalsMatchWithAdditionalData
+
+TC_WithdrawalsMatchWithAdditionalData(origin_chain_id, origin_timestamp, origin_transaction_hash, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount) :-
+    TC_WithdrawalsWithoutMatch(origin_chain_id, origin_timestamp, origin_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount),
+    additional_sc_token_withdrew(dst_transaction_hash, _, _, beneficiary, dst_token, amount),
+    additional_transaction(dst_chain_timestamp, dst_chain_id, dst_transaction_hash, _, _, _, _, 1, _).
+
+/**********************************************************************************************************************************/
+/****************************** WITHDRAWALS WITHOUT MATCH CONSIDERING ADDITIONAL DATA (TARGET CHAIN) ******************************/
+/**********************************************************************************************************************************/
+
+.decl TC_WithdrawalsWithoutMatchWithAdditionalData(origin_chain_id:unsigned, origin_timestamp:unsigned, origin_transaction_hash:symbol, withdrawal_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
+.output TC_WithdrawalsWithoutMatchWithAdditionalData
+
+TC_WithdrawalsWithoutMatchWithAdditionalData(origin_chain_id, origin_timestamp, origin_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount) :-
+    TC_WithdrawalsWithoutMatch(origin_chain_id, origin_timestamp, origin_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount),
+    !TC_WithdrawalsMatchWithAdditionalData(origin_chain_id, origin_timestamp, origin_transaction_hash, _, _, _, _, origin_token, dst_token, sender, beneficiary, amount).
+
+/**********************************************************************************************************************************/
+/******************************* WITHDRAWALS WITH MATCH CONSIDERING ADDITIONAL DATA (SOURCE CHAIN) ********************************/
+/**********************************************************************************************************************************/
+
+//dos withdrawals que nao tinham match na source chain, quais e que agora já tem depois de termos ido buscar dados na ronin
+//antes to selected interval?
+
+.decl SC_WithdrawalsMatchWithAdditionalData(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, withdrawal_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
+.output SC_WithdrawalsMatchWithAdditionalData
+
+SC_WithdrawalsMatchWithAdditionalData(origin_chain_id, origin_chain_timestamp, origin_transaction_hash, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount) :-
+    SC_WithdrawalsWithoutMatch(dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, dst_token, beneficiary, amount),
+    additional_tc_token_withdrew(origin_transaction_hash, _, withdrawal_id, beneficiary, origin_token, dst_token, dst_chain_id, _, amount),
+    additional_transaction(origin_chain_timestamp, origin_chain_id, origin_transaction_hash, _, sender, _, _, 1, _).

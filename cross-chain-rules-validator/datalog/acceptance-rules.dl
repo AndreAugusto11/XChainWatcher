@@ -1,0 +1,169 @@
+#include "lib/declarations.dl"
+#include "lib/types.dl"
+
+/******************************************************************************************************/
+/********************************** DEPOSIT ON SOURCE CHAIN (ISOLATED) ********************************/
+/******************************************************************************************************/
+
+// Valid deposit of native tokens (source chain token) in the source chain
+//    there is an event emitted by the bridge contract
+//    there is an event emitted by the native token contract. This event and the one above are in the same transaction (and consq. int the same block)
+//    there is a transaction in the same chain transfering natively the same amount (natively)
+//    there is a mapping between tokens in both chains
+//    the token being deposited is native of the source chain
+//    the bridge event comes after the one from the token contract
+
+.decl SC_ValidNativeTokenDeposit(timestamp:unsigned, transaction_hash:symbol, deposit_id:unsigned, sender:Address, to:Address, beneficiary:Address, dst_token:Address, origin_token:Address, origin_chain_id:unsigned, dst_chain_id:unsigned, standard:number, amount:Amount)
+.output SC_ValidNativeTokenDeposit
+
+SC_ValidNativeTokenDeposit(timestamp, transaction_hash, deposit_id, sender, bridge_address, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, standard, amount) :-
+    sc_token_deposited(transaction_hash, bridge_event_index, deposit_id, beneficiary, dst_token, origin_token, dst_chain_id, standard, amount),
+    sc_deposit(transaction_hash, token_event_index, sender, bridge_address, amount),
+    transaction(timestamp, origin_chain_id, transaction_hash, _, sender, _, amount, 1, _),
+    token_mapping(origin_chain_id, dst_chain_id, origin_token, dst_token, standard),
+    native_token(origin_chain_id, origin_token),
+    bridge_controlled_address(origin_chain_id, bridge_address),
+    bridge_event_index > token_event_index.
+
+// Valid deposit of ERC20 tokens in the source chain
+//    there is an event emitted by the bridge contract
+//    there is an event emitted by the token contract. This event and the one above are in the same transaction (and consq. int the same block), and move the same amount of tokens
+//    the token transfer is either to the bridge contract or to the null address (0x0000) to burn tokens
+//    there is a transaction in the same chain from the user to the bridge contract and does not transfer native tokens
+//    there is a mapping between tokens in both chains
+//    the bridge event comes after the one from the token contract
+
+.decl SC_ValidERC20TokenDeposit(timestamp:unsigned, transaction_hash:symbol, deposit_id:unsigned, from:Address, to:Address, beneficiary:Address, dst_token:Address, origin_token:Address, origin_chain_id:unsigned, dst_chain_id:unsigned, standard:number, amount:Amount)
+.output SC_ValidERC20TokenDeposit
+
+SC_ValidERC20TokenDeposit(timestamp, transaction_hash, deposit_id, from, bridge_address, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, standard, amount) :-
+    sc_token_deposited(transaction_hash, bridge_event_index, deposit_id, beneficiary, dst_token, origin_token, dst_chain_id, standard, amount),
+    erc20_transfer(transaction_hash, origin_chain_id, token_event_index, origin_token, _, bridge_address, amount),
+    transaction(timestamp, origin_chain_id, transaction_hash, _, from, _, "0", 1, _),
+    token_mapping(origin_chain_id, dst_chain_id, origin_token, dst_token, standard),
+    bridge_controlled_address(origin_chain_id, bridge_address),
+    bridge_event_index > token_event_index.
+
+
+/******************************************************************************************************/
+/************************************** DEPOSIT ON TARGET CHAIN ***************************************/
+/******************************************************************************************************/
+
+// Valid deposit of ERC20 tokens in the target chain (ISOLATED)
+//    there is an event emitted a the bridge contract
+//    there is an event emitted a the token contract. This event and the one above are in the same transaction (and consq. int the same block), and move the same amount of tokens
+//    the token transfer is either from the bridge contract or from the null address (0x0000) to mint tokens
+//    there is a transaction in the same chain from the bridge contract to the user and does not transfer native tokens
+//    there is a mapping between tokens in both chains
+//    the bridge event comes after the one from the token contract
+
+.decl TC_ValidERC20TokenDeposit(timestamp:unsigned, transaction_hash:symbol, deposit_id:unsigned, beneficiary:Address, dst_token:Address, chain_id:unsigned, amount:Amount)
+.output TC_ValidERC20TokenDeposit
+
+TC_ValidERC20TokenDeposit(timestamp, transaction_hash, deposit_id, beneficiary, dst_token, chain_id, amount) :-
+    tc_token_deposited(transaction_hash, bridge_event_index, deposit_id, beneficiary, dst_token, amount),
+    erc20_transfer(transaction_hash, chain_id, token_event_index, dst_token, bridge_address_2, beneficiary, amount),
+    transaction(timestamp, chain_id, transaction_hash, _, _, bridge_address_1, "0", 1, _),
+    bridge_controlled_address(chain_id, bridge_address_1),
+    bridge_controlled_address(chain_id, bridge_address_2),
+    bridge_event_index > token_event_index.
+
+
+// Valid deposit of ERC20 tokens in the target chain (DEPENDENT ON SOURCE CHAIN DEPOSIT)
+//     there must be a valid local deposit of tokens using TC_ValidERC20TokenDeposit
+//     there must be a SC_ValidERC20TokenDeposit with the same deposit_id, token, to address, amount, ...
+
+.decl CCTX_Deposit(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, deposit_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
+.output CCTX_Deposit
+
+CCTX_Deposit(origin_chain_id, origin_chain_timestamp, origin_transaction_hash, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, deposit_id, origin_token, dst_token, sender, beneficiary, amount) :-
+    TC_ValidERC20TokenDeposit(dst_chain_timestamp, dst_transaction_hash, deposit_id, beneficiary, dst_token, dst_chain_id, amount),
+    (
+        SC_ValidERC20TokenDeposit(origin_chain_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount) ;
+        SC_ValidNativeTokenDeposit(origin_chain_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount)
+    ),
+    origin_chain_timestamp < dst_chain_timestamp.
+
+/******************************************************************************************************/
+/******************************** WITHDRAWAL ON TARGET CHAIN (ISOLATED) *******************************/
+/******************************************************************************************************/
+
+// Valid withdrawal of native tokens (target chain token) in the target chain
+//    there is an event emitted by the bridge contract
+//    there is an event emitted by the native token contract. This event and the one above are in the same transaction (and consq. int the same block)
+//    there is a transaction in the same chain transfering natively the same amount (natively)
+//    there is a mapping between tokens in both chains
+//    the token being withdrawn is native of the target chain
+//    the bridge event comes after the one from the token contract
+
+.decl TC_ValidNativeTokenWithdrawal(timestamp:unsigned, transaction_hash:symbol, withdrawal_id:unsigned, sender:Address, to:Address, beneficiary:Address, origin_token:Address, dst_token:Address, origin_chain_id:unsigned, dst_chain_id:unsigned, standard:number, amount:Amount)
+.output TC_ValidNativeTokenWithdrawal
+
+TC_ValidNativeTokenWithdrawal(timestamp, transaction_hash, withdrawal_id, sender, bridge_address, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, standard, amount) :-
+    tc_token_withdrew(transaction_hash, bridge_event_index, withdrawal_id, beneficiary, origin_token, dst_token, dst_chain_id, standard, amount),
+    tc_withdrawal(transaction_hash, token_event_index, sender, bridge_address, amount),
+    transaction(timestamp, origin_chain_id, transaction_hash, _, sender, _, amount, 1, _),
+    token_mapping(dst_chain_id, origin_chain_id, dst_token, origin_token, standard),
+    native_token(origin_chain_id, origin_token),
+    bridge_controlled_address(origin_chain_id, bridge_address),
+    bridge_event_index > token_event_index.
+
+
+// Valid withdrawal of ERC20 tokens in the target chain
+//    there is an event emitted by the bridge contract
+//    there is an event emitted by the token contract. This event and the one above are in the same transaction (and consq. int the same block), and move the same amount of tokens
+//    there is a transaction in the same chain from bridge contract to the user and does not transfer native tokens
+//    there is a mapping between tokens in both chains
+//    the bridge event comes after the one from the token contract
+
+.decl TC_ValidERC20TokenWithdrawal(timestamp:unsigned, transaction_hash:symbol, withdrawal_id:unsigned, from:Address, to:Address, beneficiary:Address, origin_token:Address, dst_token:Address, dst_chain_id:unsigned, origin_chain_id:unsigned, standard:number, amount:Amount)
+.output TC_ValidERC20TokenWithdrawal
+
+TC_ValidERC20TokenWithdrawal(timestamp, transaction_hash, withdrawal_id, sender, bridge_address, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, standard, amount) :-
+    tc_token_withdrew(transaction_hash, bridge_event_index, withdrawal_id, beneficiary, origin_token, dst_token, dst_chain_id, standard, amount),
+    erc20_transfer(transaction_hash, origin_chain_id, token_event_index, origin_token, _, bridge_address, amount),
+    transaction(timestamp, origin_chain_id, transaction_hash, _, sender, _, "0", 1, _),
+    token_mapping(dst_chain_id, origin_chain_id, dst_token, origin_token, standard),
+    bridge_controlled_address(origin_chain_id, bridge_address),
+    bridge_event_index > token_event_index.
+
+/******************************************************************************************************/
+/************************************* WITHDRAWAL ON SOURCE CHAIN *************************************/
+/******************************************************************************************************/
+
+// Valid withdrawal of ERC20 tokens in the source chain (ISOLATED)
+//    there is an event emitted by a bridge contract
+//    there is an event emitted by the token contract. This event and the one above are in the same transaction (and consq. int the same block), and move the same amount of tokens
+//    the token transfer is either from the bridge contract or from the null address (0x0000) to mint tokens
+//    there is a transaction in the same chain from one of the bridge contracts to the user and does not transfer native tokens
+//    there is a mapping between tokens in both chains
+//    the bridge event comes after the one from the token contract
+
+.decl SC_ValidERC20TokenWithdrawal(timestamp:unsigned, transaction_hash:symbol, withdrawal_id:unsigned, beneficiary:Address, dst_token:Address, dst_chain_id:unsigned, amount:Amount)
+.output SC_ValidERC20TokenWithdrawal
+
+SC_ValidERC20TokenWithdrawal(timestamp, transaction_hash, withdrawal_id, beneficiary, dst_token, chain_id, amount) :-
+    sc_token_withdrew(transaction_hash, bridge_event_index, withdrawal_id, beneficiary, dst_token, amount),
+    (
+        erc20_transfer(transaction_hash, chain_id, token_event_index, dst_token, bridge_address, beneficiary, amount) ;
+        sc_withdrawal(transaction_hash, token_event_index, bridge_address, beneficiary, amount)
+    ),
+    transaction(timestamp, chain_id, transaction_hash, _, _, _, "0", 1, _),
+    bridge_controlled_address(chain_id, bridge_address),
+    bridge_event_index > token_event_index.
+
+
+// Valid withdrawal of ERC20 tokens in the source chain (DEPENDENT ON TARGET CHAIN WITHDRAWAL)
+//     there must be a valid local withdrawal of tokens using SC_ValidERC20TokenWithdrawal
+//     there must be a TC_ValidERC20TokenWithdrawal with the same withdrawal_id, token, to address, amount, ...
+
+.decl CCTX_Withdrawal(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, withdrawal_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
+.output CCTX_Withdrawal
+
+CCTX_Withdrawal(origin_chain_id, origin_chain_timestamp, origin_transaction_hash, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount) :-
+    SC_ValidERC20TokenWithdrawal(dst_chain_timestamp, dst_transaction_hash, withdrawal_id, beneficiary, dst_token, dst_chain_id, amount),
+    (
+        TC_ValidERC20TokenWithdrawal(origin_chain_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount) ;
+        TC_ValidNativeTokenWithdrawal(origin_chain_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount)
+    ),
+    origin_chain_timestamp < dst_chain_timestamp.

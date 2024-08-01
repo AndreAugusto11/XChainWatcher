@@ -1,0 +1,63 @@
+/******************************************************************************************************/
+/******************************************** SOURCE CHAIN ********************************************/
+/******************************************************************************************************/
+
+/* for native tokens (ETH in Ethereum) */
+.decl sc_deposit(transaction_hash:symbol, event_index:number, sender:symbol, to:symbol, amount:Amount) // deposit tokens to the bridge in the WETH contract
+.input sc_deposit
+
+.decl sc_withdrawal(transaction_hash:symbol, event_index:number, from:symbol, beneficiary:symbol, amount:Amount) // withdraw tokens from the bridge in the WETH contract
+.input sc_withdrawal
+
+/* for bridge contract */
+.decl sc_token_deposited(transaction_hash:symbol, event_index:number, deposit_id:unsigned, beneficiary:Address, dst_token:Address, origin_token:Address, dst_chain_id:unsigned, standard:number, amount:Amount)
+.input sc_token_deposited
+
+.decl sc_token_withdrew(transaction_hash:symbol, event_index:number, withdrawal_id:unsigned, beneficiary:Address, dst_token:Address, amount:Amount)
+.input sc_token_withdrew
+
+/******************************************************************************************************/
+/******************************************** TARGET CHAIN ********************************************/
+/******************************************************************************************************/
+
+/* for native tokens (ETH in Ethereum) */
+.decl tc_deposit(transaction_hash:symbol, event_index:number, from:symbol, beneficiary:symbol, amount:Amount) // withdraw tokens from the bridge in the WGLMR contract
+.input tc_deposit
+
+.decl tc_withdrawal(transaction_hash:symbol, event_index:number, sender:symbol, to:symbol, amount:Amount) // deposit tokens to the bridge in the WGLMR contract
+.input tc_withdrawal
+
+.decl tc_token_deposited(transaction_hash:symbol, event_index:number, deposit_id:unsigned, beneficiary:Address, dst_token:Address, amount:Amount)
+.input tc_token_deposited
+
+.decl tc_token_withdrew(transaction_hash:symbol, event_index:number, withdrawal_id:unsigned, beneficiary:Address, origin_token:Address, dst_token:Address, dst_chain_id:unsigned, standard:number, amount:Amount)
+.input tc_token_withdrew
+
+/******************************************************************************************************/
+/******************************************* GENERAL DECLS ********************************************/
+/******************************************************************************************************/
+
+.decl erc20_transfer(transaction_hash:symbol, chain_id:unsigned, event_index:number, contract:Address, from:Address, to:Address, amount:Amount)
+.decl transaction(timestamp:unsigned, chain_id:unsigned, transaction_hash:symbol, transaction_index:number, from:Address, to:Address, value:Amount, status:number, fee:symbol)
+.decl native_token(chain_id:unsigned, token_contract:Address)
+.decl token_mapping(source_chain_id:unsigned, target_chain_id:unsigned, source_chain_token:Address, target_chain_token:Address, standard:number)
+.decl bridge_controlled_address(chain_id:unsigned, bridge_address:Address)
+
+.input erc20_transfer
+.input transaction
+.input native_token
+.input token_mapping
+.input bridge_controlled_address
+
+/******************************************************************************************************/
+/***************************************** ADDITIONAL DECLS *******************************************/
+/******************************************************************************************************/
+
+.decl additional_sc_token_withdrew(transaction_hash:symbol, event_index:number, withdrawal_id:unsigned, beneficiary:Address, dst_token:Address, amount:Amount)
+.input additional_sc_token_withdrew
+
+.decl additional_transaction(timestamp:unsigned, chain_id:unsigned, transaction_hash:symbol, transaction_index:number, from:Address, to:Address, value:Amount, status:number, fee:symbol)
+.input additional_transaction
+
+.decl additional_tc_token_withdrew(transaction_hash:symbol, event_index:number, withdrawal_id:unsigned, beneficiary:Address, origin_token:Address, dst_token:Address, dst_chain_id:unsigned, standard:number, amount:Amount)
+.input additional_tc_token_withdrew
