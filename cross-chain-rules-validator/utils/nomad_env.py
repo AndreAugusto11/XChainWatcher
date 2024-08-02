@@ -33,16 +33,16 @@ SOURCE_CHAIN_ID = 6648936     # Ethereum
 TARGET_CHAIN_ID = 1650811245  # Moonbeam
 
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "./data/nomad-bridge/txs_receipts/merged_transaction_receipts.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "./data/nomad-bridge/txs_receipts/moonbeam.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/txs_receipts/ethereum_selected_interval.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/txs_receipts/moonbeam_selected_interval.json"
 
 # Name of files with additional transaction
 FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = ""
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "./data/nomad-bridge/txs_receipts/ethereum_additional_from_14122022/tx_receipts_after_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/nomad-bridge/txs_receipts/ethereum_after_interval.json"
 
 # Name of files with block data receipts
-FILENAME_SOURCE_CHAIN_BLOCK_DATA = "./data/nomad-bridge/blocks/ethereum.csv"
-FILENAME_TARGET_CHAIN_BLOCK_DATA = "./data/nomad-bridge/blocks/moonbeam.csv"
+FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../data/nomad-bridge/blocks/ethereum.csv"
+FILENAME_TARGET_CHAIN_BLOCK_DATA = "../data/nomad-bridge/blocks/moonbeam.csv"
 
 # Bridge Address Source Chain (Ethereum) - Manager Proxy
 SOURCE_CHAIN_BRIDGE_ADDRESS_DEPOSITS = "0x88a69b4e698a4b090df6cf5bd7b2d47325ad30a3"
@@ -111,4 +111,4 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/nomad-bridge/facts_2'
+FACTS_FOLDER = './datalog/nomad-bridge/facts'
