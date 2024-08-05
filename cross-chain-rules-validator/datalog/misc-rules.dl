@@ -50,7 +50,7 @@ SC_DepositsWithoutMatch(origin_chain_id, origin_timestamp, origin_transaction_ha
         SC_ValidERC20TokenDeposit(origin_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount);
         SC_ValidNativeTokenDeposit(origin_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount)
     ),
-    !CCTX_Deposits(origin_chain_id, origin_timestamp, origin_transaction_hash, dst_chain_id, _, _, deposit_id, origin_token, dst_token, sender, beneficiary, amount).
+    !CCTX_Deposit(origin_chain_id, origin_timestamp, origin_transaction_hash, dst_chain_id, _, _, deposit_id, origin_token, dst_token, sender, beneficiary, amount).
 
 /******************************************************************************************************/
 /******************************** DEPOSITS WITHOUT MATCH (TARGET CHAIN) *******************************/
@@ -61,7 +61,7 @@ SC_DepositsWithoutMatch(origin_chain_id, origin_timestamp, origin_transaction_ha
 
 TC_DepositsWithoutMatch(dst_chain_id, dst_chain_timestamp, dst_transaction_hash, deposit_id, dst_token, beneficiary, amount) :-
     TC_ValidERC20TokenDeposit(dst_chain_timestamp, dst_transaction_hash, deposit_id, beneficiary, dst_token, dst_chain_id, amount),
-    !CCTX_Deposits(_, _, _, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, deposit_id, _, dst_token, _, beneficiary, amount).
+    !CCTX_Deposit(_, _, _, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, deposit_id, _, dst_token, _, beneficiary, amount).
 
 /******************************************************************************************************/
 /****************************** WITHDRAWALS WITHOUT MATCH (TARGET CHAIN) ******************************/
@@ -75,7 +75,7 @@ TC_WithdrawalsWithoutMatch(origin_chain_id, origin_timestamp, origin_transaction
         TC_ValidERC20TokenWithdrawal(origin_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount) ;
         TC_ValidNativeTokenWithdrawal(origin_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount)
     ),
-    !CCTX_Withdrawals(origin_chain_id, origin_timestamp, origin_transaction_hash, dst_chain_id, _, _, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount).
+    !CCTX_Withdrawal(origin_chain_id, origin_timestamp, origin_transaction_hash, dst_chain_id, _, _, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount).
 
 /******************************************************************************************************/
 /****************************** WITHDRAWALS WITHOUT MATCH (SOURCE CHAIN) ******************************/
@@ -86,4 +86,4 @@ TC_WithdrawalsWithoutMatch(origin_chain_id, origin_timestamp, origin_transaction
 
 SC_WithdrawalsWithoutMatch(dst_chain_id, dst_timestamp, dst_transaction_hash, withdrawal_id, dst_token, beneficiary, amount) :-
     SC_ValidERC20TokenWithdrawal(dst_timestamp, dst_transaction_hash, withdrawal_id, beneficiary, dst_token, dst_chain_id, amount),
-    !CCTX_Withdrawals(_, _, _, dst_chain_id, dst_timestamp, dst_transaction_hash, withdrawal_id, _, dst_token, _, beneficiary, amount).
+    !CCTX_Withdrawal(_, _, _, dst_chain_id, dst_timestamp, dst_transaction_hash, withdrawal_id, _, dst_token, _, beneficiary, amount).
