@@ -32,17 +32,21 @@ TARGET_CHAIN_CONNECTION_OPTIONS = {
 SOURCE_CHAIN_ID = 1     # Ethereum
 TARGET_CHAIN_ID = 2020  # Ronin
 
+MAX_NUM_THREADS_SOURCE_CHAIN = 10
+MAX_NUM_THREADS_TARGET_CHAIN = 5
+
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "./data/ronin-bridge/txs_receipts/ethereum.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "./data/ronin-bridge/txs_receipts/ronin.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ethereum_selected_interval.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ronin_selected_interval.json"
 
 # Name of files with additional transaction
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "./data/ronin-bridge/ethereum_additional_until_30092022/txs_receipts.json"
-FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "./data/ronin-bridge/ronin_additional_from13092021_to31122021/unique_receipts.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE = "../data/ronin-bridge/tx_receipts/ethereum_before_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "../data/ronin-bridge/tx_receipts/ethereum_after_interval.json"
+FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ronin_before_interval.json"
 
 # Name of files with block data receipts
-FILENAME_SOURCE_CHAIN_BLOCK_DATA = "./data/ronin-bridge/blocks/ethereum.csv"
-FILENAME_TARGET_CHAIN_BLOCK_DATA = "./data/ronin-bridge/blocks/ronin.csv"
+FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../data/ronin-bridge/blocks/ethereum.csv"
+FILENAME_TARGET_CHAIN_BLOCK_DATA = "../data/ronin-bridge/blocks/ronin.csv"
 
 # Bridge Address Source Chain (Ethereum) - Manager Proxy
 SOURCE_CHAIN_BRIDGE_ADDRESS = "0x1a2a1c938ce3ec39b6d47113c7955baa9dd454f2"
@@ -84,4 +88,4 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/ronin-bridge/facts_2'
+FACTS_FOLDER = './datalog/ronin-bridge/facts'

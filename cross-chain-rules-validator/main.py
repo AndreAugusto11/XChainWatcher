@@ -124,9 +124,9 @@ def process_chunk(
     errors.close()
 
 def process_transactions(
-    facts_extractor, chain_id, transactions, blocks, only_deposits, only_withdrawals
+    facts_extractor, env_file, chain_id, transactions, blocks, only_deposits, only_withdrawals
 ):
-    max_num_threads = 10
+    max_num_threads = env_file.MAX_NUM_THREADS_SOURCE_CHAIN if chain_id == env_file.SOURCE_CHAIN_ID else env_file.MAX_NUM_THREADS_TARGET_CHAIN
 
     start = 0
     end = len(transactions)
@@ -176,6 +176,7 @@ def process_ronin_bridge():
     print("Processing Ethereum transactions...")
     process_transactions(
         ronin_bridge_facts_extractor,
+        ronin_env,
         ronin_env.SOURCE_CHAIN_ID,
         transactions,
         blocks,
@@ -192,6 +193,7 @@ def process_ronin_bridge():
     print("Processing Ronin transactions...")
     process_transactions(
         ronin_bridge_facts_extractor,
+        ronin_env,
         ronin_env.TARGET_CHAIN_ID,
         transactions,
         blocks,
@@ -199,20 +201,38 @@ def process_ronin_bridge():
         False,
     )
 
-    # Load Additional Blocks and Tx Receipts from the Source Chain
+    # Load Additional Blocks and Tx Receipts from the Source Chain After Interval
     blocks = extract_block_data_to_dict(ronin_env.FILENAME_SOURCE_CHAIN_BLOCK_DATA)
     transactions = load_transaction_receipts(
-        ronin_env.FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS
+        ronin_env.FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER
     )
 
     print("Processing Ethereum additional transactions...")
     process_transactions(
         ronin_bridge_facts_extractor,
+        ronin_env,
         ronin_env.SOURCE_CHAIN_ID,
         transactions,
         blocks,
         False,
         True,
+    )
+
+    # Load Additional Blocks and Tx Receipts from the Source Chain Before Interval
+    blocks = extract_block_data_to_dict(ronin_env.FILENAME_SOURCE_CHAIN_BLOCK_DATA)
+    transactions = load_transaction_receipts(
+        ronin_env.FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE
+    )
+
+    print("Processing Ethereum additional transactions...")
+    process_transactions(
+        ronin_bridge_facts_extractor,
+        ronin_env,
+        ronin_env.SOURCE_CHAIN_ID,
+        transactions,
+        blocks,
+        True,
+        False,
     )
 
     # Load Additional Blocks and Tx Receipts from the Target Chain
@@ -224,6 +244,7 @@ def process_ronin_bridge():
     print("Processing Ronin additional transactions...")
     process_transactions(
         ronin_bridge_facts_extractor,
+        ronin_env,
         ronin_env.TARGET_CHAIN_ID,
         transactions,
         blocks,
@@ -246,7 +267,7 @@ def process_nomad_bridge():
     )
 
     print("Processing Ethereum transactions...")
-    process_transactions(nomad_bridge_facts_extractor, nomad_env.SOURCE_CHAIN_ID, transactions, blocks, False, False)
+    process_transactions(nomad_bridge_facts_extractor, nomad_env, nomad_env.SOURCE_CHAIN_ID, transactions, blocks, False, False)
 
     # process target chain transactions
     blocks = extract_block_data_to_dict(nomad_env.FILENAME_TARGET_CHAIN_BLOCK_DATA)
@@ -255,7 +276,7 @@ def process_nomad_bridge():
     )
 
     print("Processing Moonbeam transactions...")
-    process_transactions(nomad_bridge_facts_extractor, nomad_env.TARGET_CHAIN_ID, transactions, blocks, False, False)
+    process_transactions(nomad_bridge_facts_extractor, nomad_env, nomad_env.TARGET_CHAIN_ID, transactions, blocks, False, False)
 
     # Load Additional Blocks and Tx Receipts from the Source Chain
     blocks = extract_block_data_to_dict(nomad_env.FILENAME_SOURCE_CHAIN_BLOCK_DATA)
@@ -264,7 +285,7 @@ def process_nomad_bridge():
     )
 
     print("Processing Ethereum additional transactions...")
-    process_transactions(nomad_bridge_facts_extractor, nomad_env.SOURCE_CHAIN_ID, transactions, blocks, False, True)
+    process_transactions(nomad_bridge_facts_extractor, nomad_env, nomad_env.SOURCE_CHAIN_ID, transactions, blocks, False, True)
 
 def usage():
     print("Usage:")

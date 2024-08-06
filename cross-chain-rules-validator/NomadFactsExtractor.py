@@ -204,6 +204,7 @@ class NomadFactsExtractor(FactsExtractor):
                             token_deposited_facts.write("%s\t%d\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, nonce, decodedEvent['recipient'].lower(), decodedEvent["token"].lower(), decodedEvent["amount"]))
                         else:
                             alternative_chains_facts.write("%d\t%s\t%d\t%s\t%s\t%s\r\n" % (TARGET_CHAIN_ID, transaction["transactionHash"], origin_chain_id, transaction["from"], transaction["to"], None))
+                            return
                             
 
                     log_counter_map["bridge"] += 1
@@ -224,7 +225,7 @@ class NomadFactsExtractor(FactsExtractor):
                     # Deposit(address,uint256)
                     if log["topics"][0].startswith("0xe1fffc"):
                         deals_with_native_tokens = True
-                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/moonbeam/WGLMR-ABI.json", log["address"].lower(), log_counter_map["nativeToken"])
+                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/moonbeam/WGLMR-ABI.json", log["address"].lower(), log_counter_map["nativeToken"], "Deposit")
                         withdrawal_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, transaction["from"], decodedEvent["dst"].lower(), decodedEvent["wad"]))
 
                     log_counter_map["nativeToken"] += 1

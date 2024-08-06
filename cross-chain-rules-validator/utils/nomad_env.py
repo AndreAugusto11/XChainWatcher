@@ -32,13 +32,16 @@ TARGET_CHAIN_CONNECTION_OPTIONS = {
 SOURCE_CHAIN_ID = 6648936     # Ethereum
 TARGET_CHAIN_ID = 1650811245  # Moonbeam
 
+MAX_NUM_THREADS_SOURCE_CHAIN = 10
+MAX_NUM_THREADS_TARGET_CHAIN = 2
+
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/txs_receipts/ethereum_selected_interval.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/txs_receipts/moonbeam_selected_interval.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/missing-txs.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/moonbeam_selected_interval.json"
 
 # Name of files with additional transaction
 FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = ""
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/nomad-bridge/txs_receipts/ethereum_after_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/ethereum_after_interval.json"
 
 # Name of files with block data receipts
 FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../data/nomad-bridge/blocks/ethereum.csv"
@@ -102,7 +105,7 @@ BRIDGE_CONTROLLED_ADDRESSES = [
     [6648936,	"0x0000000000000000000000000000000000000000"],
     [1650811245,	"0xd3dfd3ede74e0dcebc1aa685e151332857efce2d"],
     [1650811245,	"0x7f58bb8311db968ab110889f2dfa04ab7e8e831b"],
-    [1650811245,	"0xb70588b1a51f847d13158ff18e9cac861df5fb00"]
+    [1650811245,	"0xb70588b1a51f847d13158ff18e9cac861df5fb00"],
     [1650811245,	"0x0000000000000000000000000000000000000000"],
 ]
 

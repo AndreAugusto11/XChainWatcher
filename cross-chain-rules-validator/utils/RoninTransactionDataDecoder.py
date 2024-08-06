@@ -18,7 +18,7 @@ class RoninTransactionDataDecoder(TransactionDataDecoder):
             
             return logs[index].args
         except Exception as e:
-            print("Could not decode bridge event data", tx_hash, e)
+            raise Exception("Could not decode bridge event data", tx_hash, e)
 
     def decode_bridge_v2_event_data(self, tx_hash, bridge_contract_abi, contract_address, index):
         try:
@@ -30,4 +30,5 @@ class RoninTransactionDataDecoder(TransactionDataDecoder):
             
             return logs[index].args
         except Exception as e:
-            print("Could not decode bridge event data", tx_hash, e)
+            raise Exception("Could not decode bridge V2 event data", tx_hash, e)
+

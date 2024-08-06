@@ -47,7 +47,7 @@ class TransactionDataDecoder(ABC):
 
             return (logs[index].args, user)
         except Exception as e:
-            print("Could not decode WETH event data", e)
+            raise Exception("Could not decode WETH event data", e)
 
     def decode_erc20_event_data(self, tx_hash, erc20_contract_abi, contract_address, index):
         try:
@@ -57,7 +57,7 @@ class TransactionDataDecoder(ABC):
 
             return logs[index].args
         except Exception as e:
-            print("Could not decode ERC20 event data", e)
+            raise Exception("Could not decode ERC20 event data", e)
 
     def decode_transaction_data(self, contract_abi_filename, data, contract_address):
         with open(contract_abi_filename, 'r') as f:
@@ -68,7 +68,7 @@ class TransactionDataDecoder(ABC):
         try:
             return contract.decode_function_input(data)
         except Exception as e:
-            print("Could not decode transaction data", e)
+            raise Exception("Could not decode transaction data", e)
 
     def debug_transaction_trace(self, tx_hash):
         # it seems like the debug.traceTransaction method is not available in the Web3 api, so we will do a direct http request

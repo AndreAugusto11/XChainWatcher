@@ -57,17 +57,23 @@ class RoninFactsExtractor(FactsExtractor):
                     log_counter_map["bridge"] += 1
 
                 elif log["address"].lower() == CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN:
-                    deals_with_native_tokens = True
 
                     # Withdrawal(address,uint256)
                     if log["topics"][0].startswith("0x7fcf53"):
+                        deals_with_native_tokens = True
                         decodedEvent, user = self.sc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), log_counter_map["nativeToken"], "Withdrawal")
                         withdrawal_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, decodedEvent["src"].lower(), user, decodedEvent["wad"]))
 
                     # Deposit(address,uint256)
                     elif log["topics"][0].startswith("0xe1fffc"):
+                        deals_with_native_tokens = True
                         decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), log_counter_map["nativeToken"], "Deposit")
                         deposit_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, transaction["from"], decodedEvent["dst"].lower(), decodedEvent["wad"]))
+
+                    # Transfer(address,address,uint256)
+                    elif log["topics"][0].startswith("0xddf252"):
+                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), log_counter_map["nativeToken"], "Transfer")
+                        self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["src"].lower(), decodedEvent["dst"].lower(), decodedEvent["wad"])
 
                     log_counter_map["nativeToken"] += 1
 
@@ -77,17 +83,27 @@ class RoninFactsExtractor(FactsExtractor):
                     if log["topics"][0].startswith("0x21e88e"):
                         decodedEvent = self.sc_transactionDecoder.decode_bridge_v2_event_data(transaction["transactionHash"], "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-V2.json", log["address"].lower(), log_counter_map["bridge"])
                         receipt = decodedEvent["receipt"]
+
+                        if receipt['info']['erc'] == 1: # since this will only occur within the additional data, we will ignore NFTs, because there are not NFT transfers in the selected interval
+                            return
+                        
                         token_withdrew_facts.write("%s\t%d\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, receipt['id'], receipt['mainchain']["addr"].lower(), receipt['mainchain']['tokenAddr'].lower(), receipt['info']["quantity"]))
 
                         if receipt['mainchain']['tokenAddr'].lower() == CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN:
                             deals_with_native_tokens = True
 
-                    log_counter_map["bridge"] += 1
+                        log_counter_map["bridge"] += 1
 
                 else: # there is the transfer of another token
-                    decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction["transactionHash"], "utils/ABIs/ERC20-ABI.json", log["address"].lower(), log_counter_map["erc20"])
-                    self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
-                    log_counter_map["erc20"] += 1
+                    # Transfer(address,address,uint256)
+                    if log["topics"][0].startswith("0xddf252"): # there is the transfer of a token
+                        decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction["transactionHash"], "utils/ABIs/ERC20-ABI.json", log["address"].lower(), log_counter_map["erc20"])
+
+                        self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
+                        log_counter_map["erc20"] += 1
+                    else:
+                        # we can just ignore as this is an Approval, or e.g., VoterVotesChanged in Frax Finance: FXS Token
+                        pass
 
             tx_value = 0
             # we want to extract the eth being transferred to the bridge if this is a transfer of native tokens through the bridge
