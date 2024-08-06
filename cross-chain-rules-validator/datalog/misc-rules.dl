@@ -1,5 +1,34 @@
 #include "acceptance-rules.dl"
 
+
+/******************************************************************************************************/
+/******************************* TRANSACTIONS REVERTED ON EITHER CHAIN ********************************/
+/******************************************************************************************************/
+
+.decl SingleTokenDeposits(timestamp:unsigned, source_chain_id:unsigned, transaction_hash:symbol, token_event_index:number, dst_token:Address, value:Amount)
+.output SingleTokenDeposits
+
+SingleTokenDeposits(timestamp, chain_id, transaction_hash, token_event_index, dst_token, amount) :-
+    erc20_transfer(transaction_hash, chain_id, token_event_index, dst_token, from, bridge_address, amount),
+    transaction(timestamp, chain_id, transaction_hash, _, _, _, _, 1, _),
+    !sc_token_deposited(transaction_hash, _, _, _, _, _, _, _, _),
+    !tc_token_withdrew(transaction_hash, _, _, _, _, _, _, _, _),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    bridge_controlled_address(chain_id, bridge_address),
+    !bridge_controlled_address(chain_id, from).
+
+.decl SingleTokenWithdrawal(timestamp:unsigned, source_chain_id:unsigned, transaction_hash:symbol, token_event_index:number, dst_token:Address, value:Amount)
+.output SingleTokenWithdrawal
+
+SingleTokenWithdrawal(timestamp, chain_id, transaction_hash, token_event_index, dst_token, amount) :-
+    erc20_transfer(transaction_hash, chain_id, token_event_index, dst_token, bridge_address, to, amount),
+    transaction(timestamp, chain_id, transaction_hash, _, _, _, _, 1, _),
+    !sc_token_withdrew(transaction_hash, _, _, _, _, _),
+    !tc_token_deposited(transaction_hash, _, _, _, _, _),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    bridge_controlled_address(chain_id, bridge_address),
+    !bridge_controlled_address(chain_id, to).
+
 /******************************************************************************************************/
 /******************************* TRANSACTIONS REVERTED ON EITHER CHAIN ********************************/
 /******************************************************************************************************/
