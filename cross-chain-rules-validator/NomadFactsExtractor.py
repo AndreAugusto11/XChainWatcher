@@ -77,6 +77,9 @@ class NomadFactsExtractor(FactsExtractor):
                     # Send(address,address,uint32,bytes32,uint256,bool)
                     if log["topics"][0].startswith("0xa3d219") and (only_deposits or not additional_data):
                         decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction["transactionHash"], "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), log_counter_map["bridge"])
+                        if decodedEvent['toDomain'] != TARGET_CHAIN_ID:
+                            alternative_chains_facts.write("%d\t%s\t%d\t%s\t%s\t%s\r\n" % (SOURCE_CHAIN_ID, transaction["transactionHash"], decodedEvent['toDomain'], transaction["from"], transaction["to"], None))
+                            return
                         token_deposited_facts.write("%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, nonce, self.extract_hex_value(decodedEvent['toId'].hex()), get_token_mapping(2, 3, decodedEvent["token"].lower(), TOKEN_MAPPINGS), decodedEvent["token"].lower(), decodedEvent['toDomain'], 20, decodedEvent['amount']))
 
                     # Receive(uint64,address,address,address,uint256)
@@ -162,6 +165,7 @@ class NomadFactsExtractor(FactsExtractor):
             "home": 0,
             "bridge": 0,
             "nativeToken": 0,
+            "nativeTokenTransfer": 0,
             "erc20": 0,
         }
 
@@ -193,7 +197,6 @@ class NomadFactsExtractor(FactsExtractor):
                     if log["topics"][0].startswith("0xa3d219"):
                         decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction["transactionHash"], "utils/ABIs/moonbeam/NOMAD-BRIDGE-WITHDRAWALS.json", log["address"].lower(), log_counter_map["bridge"])
                         token_withdrew_facts.write("%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, nonce, self.extract_hex_value(decodedEvent['toId'].hex()), decodedEvent['token'].lower(), get_token_mapping(3, 2, decodedEvent['token'].lower(), TOKEN_MAPPINGS), SOURCE_CHAIN_ID, 20, decodedEvent['amount']))
-
 
                     # Receive(uint64,address,address,address,uint256)
                     elif log["topics"][0].startswith("0x9f9a97"):
@@ -227,8 +230,13 @@ class NomadFactsExtractor(FactsExtractor):
                         deals_with_native_tokens = True
                         decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/moonbeam/WGLMR-ABI.json", log["address"].lower(), log_counter_map["nativeToken"], "Deposit")
                         withdrawal_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, transaction["from"], decodedEvent["dst"].lower(), decodedEvent["wad"]))
+                        log_counter_map["nativeToken"] += 1
 
-                    log_counter_map["nativeToken"] += 1
+                    # Transfer(address,address,uint256)
+                    elif log["topics"][0].startswith("0xddf252") and not deals_with_native_tokens:
+                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction["transactionHash"], "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/moonbeam/WGLMR-ABI.json", log["address"].lower(), log_counter_map["nativeTokenTransfer"], "Transfer")
+                        self.store_erc20_fact(transaction, TARGET_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["src"].lower(), decodedEvent["dst"].lower(), decodedEvent["wad"])
+                        log_counter_map["nativeTokenTransfer"] += 1
 
                 else: # log emitted by some token
                     if deals_with_native_tokens == True:
