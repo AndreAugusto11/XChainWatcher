@@ -17,6 +17,19 @@ SingleTokenDeposits(timestamp, chain_id, transaction_hash, token_event_index, ds
     bridge_controlled_address(chain_id, bridge_address),
     !bridge_controlled_address(chain_id, from).
 
+.decl SingleEventDeposit(timestamp:unsigned, source_chain_id:unsigned, transaction_hash:symbol, from:Address, dst_token:Address, value:Amount)
+.output SingleEventDeposit
+
+SingleEventDeposit(timestamp, chain_id, transaction_hash, from, dst_token, amount) :-
+    (
+        tc_token_withdrew(transaction_hash, _, _, _, _, dst_token, _, _, amount);
+        sc_token_deposited(transaction_hash, _, _, _, dst_token, _, _, _, amount)
+    ),
+    !erc20_transfer(transaction_hash, chain_id, _, _, _, _, amount),
+    !tc_withdrawal(transaction_hash, _, _, _, _),
+    !sc_deposit(transaction_hash, _, _, _, _),
+    transaction(timestamp, chain_id, transaction_hash, _, from, _, _, 1, _).
+
 .decl SingleTokenWithdrawal(timestamp:unsigned, source_chain_id:unsigned, transaction_hash:symbol, token_event_index:number, dst_token:Address, value:Amount)
 .output SingleTokenWithdrawal
 

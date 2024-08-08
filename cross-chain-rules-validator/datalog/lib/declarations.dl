@@ -61,3 +61,6 @@
 
 .decl additional_tc_token_withdrew(transaction_hash:symbol, event_index:number, withdrawal_id:unsigned, beneficiary:Address, origin_token:Address, dst_token:Address, dst_chain_id:unsigned, standard:number, amount:Amount)
 .input additional_tc_token_withdrew
+
+.decl alternative_chains(chain_id:unsigned, transaction_hash:symbol, dst_chain_id:unsigned, from:Address, to:Address, function:symbol)
+.input alternative_chains
