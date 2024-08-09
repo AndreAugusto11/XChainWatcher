@@ -82,7 +82,8 @@ CCTX_Deposit(origin_chain_id, origin_chain_timestamp, origin_transaction_hash, d
         SC_ValidERC20TokenDeposit(origin_chain_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount) ;
         SC_ValidNativeTokenDeposit(origin_chain_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount)
     ),
-    origin_chain_timestamp < dst_chain_timestamp.
+    cctx_finality(origin_chain_id, orig_chain_finality),
+    origin_chain_timestamp + orig_chain_finality < dst_chain_timestamp.
 
 /******************************************************************************************************/
 /******************************** WITHDRAWAL ON TARGET CHAIN (ISOLATED) *******************************/

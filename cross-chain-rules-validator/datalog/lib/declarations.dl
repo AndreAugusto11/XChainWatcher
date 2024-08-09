@@ -42,12 +42,14 @@
 .decl native_token(chain_id:unsigned, token_contract:Address)
 .decl token_mapping(source_chain_id:unsigned, target_chain_id:unsigned, source_chain_token:Address, target_chain_token:Address, standard:number)
 .decl bridge_controlled_address(chain_id:unsigned, bridge_address:Address)
+.decl cctx_finality(chain_id:unsigned, finality_time:unsigned)
 
 .input erc20_transfer
 .input transaction
 .input native_token
 .input token_mapping
 .input bridge_controlled_address
+.input cctx_finality
 
 /******************************************************************************************************/
 /***************************************** ADDITIONAL DECLS *******************************************/

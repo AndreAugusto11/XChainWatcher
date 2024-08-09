@@ -52,7 +52,6 @@ def process_chunk(
         transaction_facts          = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "transaction.facts",        "a")
         erc20_transfer_facts       = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "erc20_transfer.facts",     "a")
         deposit_facts              = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "sc_deposit.facts",         "a")
-        withdrawal_facts           = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "sc_withdrawal.facts",      "a")
         token_deposited_facts      = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "sc_token_deposited.facts", "a")
         token_withdrew_facts       = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "sc_token_withdrew.facts",  "a")
         alternative_chains_facts   = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "alternative_chains.facts", "a")
@@ -82,7 +81,6 @@ def process_chunk(
     elif chain_id == ronin_env.TARGET_CHAIN_ID or chain_id == nomad_env.TARGET_CHAIN_ID:
         transaction_facts          = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "transaction.facts",        "a")
         erc20_transfer_facts       = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "erc20_transfer.facts",     "a")
-        deposit_facts              = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "tc_deposit.facts",         "a")
         withdrawal_facts           = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "tc_withdrawal.facts",      "a")
         token_deposited_facts      = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "tc_token_deposited.facts", "a")
         token_withdrew_facts       = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "tc_token_withdrew.facts",  "a")

@@ -36,7 +36,7 @@ MAX_NUM_THREADS_SOURCE_CHAIN = 10
 MAX_NUM_THREADS_TARGET_CHAIN = 2
 
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/missing-txs.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/ethereum_selected_interval.json"
 FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/moonbeam_selected_interval.json"
 
 # Name of files with additional transaction
@@ -87,6 +87,7 @@ TOKEN_MAPPINGS = [
     [6648936, 1650811245, "0xba8d75baccc4d5c4bd814fde69267213052ea663", "0xacc15dc74880c9944775448304b263d191c6077f", 20], #WGLMR
     [6648936, 1650811245, "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", "0x8f552a71efe5eefc207bf75485b356a0b3f01ec9", 20], #USDC
     [6648936, 1650811245, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "0x30d2a9f5fdf90ace8c17952cbb4ee48a55d916a7", 20], #WETH
+    [6648936, 1650811245, "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d", "0xcb8dbb3040b347705aca307ca562c209d3466fb6", 20], #renBTC
     [6648936, 1650811245, "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599", "0x1dc78acda13a8bc4408b207c9e48cdbc096d95e0", 20], #WBTC
     [6648936, 1650811245, "0x6b175474e89094c44da98b954eedeac495271d0f", "0xc234a67a4f840e61ade794be47de455361b52413", 20], #DAI 
     [6648936, 1650811245, "0xdac17f958d2ee523a2206206994597c13d831ec7", "0x8e70cd5b4ff3f62659049e74b6649c6603a0e594", 20], #USDT
