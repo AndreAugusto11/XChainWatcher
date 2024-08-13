@@ -21,7 +21,7 @@ SC_ValidNativeTokenDeposit(timestamp, transaction_hash, deposit_id, sender, brid
     sc_deposit(transaction_hash, token_event_index, sender, bridge_address, amount),
     transaction(timestamp, origin_chain_id, transaction_hash, _, sender, _, amount, 1, _),
     token_mapping(origin_chain_id, dst_chain_id, origin_token, dst_token, standard),
-    native_token(origin_chain_id, origin_token),
+    wrapped_native_token(origin_chain_id, origin_token),
     bridge_controlled_address(origin_chain_id, bridge_address),
     bridge_event_index > token_event_index.
 
@@ -105,7 +105,7 @@ TC_ValidNativeTokenWithdrawal(timestamp, transaction_hash, withdrawal_id, sender
     tc_withdrawal(transaction_hash, token_event_index, sender, bridge_address, amount),
     transaction(timestamp, origin_chain_id, transaction_hash, _, sender, _, amount, 1, _),
     token_mapping(dst_chain_id, origin_chain_id, dst_token, origin_token, standard),
-    native_token(origin_chain_id, origin_token),
+    wrapped_native_token(origin_chain_id, origin_token),
     bridge_controlled_address(origin_chain_id, bridge_address),
     bridge_event_index > token_event_index.
 

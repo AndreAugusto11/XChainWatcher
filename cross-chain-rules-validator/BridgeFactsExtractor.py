@@ -23,7 +23,7 @@ class BridgeFactsExtractor:
         ):
         bridge_controlled_addresses_facts   = open(self.facts_folder + "/bridge_controlled_address.facts",  "w")
         token_mapping_facts                 = open(self.facts_folder + "/token_mapping.facts",              "w")
-        native_token_facts                  = open(self.facts_folder + "/native_token.facts",               "w")
+        native_token_facts                  = open(self.facts_folder + "/wrapped_native_token.facts",               "w")
         errors                              = open(self.facts_folder + "/errors.txt",                       "w")
 
         print("Extracting facts from bridge...")
