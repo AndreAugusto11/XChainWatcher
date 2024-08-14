@@ -1,6 +1,19 @@
 #include "acceptance-rules.dl"
 
 
+.decl CCTX_Withdrawal_FinalityBreak(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, withdrawal_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
+.output CCTX_Withdrawal_FinalityBreak
+
+CCTX_Withdrawal_FinalityBreak(origin_chain_id, origin_chain_timestamp, origin_transaction_hash, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, origin_token, dst_token, sender, beneficiary, amount) :-
+    SC_ValidERC20TokenWithdrawal(dst_chain_timestamp, dst_transaction_hash, withdrawal_id, beneficiary, dst_token, dst_chain_id, amount),
+    (
+        TC_ValidERC20TokenWithdrawal(origin_chain_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount) ;
+        TC_ValidNativeTokenWithdrawal(origin_chain_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount)
+    ),
+    cctx_finality(origin_chain_id, orig_chain_finality),
+    origin_chain_timestamp + orig_chain_finality >= dst_chain_timestamp.
+
+
 .decl CCTX_Deposit_FinalityBreak(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, deposit_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
 .output CCTX_Deposit_FinalityBreak
 
@@ -28,7 +41,8 @@ SingleTokenDeposits(timestamp, chain_id, transaction_hash, token_event_index, ds
     !tc_token_withdrew(transaction_hash, _, _, _, _, _, _, _, _),
     !alternative_chains(_, transaction_hash, _, _, _, _),
     bridge_controlled_address(chain_id, bridge_address),
-    !bridge_controlled_address(chain_id, from).
+    !bridge_controlled_address(chain_id, from),
+    from != "0x0000000000000000000000000000000000000000".
 
 .decl SingleEventDeposit(timestamp:unsigned, source_chain_id:unsigned, transaction_hash:symbol, from:Address, dst_token:Address, value:Amount)
 .output SingleEventDeposit
