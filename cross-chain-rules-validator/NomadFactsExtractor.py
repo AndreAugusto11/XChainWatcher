@@ -36,7 +36,7 @@ class NomadFactsExtractor(FactsExtractor):
         if only_deposits or only_withdrawals:
             additional_data = True
 
-        transaction_facts, erc20_transfer_facts, deposit_facts, withdrawal_facts, token_deposited_facts, token_withdrew_facts, alternative_chains_facts, errors = output_files
+        transaction_facts, erc20_transfer_facts, deposit_facts, token_deposited_facts, token_withdrew_facts, alternative_chains_facts, errors = output_files
         
         # print("Extracting facts (Source Chain). Transaction: " + transaction["transactionHash"] + " | Block: " + str(convert_hex_to_int(transaction["blockNumber"])))
 
@@ -155,7 +155,7 @@ class NomadFactsExtractor(FactsExtractor):
     def tc_extract_facts_from_transaction(self, transaction, blocks, output_files, only_deposits, only_withdrawals):
         deals_with_native_tokens = False
 
-        transaction_facts, erc20_transfer_facts, _, withdrawal_facts, token_deposited_facts, token_withdrew_facts, alternative_chains_facts, errors = output_files
+        transaction_facts, erc20_transfer_facts, withdrawal_facts, token_deposited_facts, token_withdrew_facts, alternative_chains_facts, errors = output_files
 
         # print("Extracting facts (Target Chain). Transaction: " + transaction["transactionHash"] + " | Block: " + str(convert_hex_to_int(transaction["blockNumber"])))
 

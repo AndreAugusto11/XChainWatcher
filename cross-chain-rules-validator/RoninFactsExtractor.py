@@ -97,10 +97,13 @@ class RoninFactsExtractor(FactsExtractor):
                 else: # there is the transfer of another token
                     # Transfer(address,address,uint256)
                     if log["topics"][0].startswith("0xddf252"): # there is the transfer of a token
-                        decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction["transactionHash"], "utils/ABIs/ERC20-ABI.json", log["address"].lower(), log_counter_map["erc20"])
+                        try:
+                            decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction["transactionHash"], "utils/ABIs/ERC20-ABI.json", log["address"].lower(), log_counter_map["erc20"])
 
-                        self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
-                        log_counter_map["erc20"] += 1
+                            self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
+                            log_counter_map["erc20"] += 1
+                        except Exception as e:
+                            pass # we ignore as this is a token not mapped
                     else:
                         # we can just ignore as this is an Approval, or e.g., VoterVotesChanged in Frax Finance: FXS Token
                         pass
@@ -108,7 +111,7 @@ class RoninFactsExtractor(FactsExtractor):
             tx_value = 0
             # we want to extract the eth being transferred to the bridge if this is a transfer of native tokens through the bridge
             # or, transfers made directly to the bridge that do not emit events (just for stats)
-            if deals_with_native_tokens or (not transaction["logs"] and convert_hex_to_int(transaction["status"])):
+            if deals_with_native_tokens or (not transaction["logs"] and convert_hex_to_int(transaction["status"])) or (len(transaction["logs"]) == 1 and transaction["logs"][0]["address"] == SOURCE_CHAIN_BRIDGE_ADDRESS_V2):
                 # if we are dealing with native tokens we need to get the transaction value
                 tx_value = self.sc_transactionDecoder.get_transaction(transaction["transactionHash"])["value"]
 

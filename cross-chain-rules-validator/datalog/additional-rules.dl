@@ -37,3 +37,10 @@ SC_WithdrawalsMatchWithAdditionalData(origin_chain_id, origin_chain_timestamp, o
     SC_WithdrawalsWithoutMatch(dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, dst_token, beneficiary, amount),
     additional_tc_token_withdrew(origin_transaction_hash, _, withdrawal_id, beneficiary, origin_token, dst_token, dst_chain_id, _, amount),
     additional_transaction(origin_chain_timestamp, origin_chain_id, origin_transaction_hash, _, sender, _, _, 1, _).
+
+.decl SC_WithdrawalsWithoutMatchWithAdditionalData(dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, withdrawal_id:unsigned, dst_token:Address, beneficiary:Address, amount:Amount)
+.output SC_WithdrawalsWithoutMatchWithAdditionalData
+
+SC_WithdrawalsWithoutMatchWithAdditionalData(dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, dst_token, beneficiary, amount) :-
+    SC_WithdrawalsWithoutMatch(dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, dst_token, beneficiary, amount),
+    !SC_WithdrawalsMatchWithAdditionalData(_, _, _, dst_chain_id, dst_chain_timestamp, dst_transaction_hash, withdrawal_id, _, dst_token, _, beneficiary, amount).

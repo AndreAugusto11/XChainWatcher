@@ -32,7 +32,7 @@ TARGET_CHAIN_CONNECTION_OPTIONS = {
 SOURCE_CHAIN_ID = 1     # Ethereum
 TARGET_CHAIN_ID = 2020  # Ronin
 
-MAX_NUM_THREADS_SOURCE_CHAIN = 10
+MAX_NUM_THREADS_SOURCE_CHAIN = 1
 MAX_NUM_THREADS_TARGET_CHAIN = 5
 
 # Name of files with transaction receipts
@@ -41,7 +41,7 @@ FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/r
 
 # Name of files with additional transaction
 FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE = "../data/ronin-bridge/tx_receipts/ethereum_before_interval.json"
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "../data/ronin-bridge/tx_receipts/ethereum_after_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "../data/ronin-bridge/tx_receipts/tx_receipts_failed.json"
 FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ronin_before_interval.json"
 
 # Name of files with block data receipts
@@ -74,7 +74,8 @@ TOKEN_MAPPINGS = [
     [1, 2020, "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b", "0x97a9107c1793bc407d6f527b77e7fff4d812bece", 20],
     [1, 2020, "0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25", "0xa8754b9fa15fc18bb59458815510e40a12cd2014", 20],
     [1, 2020, "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", "0x0b7007c13325c48911f73a2dad5fa5dcbf808adc", 20],
-    [1, 2020, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "0xc99a6a985ed2cac1ef41640596c5a5f9f4e19ef5", 20]
+    [1, 2020, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "0xc99a6a985ed2cac1ef41640596c5a5f9f4e19ef5", 20],
+    [1,	2020, "0x0c7cf86188632e16af00415214155950684466a8",	"0x173a2d4fa585a63acd02c107d57f932be0a71bcc", 20]
 ]
 
 BRIDGE_CONTROLLED_ADDRESSES = [
@@ -88,4 +89,4 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/ronin-bridge/facts'
+FACTS_FOLDER = './datalog/ronin-bridge/facts_3'

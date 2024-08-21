@@ -83,7 +83,7 @@ CCTX_Deposit(origin_chain_id, origin_chain_timestamp, origin_transaction_hash, d
         SC_ValidNativeTokenDeposit(origin_chain_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount)
     ),
     cctx_finality(origin_chain_id, orig_chain_finality),
-    origin_chain_timestamp + orig_chain_finality < dst_chain_timestamp.
+    origin_chain_timestamp + orig_chain_finality <= dst_chain_timestamp.
 
 /******************************************************************************************************/
 /******************************** WITHDRAWAL ON TARGET CHAIN (ISOLATED) *******************************/
@@ -168,4 +168,4 @@ CCTX_Withdrawal(origin_chain_id, origin_chain_timestamp, origin_transaction_hash
         TC_ValidNativeTokenWithdrawal(origin_chain_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount)
     ),
     cctx_finality(origin_chain_id, orig_chain_finality),
-    origin_chain_timestamp + orig_chain_finality < dst_chain_timestamp.
+    origin_chain_timestamp + orig_chain_finality <= dst_chain_timestamp.

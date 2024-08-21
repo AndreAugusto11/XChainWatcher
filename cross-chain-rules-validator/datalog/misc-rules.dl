@@ -11,7 +11,7 @@ CCTX_Withdrawal_FinalityBreak(origin_chain_id, origin_chain_timestamp, origin_tr
         TC_ValidNativeTokenWithdrawal(origin_chain_timestamp, origin_transaction_hash, withdrawal_id, sender, _, beneficiary, origin_token, dst_token, dst_chain_id, origin_chain_id, _, amount)
     ),
     cctx_finality(origin_chain_id, orig_chain_finality),
-    origin_chain_timestamp + orig_chain_finality >= dst_chain_timestamp.
+    origin_chain_timestamp + orig_chain_finality > dst_chain_timestamp.
 
 
 .decl CCTX_Deposit_FinalityBreak(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, deposit_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
@@ -24,7 +24,7 @@ CCTX_Deposit_FinalityBreak(origin_chain_id, origin_chain_timestamp, origin_trans
         SC_ValidNativeTokenDeposit(origin_chain_timestamp, origin_transaction_hash, deposit_id, sender, _, beneficiary, dst_token, origin_token, origin_chain_id, dst_chain_id, _, amount)
     ),
     cctx_finality(origin_chain_id, orig_chain_finality),
-    origin_chain_timestamp + orig_chain_finality >= dst_chain_timestamp.
+    origin_chain_timestamp + orig_chain_finality > dst_chain_timestamp.
 
 
 /******************************************************************************************************/
