@@ -4,26 +4,21 @@ library(scales)
 format_seconds_to_days <- function(seconds) {
   if (is.na(seconds)) return(NA)
   
-  if (seconds >= 86400) {  # 86400 seconds in a day
-    # Convert seconds to days
+  if (seconds >= 86400) {
     days <- seconds / 86400
     sprintf("%s\n(%.2f days)", 
             scales::comma(seconds), 
             days)
-  } else if (seconds >= 3600) {  # 3600 seconds in an hour
-    # Convert seconds to hours
+  } else if (seconds >= 3600) {
     hours <- seconds / 3600
     sprintf("%s\n(%.2f hours)", 
             scales::comma(seconds), 
             hours)
-  } else if (seconds >= 60) {  # 3600 seconds in an hour
-    # Convert seconds to hours
+  } else if (seconds >= 60) {
     mins <- seconds / 60
     sprintf("%s\n(%.2f mins)", 
             scales::comma(seconds), 
             mins)
-  } else {
-    # Just format seconds with commas
     scales::comma(seconds)
   }
 }
@@ -52,7 +47,7 @@ p <- ggplot(df, aes(x = time_difference, y = value_usd)) +
              scales::dollar_format()(x))                 # Default formatting for values >= 1
     }
   ) +
-  labs(title = "Latency vs. Value Transferred of CCTXs and Cross-Chain Rule Violations",
+  labs(title = "Fraud Proof Window Violation (Deposits in the Nomad Bridge)",
        x = "CCTX Latency (seconds)",
        y = "CCTX Value (USD)",
        color = "") +
@@ -81,3 +76,4 @@ p <- ggplot(df, aes(x = time_difference, y = value_usd)) +
 
 print(p)
 
+#output latency_vs_value_finality_break_nomad

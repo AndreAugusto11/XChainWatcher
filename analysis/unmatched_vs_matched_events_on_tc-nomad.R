@@ -39,13 +39,13 @@ ggplot(merged_df, aes(x=interval, y=total_count_matched)) +
   scale_color_manual(values=c("royalblue3", "red")) +
   scale_x_date(limits = as.Date(c("2022-01-01", "2022-08-05")), date_labels="%Y-%m", date_breaks  ="2 month") +
   scale_y_continuous(breaks = seq(0, 300, 50)) +
-  labs(title = "Matched vs. Unmatched Withdrawal Events",
+  labs(title = "Matched vs. Unmatched Withdrawal Events in T (Nomad Bridge)",
        x = "Date",
        y = "Number of Events",
        color = "") +
   theme_minimal() +
   theme(
-    plot.margin = unit(c(0.1, 0.5, 0, 0), "cm"),
+    plot.margin = unit(c(0, 0, 0, 0), "cm"),
     text = element_text(family = "serif"),
     axis.line = element_line(colour = "black"),
     panel.grid.major.y = element_line(color = 4,

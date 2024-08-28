@@ -4,20 +4,17 @@ library(scales)
 format_seconds_to_days <- function(seconds) {
   if (is.na(seconds)) return(NA)
   
-  if (seconds >= 86400) {  # 86400 seconds in a day
-    # Convert seconds to days
+  if (seconds >= 86400) {
     days <- seconds / 86400
     sprintf("%s\n(%.2f days)", 
             scales::comma(seconds), 
             days)
-  } else if (seconds >= 3600) {  # 3600 seconds in an hour
-    # Convert seconds to hours
+  } else if (seconds >= 3600) {
     hours <- seconds / 3600
     sprintf("%s\n(%.2f hours)", 
             scales::comma(seconds), 
             hours)
-  } else if (seconds >= 60) {  # 3600 seconds in an hour
-    # Convert seconds to hours
+  } else if (seconds >= 60) {
     mins <- seconds / 60
     sprintf("%s\n(%.2f minutes)", 
             scales::comma(seconds), 
@@ -33,7 +30,7 @@ df <- read.csv('../cross-chain-rules-validator/analysis/nomad-bridge/data/combin
 p <- ggplot(df, aes(x = time_difference, y = value_usd, color = action)) +
   geom_point(size = 1, alpha = 0.7) +
   geom_vline(xintercept = 1800, linetype = "dashed", color = "black", size = 0.5) +
-  annotate("text", 3000, 50000000, hjust = .5, label = "Finality Time (30 mins)", colour = "black") +
+  annotate("text", 3000, 10000000000, hjust = .5, label = "Finality Time (30 mins)", colour = "black") +
   scale_color_manual(breaks = c("withdrawal", "deposit"), labels = c("CCTX_ValidWithdrawal", "CCTX_ValidDeposit"), values = c("royalblue3", "magenta")) +
   scale_x_log10(
     limits = c(10^3, NA),
@@ -41,16 +38,17 @@ p <- ggplot(df, aes(x = time_difference, y = value_usd, color = action)) +
       # Apply the custom formatting function to each tick mark
       sapply(x, format_seconds_to_days)
     }
-  ) +            # Set the lower limit of the x-axis to 10^3, NA allows for an upper limit based on data
+  ) +
   scale_y_log10(
-    breaks = scales::trans_breaks("log10", function(x) 10^x),
+    limits = c(10^-7, 10^10),
+    breaks = scales::trans_breaks(log10, function(x) 10^x, 10),
     labels = function(x) {
       ifelse(x < 1, 
-             scales::dollar_format(accuracy = 0.0001)(x),  # Maintains two decimal places for values < 1
-             scales::dollar_format()(x))                 # Default formatting for values >= 1
+             scales::dollar_format(accuracy = 0.000001)(x),
+             scales::dollar_format()(x))
     }
   ) +
-  labs(title = "CCTX Latency vs. CCTX Value Transferred",
+  labs(title = "CCTX Latency vs. CCTX Value Transferred (Nomad Bridge)",
    x = "CCTX Latency (seconds)",
    y = "CCTX Value (USD)",
    color = "Datalog Rule") +
