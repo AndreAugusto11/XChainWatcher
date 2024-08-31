@@ -1,0 +1,9 @@
+ipykernel
+jupyter
+notebook
+
+pandas
+numpy
+matplotlib
+requests
+python-dotenv
