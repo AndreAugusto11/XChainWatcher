@@ -3,3 +3,7 @@
 **/**/.env
 **/**/__pycache__
 .Rproj.user
+xchainwatcherenv/*
+analysis/.Rhistory
+analysis/.RData
+Rplots.pdf

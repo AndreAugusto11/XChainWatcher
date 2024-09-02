@@ -25,7 +25,7 @@ format_seconds_to_days <- function(seconds) {
   }
 }
 
-df <- read.csv('../cross-chain-rules-validator/analysis/nomad-bridge/data/combined_cctxs.csv')
+df <- read.csv("cross-chain-rules-validator/analysis/nomad-bridge/data/combined_cctxs.csv")
 
 p <- ggplot(df, aes(x = time_difference, y = value_usd, color = action)) +
   geom_point(size = 1, alpha = 0.7) +
@@ -78,3 +78,4 @@ p <- ggplot(df, aes(x = time_difference, y = value_usd, color = action)) +
 
 print(p)
 
+# ggsave("analysis/figures/combined_cctxs.pdf", p, width = 10, height = 8)
