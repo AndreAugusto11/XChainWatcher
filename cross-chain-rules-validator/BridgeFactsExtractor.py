@@ -29,6 +29,7 @@ class BridgeFactsExtractor:
         print("Extracting facts from bridge...")
 
         try:
+            # write each mapping to the file, see cross-chain-rules-validator/utils/nomad_env.py 
             for mapping in token_mappings:
                 token_mapping_facts.write("%s\t%s\t%s\t%s\t%s\r\n" % (mapping[0], mapping[1], mapping[2], mapping[3], mapping[4]))
             

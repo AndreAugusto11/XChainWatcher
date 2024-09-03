@@ -89,4 +89,4 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/ronin-bridge/facts_3'
+FACTS_FOLDER = './datalog/ronin-bridge/facts'
