@@ -61,25 +61,49 @@ See the full paper for details. These findings demonstrate the critical need for
   
 ### Setup
 1. Create a file `.env` from `.env.example`: `cp .env.example .env`
-2. Populate env vars, namely `MOONBEAM_API_KEY` ([you can obtain a free api key at onfinality](https://app.onfinality.io)), and `BLOCKDAEMON_API_KEY` (([you can obtain a free api key at Blockdaemon](https://app.blockdaemon.com/))). You may set `SOURCE_CHAIN_API_KEY`and `TARGET_CHAIN_API_KEY` to the same value as `BLOCKDAEMON_API_KEY`.
-3. `brew install --HEAD souffle-lang/souffle/souffle`
-4. python3.11 -m venv xchainwatcherenv
-5. source xchainwatcherenv/bin/activate
+2. Create a file `./vscode/launch.json` from `.vscode/launch.example.json`: `cp .vscode/launch.example.json .vscode/launch.json`
+3. Populate env vars, namely `MOONBEAM_API_KEY` ([you can obtain a free api key at onfinality](https://app.onfinality.io)), and `BLOCKDAEMON_API_KEY` (([you can obtain a free api key at Blockdaemon](https://app.blockdaemon.com/))). You may set `SOURCE_CHAIN_API_KEY`and `TARGET_CHAIN_API_KEY` to the same value as `BLOCKDAEMON_API_KEY`.
+4. `brew install --HEAD souffle-lang/souffle/souffle`
+5. python3.11 -m venv xchainwatcherenv
+6. source xchainwatcherenv/bin/activate
 Full installation procedures, including for other OSs [is available in the official installation page](https://souffle-lang.github.io/install).
     `pip install -r requirements.txt`
-
+1. To stop using the pip env, run `deactivate`
+ 
 ### Usage
 🚨 Ronin related analysis is WIP (we are uploading the datasets) 🚨
 
+#### Using VSCode
+1. Open the project in VS Code.
+2. Make sure you have the Python extension installed.
+3. Open the Command Palette (Cmd+Shift+P on macOS or Ctrl+Shift+P on Windows/Linux).
+4. Type "Python: Select Interpreter" and choose the interpreter in your xchainwatcherenv virtual environment.
+5. Open the Debug view (Ctrl+Shift+D or Cmd+Shift+D on Mac).
+6. From the dropdown at the top of the Debug view, select either:
 
+* "Python: cross-chain-rules-validator/main.py with ronin flag (xchainwatcherenv)" for Ronin
+* "Python: cross-chain-rules-validator/main.py with nomad flag (xchainwatcherenv)" for Nomad
 
-#### Figures
+Click the green play button or press F5 to start debugging.
+
+#### Using Terminal
+
+1. Activate the virtual environment if it's not already activated: `source xchainwatcherenv/bin/activate`
+2. Navigate to the project root directory.
+3. Run the script with the appropriate flag, `python cross-chain-rules-validator/main.py ronin` or `python cross-chain-rules-validator/main.py nomad` for Ronin or Nomad, respectively. 
+
+When you're done, you can deactivate the virtual environment by running `deactivate`
+
+### Figures
 To generate figures, run each corresponding R script in `analysis/figures`, for instance `Rscript analysis/cctx-breaking-finality-nomad.R`.
 
 ### Data
 This project includes the first open-source dataset of over 81,000 cross-chain transactions across three blockchains, capturing $585M and $3.7B in token transfers in Nomad and Ronin, respectively.
 
 Datasets can be found under different folders. For Ronin and Nomad, respectively: raw data can be found in `cross-chain-rules-validator/analysis/ronin-bridge/data` and `cross-chain-rules-validator/analysis/nomad-bridge/data`. Datalog engine runs can be found in `cross-chain-rules-validator/datalog/ronin-bridge/results` and `cross-chain-rules-validator/datalog/nomad-bridge/results`. Datalog facts can be found in `cross-chain-rules-validator/datalog/ronin-bridge/facts` and `cross-chain-rules-validator/datalog/nomad-bridge/facts`.
+
+### token-price-data
+Token price data is an util that processes token data information for usage in the figure generation.
 
 ### Contributing
 We adhere to the [Hyperledger Cacti contributing](https://github.com/hyperledger/cacti/blob/main/CONTRIBUTING.md) guidelines. Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
