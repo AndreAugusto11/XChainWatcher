@@ -12,7 +12,7 @@ class FactsExtractor(ABC):
             if not os.path.exists(self.facts_folder):
                 os.makedirs(self.facts_folder)
         except:
-            print("Not able to open file")
+            raise Exception("Not able to open file")
 
     @abstractmethod
     def sc_extract_facts_from_transaction(self, transaction, blocks, only_deposits, only_withdrawals):

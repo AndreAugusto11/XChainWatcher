@@ -4,9 +4,12 @@ from NomadFactsExtractor import NomadFactsExtractor
 from RoninFactsExtractor import RoninFactsExtractor
 from BridgeFactsExtractor import BridgeFactsExtractor
 from utils.utils import load_transaction_receipts, extract_block_data_to_dict
-import concurrent.futures
+from queue import Queue
+import threading
 import sys
 
+global processed_count
+global total_receipts
 
 def process_ronin_bridge_facts():
     bridge_facts_extractor = BridgeFactsExtractor(ronin_env.FACTS_FOLDER)
@@ -15,6 +18,8 @@ def process_ronin_bridge_facts():
         ronin_env.BRIDGE_CONTROLLED_ADDRESSES,
         ronin_env.SOURCE_CHAIN_ID,
         ronin_env.TARGET_CHAIN_ID,
+        ronin_env.SOURCE_CHAIN_FINALITY_TIME,
+        ronin_env.TARGET_CHAIN_FINALITY_TIME,
         ronin_env.CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN,
         ronin_env.CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_TARGET_CHAIN,
     )
@@ -27,26 +32,27 @@ def process_nomad_bridge_facts():
         nomad_env.BRIDGE_CONTROLLED_ADDRESSES,
         nomad_env.SOURCE_CHAIN_ID,
         nomad_env.TARGET_CHAIN_ID,
+        nomad_env.SOURCE_CHAIN_FINALITY_TIME,
+        nomad_env.TARGET_CHAIN_FINALITY_TIME,
         nomad_env.CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN,
         nomad_env.CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_TARGET_CHAIN,
     )
 
-
 def process_chunk(
-    thread_info,
     facts_extractor,
     chain_id,
     chunk,
-    transactions,
     blocks,
     only_deposits,
     only_withdrawals,
 ):
+    global processed_count
+    global total_receipts
+    thread_name = threading.current_thread().name
+
     PREFIX_FILENAME = ""
     if only_deposits or only_withdrawals:
         PREFIX_FILENAME = "additional_"
-
-    tid, start_idx, end_idx = thread_info
         
     if chain_id == ronin_env.SOURCE_CHAIN_ID or chain_id == nomad_env.SOURCE_CHAIN_ID:
         transaction_facts          = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "transaction.facts",        "a")
@@ -58,12 +64,9 @@ def process_chunk(
         alternative_chains_facts   = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "alternative_chains.facts", "a")
         errors                     = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "sc_errors.txt",            "a")
 
-        for index in chunk:
-            if index % 10 == 0:
-                print(f"{tid}: {index}/{chunk} {(index-start_idx)/(end_idx-start_idx)*100}%")
-
+        for transaction in chunk:
             facts_extractor.sc_extract_facts_from_transaction(
-                transactions[index],
+                transaction,
                 blocks,
                 [
                     transaction_facts,
@@ -88,12 +91,9 @@ def process_chunk(
         alternative_chains_facts   = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "alternative_chains.facts", "a")
         errors                     = open(facts_extractor.facts_folder + "/" + PREFIX_FILENAME + "tc_errors.txt",            "a")
 
-        for index in chunk:
-            if index % 100 == 0:
-                print(f"{tid}: {index}/{chunk} {(index-start_idx)/(end_idx-start_idx)*100}%")
-
+        for transaction in chunk:
             facts_extractor.tc_extract_facts_from_transaction(
-                transactions[index],
+                transaction,
                 blocks,
                 [
                     transaction_facts,
@@ -120,43 +120,70 @@ def process_chunk(
     errors.close()
     withdrawal_facts.close()
 
+    with lock:
+        processed_count += len(chunk)
+        if processed_count > total_receipts:
+            processed_count = total_receipts
+        percentage = (processed_count / total_receipts) * 100
+        print(f"Global progress: {percentage:.2f}%")
+
     if chain_id == ronin_env.SOURCE_CHAIN_ID or chain_id == nomad_env.SOURCE_CHAIN_ID:
         deposit_facts.close()
+
+
+lock = threading.Lock()
+
+def worker(queue, facts_extractor, chain_id, transactions, blocks, only_deposits, only_withdrawals):
+    while True:
+        chunk = queue.get()
+        if chunk is None:
+            break
+        process_chunk(facts_extractor, chain_id, chunk, blocks, only_deposits, only_withdrawals)
+        queue.task_done()
+
 
 def process_transactions(
     facts_extractor, env_file, chain_id, transactions, blocks, only_deposits, only_withdrawals
 ):
+    # Shared variable to track the number of processed receipts
+    global processed_count
+    global total_receipts
+    
+    processed_count = 0
+    total_receipts = len(transactions)
+
     max_num_threads = env_file.MAX_NUM_THREADS_SOURCE_CHAIN if chain_id == env_file.SOURCE_CHAIN_ID else env_file.MAX_NUM_THREADS_TARGET_CHAIN
 
-    start = 0
-    end = len(transactions)
-    interval_range = range(start, end + 1)
-    chunk_size = len(interval_range) // max_num_threads + 1
+    # a queue to hold chunks of 500 receipts
+    queue = Queue()
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_num_threads) as executor:
-        start_idx = 0
-        futures = []
-        for tid in range(max_num_threads):
-            end_idx = start_idx + min(chunk_size, end - start_idx)
-            chunk = interval_range[start_idx:end_idx]
-            futures.append(
-                executor.submit(
-                    process_chunk,
-                    (tid, start_idx, end_idx),
-                    facts_extractor,
-                    chain_id,
-                    chunk,
-                    transactions,
-                    blocks,
-                    only_deposits,
-                    only_withdrawals,
-                )
-            )
-            start_idx = end_idx
+    threads = []
+    for i in range(max_num_threads):
+        t = threading.Thread(
+            target=worker, args=(
+                queue,
+                facts_extractor,
+                chain_id,
+                transactions,
+                blocks,
+                only_deposits,
+                only_withdrawals
+            ),
+            name=f"Thread-{i+1}"
+        )
+        t.start()
+        threads.append(t)
 
-        # Wait for all threads to finish before moving on to the next interval
-        for future in futures:
-            future.result()
+    for i in range(0, total_receipts, 500):
+        queue.put(transactions[i:i + 500])
+
+    queue.join()
+
+    for _ in range(max_num_threads):
+        queue.put(None)
+
+    for t in threads:
+        t.join()
 
 
 def process_ronin_bridge():

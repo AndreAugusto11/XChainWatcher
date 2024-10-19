@@ -10,7 +10,7 @@ class BridgeFactsExtractor:
             if not os.path.exists(facts_folder):
                 os.makedirs(facts_folder)
         except:
-            print("Not able to open file")
+            raise Exception("Not able to open file")
 
     def extract_facts_from_bridge(
             self,
@@ -18,10 +18,13 @@ class BridgeFactsExtractor:
             bridge_controlled_addresses,
             source_chain_id,
             target_chain_id,
+            finality_source_chain,
+            finality_target_chain,
             contract_address_eq_native_token_source_chain,
             contract_address_eq_native_token_target_chain
         ):
         bridge_controlled_addresses_facts   = open(self.facts_folder + "/bridge_controlled_address.facts",  "w")
+        cctx_finality_facts                 = open(self.facts_folder + "/cctx_finality.facts",              "w")
         token_mapping_facts                 = open(self.facts_folder + "/token_mapping.facts",              "w")
         native_token_facts                  = open(self.facts_folder + "/wrapped_native_token.facts",               "w")
         errors                              = open(self.facts_folder + "/errors.txt",                       "w")
@@ -36,6 +39,9 @@ class BridgeFactsExtractor:
             # for now we are considering only one source chain and one destination chain
             native_token_facts.write("%s\t%s\r\n" % (source_chain_id, contract_address_eq_native_token_source_chain))
             native_token_facts.write("%s\t%s\r\n" % (target_chain_id, contract_address_eq_native_token_target_chain))
+
+            cctx_finality_facts.write("%s\t%s\r\n" % (source_chain_id, finality_source_chain))
+            cctx_finality_facts.write("%s\t%s\r\n" % (target_chain_id, finality_target_chain))
 
             for pair in bridge_controlled_addresses:
                 bridge_controlled_addresses_facts.write("%s\t%s\r\n" % (pair[0], pair[1]))

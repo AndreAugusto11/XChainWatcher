@@ -33,19 +33,23 @@ SOURCE_CHAIN_ID = 6648936     # Ethereum
 TARGET_CHAIN_ID = 1650811245  # Moonbeam
 
 MAX_NUM_THREADS_SOURCE_CHAIN = 10
-MAX_NUM_THREADS_TARGET_CHAIN = 2
+MAX_NUM_THREADS_TARGET_CHAIN = 10
+
+# Finality times of each chain or cross-chain protocol (like fraud-proof time window) in seconds
+SOURCE_CHAIN_FINALITY_TIME = 1800
+TARGET_CHAIN_FINALITY_TIME = 1800
 
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/ethereum_selected_interval.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/moonbeam_selected_interval.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/nomad-bridge/tx_receipts/ethereum_selected_interval.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/nomad-bridge/tx_receipts/moonbeam_selected_interval.json"
 
 # Name of files with additional transaction
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../raw-data/nomad-bridge/tx_receipts/ethereum_after_interval.json"
 FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = ""
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/nomad-bridge/tx_receipts/ethereum_after_interval.json"
 
 # Name of files with block data receipts
-FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../data/nomad-bridge/blocks/ethereum.csv"
-FILENAME_TARGET_CHAIN_BLOCK_DATA = "../data/nomad-bridge/blocks/moonbeam.csv"
+FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../raw-data/nomad-bridge/blocks/ethereum.csv"
+FILENAME_TARGET_CHAIN_BLOCK_DATA = "../raw-data/nomad-bridge/blocks/moonbeam.csv"
 
 # Bridge Address Source Chain (Ethereum) - Manager Proxy
 SOURCE_CHAIN_BRIDGE_ADDRESS_DEPOSITS = "0x88a69b4e698a4b090df6cf5bd7b2d47325ad30a3"

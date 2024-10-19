@@ -32,21 +32,25 @@ TARGET_CHAIN_CONNECTION_OPTIONS = {
 SOURCE_CHAIN_ID = 1     # Ethereum
 TARGET_CHAIN_ID = 2020  # Ronin
 
-MAX_NUM_THREADS_SOURCE_CHAIN = 1
-MAX_NUM_THREADS_TARGET_CHAIN = 5
+MAX_NUM_THREADS_SOURCE_CHAIN = 20
+MAX_NUM_THREADS_TARGET_CHAIN = 10
+
+# Finality times of each chain or cross-chain protocol (like fraud-proof time window) in seconds
+SOURCE_CHAIN_FINALITY_TIME = 78
+TARGET_CHAIN_FINALITY_TIME = 45
 
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ethereum_selected_interval.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ronin_selected_interval.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/ronin-bridge/tx_receipts/ethereum_selected_interval.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/ronin-bridge/tx_receipts/ronin_selected_interval.json"
 
 # Name of files with additional transaction
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE = "../data/ronin-bridge/tx_receipts/ethereum_before_interval.json"
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "../data/ronin-bridge/tx_receipts/tx_receipts_failed.json"
-FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../data/ronin-bridge/tx_receipts/ronin_before_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE = "../raw-data/ronin-bridge/tx_receipts/ethereum_before_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "../raw-data/ronin-bridge/tx_receipts/ethereum_after_interval.json"
+FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../raw-data/ronin-bridge/tx_receipts/ronin_before_interval.json"
 
 # Name of files with block data receipts
-FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../data/ronin-bridge/blocks/ethereum.csv"
-FILENAME_TARGET_CHAIN_BLOCK_DATA = "../data/ronin-bridge/blocks/ronin.csv"
+FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../raw-data/ronin-bridge/blocks/ethereum.csv"
+FILENAME_TARGET_CHAIN_BLOCK_DATA = "../raw-data/ronin-bridge/blocks/ronin.csv"
 
 # Bridge Address Source Chain (Ethereum) - Manager Proxy
 SOURCE_CHAIN_BRIDGE_ADDRESS = "0x1a2a1c938ce3ec39b6d47113c7955baa9dd454f2"

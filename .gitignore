@@ -8,3 +8,4 @@ analysis/.Rhistory
 analysis/.RData
 Rplots.pdf
 .vscode/launch.json
+./raw-data/*

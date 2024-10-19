@@ -114,7 +114,17 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ### Suggested Citation
 This work is an implementation of the paper XChainWatcher. It can be obtained here:
-TBD
+```bibtex
+@misc{augusto2024xchainwatcher,
+      title={XChainWatcher: Monitoring and Identifying Attacks in Cross-Chain Bridges}, 
+      author={André Augusto and Rafael Belchior and Jonas Pfannschmidt and André Vasconcelos and Miguel Correia},
+      year={2024},
+      eprint={2410.02029},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2410.02029}, 
+}
+```
 
 ### Contact
 For bugs, feature requests, and other issues, please use the GitHub issue tracker.

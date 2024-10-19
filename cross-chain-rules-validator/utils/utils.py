@@ -1,3 +1,4 @@
+from hexbytes import HexBytes
 import json
 import csv
 
@@ -27,3 +28,11 @@ def get_token_mapping(col_search, col_retrieve, token_address, token_mappings):
             return mapping[col_retrieve]
  
     return None
+
+def convert_topics_to_hex(log):
+    hex_topics = []
+    for topic in log['topics']:
+        hex_topics.append(HexBytes(topic))
+    
+    log['topics'] = hex_topics
+    return log
