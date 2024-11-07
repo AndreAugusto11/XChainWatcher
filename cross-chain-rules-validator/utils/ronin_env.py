@@ -15,12 +15,12 @@ def get_api_key(key):
 SOURCE_CHAIN_CONNECTION_URL = "https://svc.blockdaemon.com/ethereum/mainnet/native"
 SOURCE_CHAIN_CONNECTION_OPTIONS = {
     "headers": {
-        "Authorization": f"Bearer {get_api_key('SOURCE_CHAIN_API_KEY')}",
+        "Authorization": f"Bearer {get_api_key('BLOCKDAEMON_API_KEY')}",
         "Content-Type": "application/json",
     }
 }
 
-TARGET_CHAIN_CONNECTION_URL = f"https://api-gateway.skymavis.com/rpc/archive?apikey={get_api_key('TARGET_CHAIN_API_KEY')}"
+TARGET_CHAIN_CONNECTION_URL = f"https://api-gateway.skymavis.com/rpc/archive?apikey={get_api_key('RONIN_CHAIN_API_KEY')}"
 TARGET_CHAIN_CONNECTION_OPTIONS = {
     "headers": {
         "Content-Type": "application/json",
@@ -32,25 +32,29 @@ TARGET_CHAIN_CONNECTION_OPTIONS = {
 SOURCE_CHAIN_ID = 1     # Ethereum
 TARGET_CHAIN_ID = 2020  # Ronin
 
-MAX_NUM_THREADS_SOURCE_CHAIN = 20
-MAX_NUM_THREADS_TARGET_CHAIN = 10
+MAX_NUM_THREADS_SOURCE_CHAIN = 15
+MAX_NUM_THREADS_TARGET_CHAIN = 15
 
 # Finality times of each chain or cross-chain protocol (like fraud-proof time window) in seconds
 SOURCE_CHAIN_FINALITY_TIME = 78
 TARGET_CHAIN_FINALITY_TIME = 45
 
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/ronin-bridge/tx_receipts/ethereum_selected_interval.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/ronin-bridge/tx_receipts/ronin_selected_interval.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "./raw-data/ronin-bridge/tx_receipts/ethereum_selected_interval.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "./raw-data/ronin-bridge/tx_receipts/ronin_selected_interval.json"
 
 # Name of files with additional transaction
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE = "../raw-data/ronin-bridge/tx_receipts/ethereum_before_interval.json"
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "../raw-data/ronin-bridge/tx_receipts/ethereum_after_interval.json"
-FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../raw-data/ronin-bridge/tx_receipts/ronin_before_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_BEFORE = "./raw-data/ronin-bridge/tx_receipts/ethereum_before_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS_AFTER = "./raw-data/ronin-bridge/tx_receipts/ethereum_after_interval.json"
+FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "./raw-data/ronin-bridge/tx_receipts/ronin_before_interval.json"
 
 # Name of files with block data receipts
-FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../raw-data/ronin-bridge/blocks/ethereum.csv"
-FILENAME_TARGET_CHAIN_BLOCK_DATA = "../raw-data/ronin-bridge/blocks/ronin.csv"
+FILENAME_SOURCE_CHAIN_BLOCK_DATA = "./raw-data/ronin-bridge/blocks/ethereum.csv"
+FILENAME_TARGET_CHAIN_BLOCK_DATA = "./raw-data/ronin-bridge/blocks/ronin.csv"
+
+ABIs_DIR = "./cross-chain-rules-validator/utils/ABIs/"
+SC_ABIs_DIR = f"{ABIs_DIR}ethereum/"
+TC_ABIs_DIR = f"{ABIs_DIR}ronin/"
 
 # Bridge Address Source Chain (Ethereum) - Manager Proxy
 SOURCE_CHAIN_BRIDGE_ADDRESS = "0x1a2a1c938ce3ec39b6d47113c7955baa9dd454f2"
@@ -93,4 +97,7 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/ronin-bridge/facts'
+FACTS_FOLDER = './datalog/ronin-bridge/facts/'
+
+# The folder to which the evaluation results will be saved
+EVALUATION_FOLDER = "./cross-chain-rules-validator/evaluations/ronin-bridge/"

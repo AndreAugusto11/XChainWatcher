@@ -1,16 +1,26 @@
 from abc import ABC, abstractmethod
 from utils.TransactionDataDecoder import TransactionDataDecoder
 from utils.utils import convert_hex_to_int
+import shutil
 import os
 
 class FactsExtractor(ABC):
 
-    def __init__(self, facts_folder):
+    def __init__(self, facts_folder, evaluation_folder):
         self.facts_folder = facts_folder
+        self.evaluation_folder = evaluation_folder
 
         try:
-            if not os.path.exists(self.facts_folder):
-                os.makedirs(self.facts_folder)
+            if os.path.exists(self.facts_folder):
+                shutil.rmtree(self.facts_folder, ignore_errors=True)
+            
+            os.makedirs(self.facts_folder)
+
+            if os.path.exists(self.evaluation_folder):
+                shutil.rmtree(self.evaluation_folder, ignore_errors=True)
+
+            os.makedirs(self.evaluation_folder)
+
         except:
             raise Exception("Not able to open file")
 

@@ -104,7 +104,7 @@ SC_WithdrewTokensToBridge(timestamp, transaction_hash, withdrawal_id, beneficiar
         erc20_transfer(transaction_hash, chain_id, token_event_index, dst_token, bridge_address, bridge_address, amount);
         sc_withdrawal(transaction_hash, token_event_index, bridge_address, bridge_address, amount)
     ),
-    transaction(timestamp, chain_id, transaction_hash, _, beneficiary, bridge_address, "0", 1, _),
+    transaction(timestamp, chain_id, transaction_hash, _, beneficiary, bridge_address, _, 1, _),
     bridge_event_index > token_event_index.
 
 /******************************************************************************************************/

@@ -149,7 +149,7 @@ SC_ValidERC20TokenWithdrawal(timestamp, transaction_hash, withdrawal_id, benefic
         erc20_transfer(transaction_hash, chain_id, token_event_index, dst_token, bridge_address, beneficiary, amount) ;
         sc_withdrawal(transaction_hash, token_event_index, bridge_address, beneficiary, amount)
     ),
-    transaction(timestamp, chain_id, transaction_hash, _, _, _, "0", 1, _),
+    transaction(timestamp, chain_id, transaction_hash, _, _, _, _, 1, _),
     bridge_controlled_address(chain_id, bridge_address),
     bridge_event_index > token_event_index.
 

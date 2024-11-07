@@ -15,7 +15,7 @@ def get_api_key(key):
 SOURCE_CHAIN_CONNECTION_URL = "https://svc.blockdaemon.com/ethereum/mainnet/native"
 SOURCE_CHAIN_CONNECTION_OPTIONS = {
     "headers": {
-        "Authorization": f"Bearer {get_api_key('SOURCE_CHAIN_API_KEY')}",
+        "Authorization": f"Bearer {get_api_key('BLOCKDAEMON_API_KEY')}",
         "Content-Type": "application/json",
     }
 }
@@ -32,24 +32,28 @@ TARGET_CHAIN_CONNECTION_OPTIONS = {
 SOURCE_CHAIN_ID = 6648936     # Ethereum
 TARGET_CHAIN_ID = 1650811245  # Moonbeam
 
-MAX_NUM_THREADS_SOURCE_CHAIN = 10
-MAX_NUM_THREADS_TARGET_CHAIN = 10
+MAX_NUM_THREADS_SOURCE_CHAIN = 15
+MAX_NUM_THREADS_TARGET_CHAIN = 15
 
 # Finality times of each chain or cross-chain protocol (like fraud-proof time window) in seconds
 SOURCE_CHAIN_FINALITY_TIME = 1800
 TARGET_CHAIN_FINALITY_TIME = 1800
 
 # Name of files with transaction receipts
-FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/nomad-bridge/tx_receipts/ethereum_selected_interval.json"
-FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "../raw-data/nomad-bridge/tx_receipts/moonbeam_selected_interval.json"
+FILENAME_SOURCE_CHAIN_TRANSACTION_RECEIPTS = "./raw-data/nomad-bridge/tx_receipts/ethereum_selected_interval.json"
+FILENAME_TARGET_CHAIN_TRANSACTION_RECEIPTS = "./raw-data/nomad-bridge/tx_receipts/moonbeam_selected_interval.json"
 
 # Name of files with additional transaction
-FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "../raw-data/nomad-bridge/tx_receipts/ethereum_after_interval.json"
+FILENAME_SOURCE_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = "./raw-data/nomad-bridge/tx_receipts/ethereum_after_interval.json"
 FILENAME_TARGET_CHAIN_ADDITIONAL_TRANSACTION_RECEIPTS = ""
 
 # Name of files with block data receipts
-FILENAME_SOURCE_CHAIN_BLOCK_DATA = "../raw-data/nomad-bridge/blocks/ethereum.csv"
-FILENAME_TARGET_CHAIN_BLOCK_DATA = "../raw-data/nomad-bridge/blocks/moonbeam.csv"
+FILENAME_SOURCE_CHAIN_BLOCK_DATA = "./raw-data/nomad-bridge/blocks/ethereum.csv"
+FILENAME_TARGET_CHAIN_BLOCK_DATA = "./raw-data/nomad-bridge/blocks/moonbeam.csv"
+
+ABIs_DIR = "./cross-chain-rules-validator/utils/ABIs/"
+SC_ABIs_DIR = f"{ABIs_DIR}ethereum/"
+TC_ABIs_DIR = f"{ABIs_DIR}moonbeam/"
 
 # Bridge Address Source Chain (Ethereum) - Manager Proxy
 SOURCE_CHAIN_BRIDGE_ADDRESS_DEPOSITS = "0x88a69b4e698a4b090df6cf5bd7b2d47325ad30a3"
@@ -58,8 +62,9 @@ SOURCE_CHAIN_BRIDGE_ADDRESS_WITHDRAWALS = "0x049b51e531fd8f90da6d92ea83dc4125002
 SOURCE_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS_NATIVE = "0x2d6775c1673d4ce55e1f827a0d53e62c43d1f304"
 SOURCE_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS = "0xe0db61ac718f502B485DEc66D013afbbE0B52F84"
 SOURCE_CHAIN_BRIDGE_SOURCE_CODE_WITHDRAWALS = "0x8407dc57739bcda7aa53ca6f12f82f9d51c2f21e"
-SOURCE_CHAIN_ABI_CONTRACT_DEPOSITS = "./utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS.json"
-SOURCE_CHAIN_ABI_CONTRACT_WITHDRAWALS = "./utils/ABIs/ethereum/NOMAD-BRIDGE-WITHDRAWALS.json"
+SOURCE_CHAIN_ABI_CONTRACT_DEPOSITS = f"{ABIs_DIR}ethereum/NOMAD-BRIDGE-DEPOSITS.json"
+SOURCE_CHAIN_ABI_CONTRACT_WITHDRAWALS = f"{ABIs_DIR}ethereum/NOMAD-BRIDGE-WITHDRAWALS.json"
+
 
 # Contract to which state proofs are relayed and fraud proofs are submitted on the source chain
 SOURCE_CHAIN_ABI_HOME_CONTRACT="0x92d3404a7e6c91455bbd81475cd9fad96acff4c8"
@@ -72,8 +77,8 @@ TARGET_CHAIN_BRIDGE_ADDRESS_WITHDRAWALS = "0xd3dfd3ede74e0dcebc1aa685e151332857e
 TARGET_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS_NATIVE = "0xb70588b1a51f847d13158ff18e9cac861df5fb00"
 TARGET_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS = "0x8d2c231c3522b9906b4e017c9ad658868720b436"
 TARGET_CHAIN_BRIDGE_SOURCE_CODE_WITHDRAWALS = "0x0e6a3fd785f2169a086e179004710ba6b663a892"
-TARGET_CHAIN_ABI_CONTRACT_DEPOSITS = "./utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS.json"
-TARGET_CHAIN_ABI_CONTRACT_WITHDRAWALS = "./utils/ABIs/moonbeam/NOMAD-BRIDGE-WITHDRAWALS.json"
+TARGET_CHAIN_ABI_CONTRACT_DEPOSITS = f"{ABIs_DIR}moonbeam/NOMAD-BRIDGE-DEPOSITS.json"
+TARGET_CHAIN_ABI_CONTRACT_WITHDRAWALS = f"{ABIs_DIR}moonbeam/NOMAD-BRIDGE-WITHDRAWALS.json"
 
 # Contract to which state proofs are relayed and fraud proofs are submitted on the source chain
 TARGET_CHAIN_ABI_HOME_CONTRACT="0x8f184d6aa1977fd2f9d9024317d0ea5cf5815b6f"
@@ -119,4 +124,7 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/nomad-bridge/facts'
+FACTS_FOLDER = './cross-chain-rules-validator/datalog/nomad-bridge/facts/'
+
+# The folder to which the evaluation results will be saved
+EVALUATION_FOLDER = "./cross-chain-rules-validator/evaluations/nomad-bridge/"

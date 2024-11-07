@@ -57,18 +57,19 @@ See the full paper for details. These findings demonstrate the critical need for
 ### Requirements
 * [python 3.11](https://www.python.org/downloads/release/python-3115/): `brew install python@3.11` (tested with python 3.11.5)
 * Virtualenv: `pip install virtualenv`
-* R (to create and visualize figures): `brew install r`. To install required R packages, run `sudo Rscript -e 'install.packages(c("ggplot2", "scales", "dplyr", "gridExtra", "patchwork", "tidyr", "lubridate"), repos="https://cloud.r-project.org")'`.
+* R (to create and visualize figures): `brew install r`. To install required R packages, run `sudo Rscript -e 'install.packages(c("ggplot2", "scales", "dplyr", "gridExtra", "patchwork", "tidyr", "lubridate", "cowplot"), repos="https://cloud.r-project.org")'`.
   
 ### Setup
+1. Copy the `scp -r ist190704@sigma.ist.utl.pt:data/xchainwatcher/data raw-data`
 1. Create a file `.env` from `.env.example`: `cp .env.example .env`
 2. Create a file `./vscode/launch.json` from `.vscode/launch.example.json`: `cp .vscode/launch.example.json .vscode/launch.json`
-3. Populate env vars, namely `MOONBEAM_API_KEY` ([you can obtain a free api key at onfinality](https://app.onfinality.io)), and `BLOCKDAEMON_API_KEY` (([you can obtain a free api key at Blockdaemon](https://app.blockdaemon.com/))). You may set `SOURCE_CHAIN_API_KEY`and `TARGET_CHAIN_API_KEY` to the same value as `BLOCKDAEMON_API_KEY`.
+3. Populate env vars, namely `MOONBEAM_API_KEY` ([you can obtain a free api key at onfinality](https://app.onfinality.io)), and `BLOCKDAEMON_API_KEY` (([you can obtain a free api key at Blockdaemon](https://app.blockdaemon.com/))).
 4. `brew install --HEAD souffle-lang/souffle/souffle`
 5. python3.11 -m venv xchainwatcherenv
 6. source xchainwatcherenv/bin/activate
 Full installation procedures, including for other OSs [is available in the official installation page](https://souffle-lang.github.io/install).
     `pip install -r requirements.txt`
-1. To stop using the pip env, run `deactivate`
+7. To stop using the pip env, run `deactivate`
  
 ### Usage
 🚨 Ronin related analysis is WIP (we are uploading the datasets) 🚨
@@ -93,6 +94,17 @@ Click the green play button or press F5 to start debugging.
 3. Run the script with the appropriate flag, `python cross-chain-rules-validator/main.py ronin` or `python cross-chain-rules-validator/main.py nomad` for Ronin or Nomad, respectively. 
 
 When you're done, you can deactivate the virtual environment by running `deactivate`
+
+#### Running the Cross-Chain Model
+Run both commands to execute the cross-chain model with the previously extracted facts. The first file contains acceptance rules that define the expected behavior within the selected interval. The output of these rules are facts (and thus transactions) that comply with the model.
+```bash
+souffle -F./cross-chain-rules-validator/datalog/ronin-bridge/facts/ -D./cross-chain-rules-validator/datalog/ronin-bridge/results/ ./cross-chain-rules-validator/datalog/acceptance-rules.dl
+```
+
+The command below uses the facts extracted beyond the selected interval, leveraging what we call "additional data". Moreover, these rules allow the extraction of other relevant insights on the data.
+```bash
+souffle -F./cross-chain-rules-validator/datalog/ronin-bridge/facts/ -D./cross-chain-rules-validator/datalog/ronin-bridge/results/ ./cross-chain-rules-validator/datalog/additional-rules.dl
+```
 
 ### Figures
 To generate figures, run each corresponding R script in `analysis/figures`, for instance `Rscript analysis/cctx-breaking-finality-nomad.R`.

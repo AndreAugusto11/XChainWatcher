@@ -1,5 +1,0 @@
-#include "lib/declarations.dl"
-#include "lib/types.dl"
-
-// https://etherscan.io/tx/0x97801ae54b460f009385602b806d6bc340da73c4925da06df56801d906762e6c#eventlog
-// TBD

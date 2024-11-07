@@ -17,13 +17,16 @@ from utils.nomad_env import (
     SOURCE_CHAIN_CONNECTION_URL,
     SOURCE_CHAIN_CONNECTION_OPTIONS,
     TOKEN_MAPPINGS,
-    SOURCE_CHAIN_ABI_HOME_CONTRACT
+    SOURCE_CHAIN_ABI_HOME_CONTRACT,
+    ABIs_DIR,
+    SC_ABIs_DIR,
+    TC_ABIs_DIR,
 )
 
 class NomadFactsExtractor(FactsExtractor):
 
-    def __init__(self, facts_folder):
-        super().__init__(facts_folder)
+    def __init__(self, facts_folder, evaluation_folder):
+        super().__init__(facts_folder, evaluation_folder)
         self.sc_transactionDecoder = NomadTransactionDataDecoder(SOURCE_CHAIN_CONNECTION_URL, SOURCE_CHAIN_CONNECTION_OPTIONS)
         self.tc_transactionDecoder = NomadTransactionDataDecoder(TARGET_CHAIN_CONNECTION_URL, TARGET_CHAIN_CONNECTION_OPTIONS)
 
@@ -40,8 +43,8 @@ class NomadFactsExtractor(FactsExtractor):
 
         nonce = None
         try:
-            function, dst_chain = self.extract_dst_chain_from_tx_input_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS.json", SOURCE_CHAIN_BRIDGE_ADDRESS_DEPOSITS, SOURCE_CHAIN_ID)
-            function_2, dst_chain_2 = self.extract_dst_chain_from_tx_input_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", SOURCE_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS_NATIVE, SOURCE_CHAIN_ID)
+            function, dst_chain = self.extract_dst_chain_from_tx_input_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS.json", SOURCE_CHAIN_BRIDGE_ADDRESS_DEPOSITS, SOURCE_CHAIN_ID)
+            function_2, dst_chain_2 = self.extract_dst_chain_from_tx_input_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS-NATIVE.json", SOURCE_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS_NATIVE, SOURCE_CHAIN_ID)
 
             if dst_chain != None: dst_chain = dst_chain["_destination"]
             if dst_chain_2 != None: dst_chain_2 = dst_chain_2["_domain"]
@@ -65,7 +68,7 @@ class NomadFactsExtractor(FactsExtractor):
                 if log["address"] == SOURCE_CHAIN_BRIDGE_ADDRESS_DEPOSITS:
                     # Send(address,address,uint32,bytes32,uint256,bool)
                     if log["topics"][0].hex().startswith("a3d219") and (only_deposits or not additional_data):
-                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), idx, "Deposit")
                         if decodedEvent['toDomain'] != TARGET_CHAIN_ID:
                             alternative_chains_facts.write("%d\t%s\t%d\t%s\t%s\t%s\r\n" % (SOURCE_CHAIN_ID, transaction["transactionHash"], decodedEvent['toDomain'], transaction["from"], transaction["to"], None))
                             return
@@ -73,7 +76,7 @@ class NomadFactsExtractor(FactsExtractor):
 
                     # Receive(uint64,address,address,address,uint256)
                     elif log["topics"][0].hex().startswith("9f9a97") and (only_withdrawals or not additional_data):
-                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), idx, "Withdrawal")
+                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), idx, "Withdrawal")
                         origin, nonce = self.extract_destination_and_nonce(decodedEvent["originAndNonce"])
 
                         if origin == TARGET_CHAIN_ID:
@@ -85,7 +88,7 @@ class NomadFactsExtractor(FactsExtractor):
                 elif log["address"] == SOURCE_CHAIN_ABI_HOME_CONTRACT:
                     # Dispatch(bytes32,uint256,uint64,bytes32,bytes)
                     if log["topics"][0].hex().startswith("9d4c83"):
-                        decodedEvent = self.sc_transactionDecoder.decode_home_contract_event_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-HOME.json", log["address"].lower(), idx)
+                        decodedEvent = self.sc_transactionDecoder.decode_home_contract_event_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-HOME.json", log["address"].lower(), idx)
                         _, nonce = self.extract_destination_and_nonce(decodedEvent["destinationAndNonce"])
 
                 elif log["address"] == "0x049b51e531fd8f90da6d92ea83dc4125002f20ef" or log["address"] == "0x5d94309e5a0090b165fa4181519701637b6daeba": # The "Process" event is irrelevant
@@ -96,12 +99,12 @@ class NomadFactsExtractor(FactsExtractor):
                     # Deposit(address,uint256)
                     if log["topics"][0].hex().startswith("e1fffc"):
                         deals_with_native_tokens = True
-                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS-NATIVE.json", SC_ABIs_DIR + "WETH-ABI.json", log["address"].lower(), idx, "Deposit")
                         deposit_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, transaction["from"], decodedEvent["dst"].lower(), decodedEvent["wad"]))
 
                     # Transfer(address,address,uint256)
                     elif log["topics"][0].hex().startswith("ddf252") and not deals_with_native_tokens and not additional_data: # there is the transfer of a token
-                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), idx, "Transfer")
+                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS-NATIVE.json", SC_ABIs_DIR + "WETH-ABI.json", log["address"].lower(), idx, "Transfer")
                         self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["src"].lower(), decodedEvent["dst"].lower(), decodedEvent["wad"])
 
                 else: # log emitted by some token
@@ -111,7 +114,7 @@ class NomadFactsExtractor(FactsExtractor):
 
                     # Transfer(address,address,uint256)
                     if log["topics"][0].hex().startswith("ddf252") and not additional_data: # there is the transfer of a token
-                        decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction, "utils/ABIs/ERC20-ABI.json", log["address"].lower(), idx)
+                        decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction, ABIs_DIR + "ERC20-ABI.json", log["address"].lower(), idx)
                         self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
                     else:
                         # we can just ignore as this is an Approval, or e.g., VoterVotesChanged in Frax Finance: FXS Token
@@ -143,8 +146,8 @@ class NomadFactsExtractor(FactsExtractor):
 
         nonce = None
         try:
-            function, dst_chain = self.extract_dst_chain_from_tx_input_data(transaction, "utils/ABIs/moonbeam/NOMAD-BRIDGE-WITHDRAWALS.json", TARGET_CHAIN_BRIDGE_ADDRESS_WITHDRAWALS, TARGET_CHAIN_ID)
-            function_2, dst_chain_2 = self.extract_dst_chain_from_tx_input_data(transaction, "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", TARGET_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS_NATIVE, TARGET_CHAIN_ID)
+            function, dst_chain = self.extract_dst_chain_from_tx_input_data(transaction, TC_ABIs_DIR + "NOMAD-BRIDGE-WITHDRAWALS.json", TARGET_CHAIN_BRIDGE_ADDRESS_WITHDRAWALS, TARGET_CHAIN_ID)
+            function_2, dst_chain_2 = self.extract_dst_chain_from_tx_input_data(transaction, TC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS-NATIVE.json", TARGET_CHAIN_BRIDGE_SOURCE_CODE_DEPOSITS_NATIVE, TARGET_CHAIN_ID)
 
             if dst_chain != None: dst_chain = dst_chain["_destination"]
             if dst_chain_2 != None: dst_chain_2 = dst_chain_2["_domain"]
@@ -168,12 +171,12 @@ class NomadFactsExtractor(FactsExtractor):
                 if log["address"] == TARGET_CHAIN_BRIDGE_ADDRESS_WITHDRAWALS:
                     # Send(address,address,uint32,bytes32,uint256,bool)
                     if log["topics"][0].hex().startswith("a3d219"):
-                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/moonbeam/NOMAD-BRIDGE-WITHDRAWALS.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, TC_ABIs_DIR + "NOMAD-BRIDGE-WITHDRAWALS.json", log["address"].lower(), idx, "Deposit")
                         token_withdrew_facts.write("%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, nonce, self.extract_hex_value(decodedEvent['toId'].hex()), decodedEvent['token'].lower(), get_token_mapping(3, 2, decodedEvent['token'].lower(), TOKEN_MAPPINGS), SOURCE_CHAIN_ID, 20, decodedEvent['amount']))
 
                     # Receive(uint64,address,address,address,uint256)
                     elif log["topics"][0].hex().startswith("9f9a97"):
-                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ethereum/NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), idx, "Withdrawal")
+                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, SC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS.json", log["address"].lower(), idx, "Withdrawal")
                         origin_chain_id, nonce = self.extract_destination_and_nonce(decodedEvent["originAndNonce"])
 
                         if origin_chain_id == SOURCE_CHAIN_ID:
@@ -187,7 +190,7 @@ class NomadFactsExtractor(FactsExtractor):
                 elif log["address"] == TARGET_CHAIN_ABI_HOME_CONTRACT:
                     # Dispatch(bytes32,uint256,uint64,bytes32,bytes)
                     if log["topics"][0].hex().startswith("9d4c83"):
-                        decodedEvent = self.tc_transactionDecoder.decode_home_contract_event_data(transaction, "utils/ABIs/moonbeam/NOMAD-BRIDGE-HOME.json", log["address"].lower(), idx)
+                        decodedEvent = self.tc_transactionDecoder.decode_home_contract_event_data(transaction, TC_ABIs_DIR + "NOMAD-BRIDGE-HOME.json", log["address"].lower(), idx)
                         _, nonce = self.extract_destination_and_nonce(decodedEvent["destinationAndNonce"])
 
 
@@ -199,12 +202,12 @@ class NomadFactsExtractor(FactsExtractor):
                     # Deposit(address,uint256)
                     if log["topics"][0].hex().startswith("e1fffc"):
                         deals_with_native_tokens = True
-                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/moonbeam/WGLMR-ABI.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction, TC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS-NATIVE.json", TC_ABIs_DIR + "WGLMR-ABI.json", log["address"].lower(), idx, "Deposit")
                         withdrawal_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, transaction["from"], decodedEvent["dst"].lower(), decodedEvent["wad"]))
 
                     # Transfer(address,address,uint256)
                     elif log["topics"][0].hex().startswith("ddf252") and not deals_with_native_tokens:
-                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/moonbeam/NOMAD-BRIDGE-DEPOSITS-NATIVE.json", "utils/ABIs/moonbeam/WGLMR-ABI.json", log["address"].lower(), idx, "Transfer")
+                        decodedEvent, _ = self.tc_transactionDecoder.decode_weth_event_data(transaction, TC_ABIs_DIR + "NOMAD-BRIDGE-DEPOSITS-NATIVE.json", TC_ABIs_DIR + "WGLMR-ABI.json", log["address"].lower(), idx, "Transfer")
                         self.store_erc20_fact(transaction, TARGET_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["src"].lower(), decodedEvent["dst"].lower(), decodedEvent["wad"])
 
                 else: # log emitted by some token
@@ -214,7 +217,7 @@ class NomadFactsExtractor(FactsExtractor):
 
                     # Transfer(address,address,uint256)
                     if log["topics"][0].hex().startswith("ddf252"): # there is the transfer of a token
-                        decodedEvent = self.tc_transactionDecoder.decode_erc20_event_data(transaction, "utils/ABIs/ERC20-ABI.json", log["address"].lower(), idx)
+                        decodedEvent = self.tc_transactionDecoder.decode_erc20_event_data(transaction, ABIs_DIR + "ERC20-ABI.json", log["address"].lower(), idx)
                         self.store_erc20_fact(transaction, TARGET_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
                     else:
                         # we can just ignore as this is an Approval, or e.g., VoterVotesChanged in Frax Finance: FXS Token

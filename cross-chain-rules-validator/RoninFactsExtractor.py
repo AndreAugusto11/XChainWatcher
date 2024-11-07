@@ -12,13 +12,16 @@ from utils.ronin_env import (
     SOURCE_CHAIN_CONNECTION_URL,
     SOURCE_CHAIN_CONNECTION_OPTIONS,
     SOURCE_CHAIN_BRIDGE_ADDRESS,
-    TARGET_CHAIN_BRIDGE_ADDRESS
+    TARGET_CHAIN_BRIDGE_ADDRESS,
+    ABIs_DIR,
+    SC_ABIs_DIR,
+    TC_ABIs_DIR,
 )
 
 class RoninFactsExtractor(FactsExtractor):
 
-    def __init__(self, facts_folder):
-        super().__init__(facts_folder)
+    def __init__(self, facts_folder, evaluation_folder):
+        super().__init__(facts_folder, evaluation_folder)
         self.sc_transactionDecoder = RoninTransactionDataDecoder(SOURCE_CHAIN_CONNECTION_URL, SOURCE_CHAIN_CONNECTION_OPTIONS)
         self.tc_transactionDecoder = RoninTransactionDataDecoder(TARGET_CHAIN_CONNECTION_URL, TARGET_CHAIN_CONNECTION_OPTIONS)
 
@@ -43,12 +46,12 @@ class RoninFactsExtractor(FactsExtractor):
 
                     # TokenWithdrew(uint256,address,address,uint256)
                     if log["topics"][0].hex().startswith("86174e"):
-                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", log["address"].lower(), idx, "Withdrawal")
+                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, SC_ABIs_DIR + "RONIN-BRIDGE-CONTRACT-ABI.json", log["address"].lower(), idx, "Withdrawal")
                         token_withdrew_facts.write("%s\t%d\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, decodedEvent['_withdrawId'], decodedEvent['_owner'].lower(), decodedEvent['_tokenAddress'].lower(), decodedEvent['_tokenNumber']))
 
                     # TokenDeposited(uint256,address,address,address,uint32,uint256)
                     elif log["topics"][0].hex().startswith("728488"):
-                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent = self.sc_transactionDecoder.decode_bridge_event_data(transaction, SC_ABIs_DIR + "RONIN-BRIDGE-CONTRACT-ABI.json", log["address"].lower(), idx, "Deposit")
                         token_deposited_facts.write("%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, decodedEvent["_depositId"], decodedEvent['_owner'].lower(), decodedEvent['_sidechainAddress'].lower(), decodedEvent["_tokenAddress"].lower(), TARGET_CHAIN_ID, decodedEvent['_standard'], decodedEvent['_tokenNumber']))
 
                 elif log["address"].lower() == CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN:
@@ -56,25 +59,25 @@ class RoninFactsExtractor(FactsExtractor):
                     # Withdrawal(address,uint256)
                     if log["topics"][0].hex().startswith("7fcf53") and (only_withdrawals or not additional_data):
                         deals_with_native_tokens = True
-                        decodedEvent, user = self.sc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), idx, "Withdrawal")
+                        decodedEvent, user = self.sc_transactionDecoder.decode_weth_event_data(transaction, SC_ABIs_DIR + "RONIN-BRIDGE-CONTRACT-ABI.json", SC_ABIs_DIR + "WETH-ABI.json", log["address"].lower(), idx, "Withdrawal")
                         withdrawal_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, decodedEvent["src"].lower(), user, decodedEvent["wad"]))
 
                     # Deposit(address,uint256)
                     elif log["topics"][0].hex().startswith("e1fffc") and (only_deposits or not additional_data):
                         deals_with_native_tokens = True
-                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, SC_ABIs_DIR + "RONIN-BRIDGE-CONTRACT-ABI.json", SC_ABIs_DIR + "WETH-ABI.json", log["address"].lower(), idx, "Deposit")
                         deposit_facts.write("%s\t%d\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, transaction["from"], decodedEvent["dst"].lower(), decodedEvent["wad"]))
 
                     # Transfer(address,address,uint256)
                     elif log["topics"][0].hex().startswith("ddf252"):
-                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-ABI.json", "utils/ABIs/ethereum/WETH-ABI.json", log["address"].lower(), idx, "Transfer")
+                        decodedEvent, _ = self.sc_transactionDecoder.decode_weth_event_data(transaction, SC_ABIs_DIR + "RONIN-BRIDGE-CONTRACT-ABI.json", SC_ABIs_DIR + "WETH-ABI.json", log["address"].lower(), idx, "Transfer")
                         self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["src"].lower(), decodedEvent["dst"].lower(), decodedEvent["wad"])
 
                 elif log["address"].lower() == SOURCE_CHAIN_BRIDGE_ADDRESS_V2 and additional_data:
                     
                     # Withdrew(bytes32,tuple)
                     if log["topics"][0].hex().startswith("21e88e"):
-                        decodedEvent = self.sc_transactionDecoder.decode_bridge_v2_event_data(transaction, "utils/ABIs/ethereum/RONIN-BRIDGE-CONTRACT-V2.json", log["address"].lower(), idx)
+                        decodedEvent = self.sc_transactionDecoder.decode_bridge_v2_event_data(transaction, SC_ABIs_DIR + "RONIN-BRIDGE-CONTRACT-V2.json", log["address"].lower(), idx)
                         receipt = decodedEvent["receipt"]
 
                         if receipt['info']['erc'] == 1: # since this will only occur within the additional data, we will ignore NFTs, because there are not NFT transfers in the selected interval
@@ -89,7 +92,7 @@ class RoninFactsExtractor(FactsExtractor):
                     # Transfer(address,address,uint256)
                     if log["topics"][0].hex().startswith("ddf252"): # there is the transfer of a token
                         try:
-                            decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction, "utils/ABIs/ERC20-ABI.json", log["address"].lower(), idx)
+                            decodedEvent = self.sc_transactionDecoder.decode_erc20_event_data(transaction, ABIs_DIR + "ERC20-ABI.json", log["address"].lower(), idx)
 
                             self.store_erc20_fact(transaction, SOURCE_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
                         except Exception as e:
@@ -133,18 +136,18 @@ class RoninFactsExtractor(FactsExtractor):
 
                     # TokenWithdrew(uint256,address,address,address,uint32,uint256)
                     if log["topics"][0].hex().startswith("d56c021e") and (only_withdrawals or not additional_data):
-                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ronin/BRIDGE-ABI.json", log["address"].lower(), idx, "Withdrawal")
+                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, TC_ABIs_DIR + "BRIDGE-ABI.json", log["address"].lower(), idx, "Withdrawal")
                         token_withdrew_facts.write("%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, decodedEvent['_withdrawId'], decodedEvent['_owner'].lower(), decodedEvent['_tokenAddress'].lower(), decodedEvent['_mainchainAddress'].lower(), SOURCE_CHAIN_ID, decodedEvent['_standard'], decodedEvent['_tokenNumber']))
 
                     # TokenDeposited(uint256,address,address,uint256)
                     if log["topics"][0].hex().startswith("5187d31a") and (only_deposits or not additional_data):
-                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, "utils/ABIs/ronin/BRIDGE-ABI.json", log["address"].lower(), idx, "Deposit")
+                        decodedEvent = self.tc_transactionDecoder.decode_bridge_event_data(transaction, TC_ABIs_DIR + "BRIDGE-ABI.json", log["address"].lower(), idx, "Deposit")
                         token_deposited_facts.write("%s\t%s\t%s\t%s\t%s\t%s\r\n" % (transaction["transactionHash"], idx, decodedEvent["depositId"], decodedEvent['owner'].lower(), decodedEvent["tokenAddress"].lower(), decodedEvent['tokenNumber']))
 
                 else: # there is the transfer of a token
                     # Transfer(address,address,uint256)
                     if log["topics"][0].hex().startswith("ddf252"):
-                        decodedEvent = self.tc_transactionDecoder.decode_erc20_event_data(transaction, "utils/ABIs/ERC20-ABI.json", log["address"].lower(), idx)
+                        decodedEvent = self.tc_transactionDecoder.decode_erc20_event_data(transaction, ABIs_DIR + "ERC20-ABI.json", log["address"].lower(), idx)
                         self.store_erc20_fact(transaction, TARGET_CHAIN_ID, idx, log, erc20_transfer_facts, decodedEvent["from"].lower(), decodedEvent["to"].lower(), decodedEvent["value"])
                         idx += 1
                     else:
