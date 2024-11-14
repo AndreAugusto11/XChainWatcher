@@ -96,18 +96,34 @@ Click the green play button or press F5 to start debugging.
 When you're done, you can deactivate the virtual environment by running `deactivate`
 
 #### Running the Cross-Chain Model
-Run both commands to execute the cross-chain model with the previously extracted facts. The first file contains acceptance rules that define the expected behavior within the selected interval. The output of these rules are facts (and thus transactions) that comply with the model.
+Run the following command to execute the cross-chain model with the previously extracted facts. The file contains acceptance rules that define the expected behavior within the selected interval, and imports several other files with facts definition and additional rules. The output of these rules are facts that comply with the model.
+
+For the Ronin bridge:
 ```bash
-souffle -F./cross-chain-rules-validator/datalog/ronin-bridge/facts/ -D./cross-chain-rules-validator/datalog/ronin-bridge/results/ ./cross-chain-rules-validator/datalog/acceptance-rules.dl
+souffle -p ./cross-chain-rules-validator/evaluations/ronin-bridge/datalog-logs.console -F./cross-chain-rules-validator/datalog/ronin-bridge/facts/ -D./cross-chain-rules-validator/datalog/ronin-bridge/results/ ./cross-chain-rules-validator/datalog/acceptance-rules.dl
 ```
 
-The command below uses the facts extracted beyond the selected interval, leveraging what we call "additional data". Moreover, these rules allow the extraction of other relevant insights on the data.
+For the Nomad bridge:
 ```bash
-souffle -F./cross-chain-rules-validator/datalog/ronin-bridge/facts/ -D./cross-chain-rules-validator/datalog/ronin-bridge/results/ ./cross-chain-rules-validator/datalog/additional-rules.dl
+souffle -p ./cross-chain-rules-validator/evaluations/nomad-bridge/datalog-logs.console -F./cross-chain-rules-validator/datalog/nomad-bridge/facts/ -D./cross-chain-rules-validator/datalog/nomad-bridge/results/ ./cross-chain-rules-validator/datalog/acceptance-rules.dl
 ```
+
+#### Evaluating the execution of the Cross-Chain Model
+
+For the Ronin bridge:
+```bash
+souffleprof ./cross-chain-rules-validator/evaluations/ronin-bridge/datalog-logs.console -j
+```
+
+For the Nomad bridge:
+```bash
+souffleprof ./cross-chain-rules-validator/evaluations/nomad-bridge/datalog-logs.console -j
+```
+
+These commands will create a file under `profiler_html` with the profiler data. There are already examples in the folder.
 
 ### Figures
-To generate figures, run each corresponding R script in `analysis/figures`, for instance `Rscript analysis/cctx-breaking-finality-nomad.R`.
+To generate figures, run each corresponding R script in `analysis/figures`, for instance `Rscript data-visualizations/cctx-breaking-finality-nomad.R`. Alternatively, open the project in RStudio.
 
 ### Data
 This project includes the first open-source dataset of over 81,000 cross-chain transactions across three blockchains, capturing $585M and $3.7B in token transfers in Nomad and Ronin, respectively.

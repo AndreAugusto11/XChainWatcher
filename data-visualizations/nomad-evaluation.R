@@ -36,21 +36,17 @@ print(native_time_metrics)
 print(non_native_time_metrics)
 
 # Create the first histogram for balance_at_date_capped
-p1 <-
-  nomad_evaluation_data %>%
-  mutate(type=factor(type, levels=c("non-native", "native"))) %>%   # This trick update the factor levels
-  ggplot(aes(x=time, fill=type)) +
-  geom_histogram(bins=500, alpha=1) +
+p1 <- ggplot(nomad_evaluation_data, aes(x = time, color = type)) +
+  stat_ecdf(geom = "step", alpha = 1) +
   scale_x_log10(limits = x_limits, breaks = custom_breaks, labels = scales::label_number()) +
-  scale_fill_manual(
-    name = "Token Transf",
-    values = c("#ff7f0e", "#1f77b4"),
-    breaks = c("native", "non-native"),
-    labels = c("  Non-Native: N=51,702", "  Native: N=7,656")
+  scale_color_manual(
+    name = "Type of Token Transferred",
+    values = c("native" = "#1f77b4", "non-native" = "#ff7f0e"),
+    labels = c("  Native: N=7,656", "  Non-Native: N=51,702")
   ) +
-  labs(#title="Facts Extraction Latency",
-    x="Latency of Transaction Receipt Facts Extraction (seconds)",
-    y="Frequency"
+  labs(
+    x="Transaction Receipt Processing Time (seconds)",
+    y="Cumulative Distribution"
   ) +
   theme_minimal() +
   theme(
@@ -66,9 +62,14 @@ p1 <-
     axis.title.x=element_text(size=12, face="bold"),
     legend.title = element_text(face = "bold", size=14, margin = margin(r = 5)),
     axis.text = element_text(size = 10, face="bold"),
-    legend.position = "bottom",
-    legend.key.spacing.x = unit(0.2, 'cm'),
-    legend.text = element_text(size = 12, margin = margin(r = 2)),
+    legend.position = c(0.79, 0.22),
+    legend.background = element_rect(fill="lightblue",
+                                     size=0.5, linetype="solid", color="lightblue"),
+    legend.text = element_text(size = 10),
+    
+    #legend.position = "bottom",
+    #legend.key.spacing.x = unit(0.2, 'cm'),
+    #legend.text = element_text(size = 12, margin = margin(r = 2))
   )
 
 p1

@@ -1,6 +1,3 @@
-#include "acceptance-rules.dl"
-
-
 .decl CCTX_Withdrawal_FinalityBreak(origin_chain_id:unsigned, origin_chain_timestamp:unsigned, origin_transaction_hash:symbol, dst_chain_id:unsigned, dst_chain_timestamp:unsigned, dst_transaction_hash:symbol, withdrawal_id:unsigned, origin_token:Address, dst_token:Address, sender:Address, beneficiary:Address, amount:Amount)
 .output CCTX_Withdrawal_FinalityBreak
 
