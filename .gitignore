@@ -2,10 +2,9 @@
 
 **/**/.env
 **/**/__pycache__
-.Rproj.user
+**/**/.Rproj.user
 xchainwatcherenv/*
-analysis/.Rhistory
-analysis/.RData
-Rplots.pdf
+**/**/.Rhistory
+**/**/.RData
 .vscode/launch.json
 ./raw-data/*

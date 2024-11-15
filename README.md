@@ -60,7 +60,7 @@ See the full paper for details. These findings demonstrate the critical need for
 * R (to create and visualize figures): `brew install r`. To install required R packages, run `sudo Rscript -e 'install.packages(c("ggplot2", "scales", "dplyr", "gridExtra", "patchwork", "tidyr", "lubridate", "cowplot"), repos="https://cloud.r-project.org")'`.
   
 ### Setup
-1. Copy the `scp -r ist190704@sigma.ist.utl.pt:data/xchainwatcher/data raw-data`
+1. Copy the raw data from a remote repository `gdown 1YeBQpXWUB8LEXkbzyF0uJqOfhxqKiby7 --folder`
 1. Create a file `.env` from `.env.example`: `cp .env.example .env`
 2. Create a file `./vscode/launch.json` from `.vscode/launch.example.json`: `cp .vscode/launch.example.json .vscode/launch.json`
 3. Populate env vars, namely `MOONBEAM_API_KEY` ([you can obtain a free api key at onfinality](https://app.onfinality.io)), and `BLOCKDAEMON_API_KEY` (([you can obtain a free api key at Blockdaemon](https://app.blockdaemon.com/))).
