@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: cross-chain-rules-validator/main.py with ronin flag (xchainwatcherenv)",
+      "name": "Python: cross-chain-rules-validator with ronin flag (xchainwatcherenv)",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/cross-chain-rules-validator/main.py",
+      "program": "${workspaceFolder}/cross-chain-rules-validator",
       "args": ["ronin"],
       "console": "integratedTerminal",
       "justMyCode": true,
@@ -13,10 +13,10 @@
       "env": { "PYTHONPATH": "${workspaceFolder}" }
     },
     {
-      "name": "Python: cross-chain-rules-validator/main.py with nomad flag (xchainwatcherenv)",
+      "name": "Python: cross-chain-rules-validator with nomad flag (xchainwatcherenv)",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/cross-chain-rules-validator/main.py",
+      "program": "${workspaceFolder}/cross-chain-rules-validator",
       "args": ["nomad"],
       "console": "integratedTerminal",
       "justMyCode": true,

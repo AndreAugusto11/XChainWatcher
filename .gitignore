@@ -8,3 +8,4 @@ xchainwatcherenv/*
 **/**/.RData
 .vscode/launch.json
 ./raw-data/*
+.Rproj.user

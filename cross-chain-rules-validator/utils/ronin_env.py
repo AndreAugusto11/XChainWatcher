@@ -1,10 +1,4 @@
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-def get_api_key(key):
-    return os.getenv(key)
+from utils.utils import get_api_key
 
 ###################################################
 ###### CHANGE PARAMETERS BASED ON THE BRIDGE ######
@@ -15,7 +9,7 @@ def get_api_key(key):
 SOURCE_CHAIN_CONNECTION_URL = "https://svc.blockdaemon.com/ethereum/mainnet/native"
 SOURCE_CHAIN_CONNECTION_OPTIONS = {
     "headers": {
-        "Authorization": f"Bearer {get_api_key('BLOCKDAEMON_API_KEY')}",
+        "Authorization": f"Bearer {get_api_key('ETHEREUM_API_KEY')}",
         "Content-Type": "application/json",
     }
 }
@@ -97,7 +91,7 @@ BRIDGE_CONTROLLED_ADDRESSES = [
 ###################################################
 
 # Datalog facts folder
-FACTS_FOLDER = './datalog/ronin-bridge/facts/'
+FACTS_FOLDER = './cross-chain-rules-validator/datalog/ronin-bridge/facts/'
 
 # The folder to which the evaluation results will be saved
 EVALUATION_FOLDER = "./cross-chain-rules-validator/evaluations/ronin-bridge/"

@@ -1,6 +1,13 @@
 from hexbytes import HexBytes
+from dotenv import load_dotenv
 import json
 import csv
+import os
+
+load_dotenv()
+
+def get_api_key(key):
+    return os.getenv(key)
 
 def load_transaction_receipts(filename):
     print("Opening file " + filename)
@@ -36,3 +43,11 @@ def convert_topics_to_hex(log):
     
     log['topics'] = hex_topics
     return log
+
+def confirm_api_keys_loaded():
+    ethereum = get_api_key('ETHEREUM_API_KEY')
+    ronin = get_api_key('RONIN_CHAIN_API_KEY')
+    moonbeam = get_api_key('MOONBEAM_API_KEY')
+
+    if ethereum == "" or ronin == "" or moonbeam == "":
+        raise Exception("API keys not found in .env file")
