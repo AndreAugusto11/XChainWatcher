@@ -78,7 +78,7 @@ pip install virtualenv
 ### Setup
 1. Create a file `.env` from `.env.example`: `cp .env.example .env`
 2. Create a file `./vscode/launch.json` from `.vscode/launch.example.json`: `cp .vscode/launch.example.json .vscode/launch.json`
-3. Populate env vars, namely `MOONBEAM_API_KEY` ([you can obtain a free api key at onfinality](https://app.onfinality.io)), and `ETHEREUM_API_KEY` (([you can obtain a free api key at Blockdaemon](https://app.blockdaemon.com/))).
+3. Populate env vars, namely `MOONBEAM_API_KEY` ([obtain a free api key at onfinality](https://app.onfinality.io)), and `ETHEREUM_API_KEY` ([obtain a free api key at Blockdaemon](https://app.blockdaemon.com/)).
 4. Create virtual environment `python3.11 -m venv xchainwatcherenv`
 5. Activate virstual environment `source xchainwatcherenv/bin/activate`
 6. Install all dependencies `pip install -r requirements.txt`
@@ -140,9 +140,13 @@ These commands will create a file under `profiler_html` with the profiler data. 
 The results of the execution of the Datalog engine can be found in [`cross-chain-rules-validator/datalog/nomad-bridge/results`](cross-chain-rules-validator/datalog/nomad-bridge/results) and [`cross-chain-rules-validator/datalog/ronin-bridge/results`](cross-chain-rules-validator/datalog/ronin-bridge/results).
 
 ### Data
-This project includes the first open-source dataset of over 81,000 cross-chain transactions across three blockchains, capturing $585M and $3.7B in token transfers in Nomad and Ronin, respectively.
+This project includes the first open-source dataset of over 81,000 cross-chain transactions across three blockchains, capturing $585M and $3.7B in token transfers in Nomad and Ronin, respectively. Datasets can be found under different folders:
 
-Datasets can be found under different folders. For Ronin and Nomad, respectively: raw data can be found in [`raw-data`](./raw-data). [`cross-chain-rules-validator/analysis/ronin-bridge/data`](./cross-chain-rules-validator/analysis/ronin-bridge/data) and [`cross-chain-rules-validator/analysis/nomad-bridge/data`](./cross-chain-rules-validator/analysis/nomad-bridge/data). Datalog engine runs can be found in [`cross-chain-rules-validator/datalog/ronin-bridge/results`](./cross-chain-rules-validator/datalog/ronin-bridge/results) and [`cross-chain-rules-validator/datalog/nomad-bridge/results`](./cross-chain-rules-validator/datalog/nomad-bridge/results). Datalog facts can be found in [`cross-chain-rules-validator/datalog/ronin-bridge/facts`](./cross-chain-rules-validator/datalog/ronin-bridge/facts) and [`cross-chain-rules-validator/datalog/nomad-bridge/facts`](./cross-chain-rules-validator/datalog/nomad-bridge/facts).
+* For Ronin and Nomad, respectively: raw data (transaction receipts) can be found in [`raw-data`](./raw-data).
+
+* Datalog engine runs can be found in [`cross-chain-rules-validator/datalog/ronin-bridge/results`](./cross-chain-rules-validator/datalog/ronin-bridge/results) and [`cross-chain-rules-validator/datalog/nomad-bridge/results`](./cross-chain-rules-validator/datalog/nomad-bridge/results). Datalog facts can be found in [`cross-chain-rules-validator/datalog/ronin-bridge/facts`](./cross-chain-rules-validator/datalog/ronin-bridge/facts) and [`cross-chain-rules-validator/datalog/nomad-bridge/facts`](./cross-chain-rules-validator/datalog/nomad-bridge/facts).
+
+* Analyzed and pre-processed data can be found in [`cross-chain-rules-validator/analysis/ronin-bridge/data`](./cross-chain-rules-validator/analysis/ronin-bridge/data) and [`cross-chain-rules-validator/analysis/nomad-bridge/data`](./cross-chain-rules-validator/analysis/nomad-bridge/data).
 
 ### Figures
 To generate figures, run each corresponding R script in [`data-visualizations`](./data-visualizations). Alternatively, open the entire folder in RStudio.

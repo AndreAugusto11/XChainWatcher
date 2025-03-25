@@ -70,7 +70,7 @@ CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN = "0xc02aaa39b223fe8d0a0e5
 # AXS is the native token in the Target Chain (Ronin). We need the contract of the wrapped version
 CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_TARGET_CHAIN = "0x97a9107c1793bc407d6f527b77e7fff4d812bece"
 
-# Token Mappings between Source Chain (Ethereum) and Target Chain (Ronin)
+# Token Mappings between Source Chain (Ethereum) and Target Chain (Moonbeam) according to the documentation and code
 # in the form [SOURCE_CHAIN_ID, TARGET_CHAIN_ID, TOKEN_ADDRESS_SOURCE_CHAIN, TOKEN_ADDRESS_TARGET_CHAIN, STANDARD]
 TOKEN_MAPPINGS = [
     [1, 2020, "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b", "0x97a9107c1793bc407d6f527b77e7fff4d812bece", 20],
@@ -80,6 +80,7 @@ TOKEN_MAPPINGS = [
     [1,	2020, "0x0c7cf86188632e16af00415214155950684466a8",	"0x173a2d4fa585a63acd02c107d57f932be0a71bcc", 20]
 ]
 
+# All addresses of bridge contracts that are controlled by the bridge
 BRIDGE_CONTROLLED_ADDRESSES = [
     [1,	"0x1a2a1c938ce3ec39b6d47113c7955baa9dd454f2"],
     [1,	"0x64192819ac13ef72bf6b5ae239ac672b43a9af08"],

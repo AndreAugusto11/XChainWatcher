@@ -84,7 +84,7 @@ CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_SOURCE_CHAIN = "0xc02aaa39b223fe8d0a0e5
 # AXS is the native token in the Target Chain (Moonbeam). We need the contract of the wrapped version
 CONTRACT_ADDRESS_EQUIVALENT_NATIVE_TOKEN_TARGET_CHAIN = "0xacc15dc74880c9944775448304b263d191c6077f"
 
-# Token Mappings between Source Chain (Ethereum) and Target Chain (Moonbeam)
+# Token Mappings between Source Chain (Ethereum) and Target Chain (Moonbeam) according to the documentation and code
 # in the form [SOURCE_CHAIN_ID, TARGET_CHAIN_ID, TOKEN_ADDRESS_SOURCE_CHAIN, TOKEN_ADDRESS_TARGET_CHAIN, STANDARD]
 TOKEN_MAPPINGS = [
     [6648936, 1650811245, "0xba8d75baccc4d5c4bd814fde69267213052ea663", "0xacc15dc74880c9944775448304b263d191c6077f", 20], #WGLMR
@@ -100,6 +100,7 @@ TOKEN_MAPPINGS = [
     [6648936, 1650811245, "0x3432b6a60d23ca0dfca7761b7ab56459d9c964d0", "0x21a8daca6a56434bdb6f39e7616c0f9891829aec", 20], #FXS
 ]
 
+# All addresses of bridge contracts that are controlled by the bridge
 BRIDGE_CONTROLLED_ADDRESSES = [
     [6648936,	"0x88a69b4e698a4b090df6cf5bd7b2d47325ad30a3"],
     [6648936,	"0x049b51e531fd8f90da6d92ea83dc4125002f20ef"],

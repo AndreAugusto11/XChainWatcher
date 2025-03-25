@@ -8,10 +8,10 @@
     "jobs": "1",
     "libraries": "functors",
     "library-dir": ".",
-    "output-dir": "./cross-chain-rules-validator/datalog/nomad-bridge/results/",
+    "output-dir": "./cross-chain-rules-validator/datalog/nomad-bridge/results",
     "profile": "./cross-chain-rules-validator/evaluations/nomad-bridge/datalog-logs.console",
-    "relationCount": "41",
-    "ruleCount": "33",
+    "relationCount": "47",
+    "ruleCount": "42",
     "version": "2.4.1-53-g73edcf363",
     "warn": "all",
     "wno": "none"
@@ -19,8 +19,8 @@
    "relation": {
     "CCTX_Deposit": {
      "maxRSS": {
-      "post": 45498368,
-      "pre": 45449216
+      "post": 49070080,
+      "pre": 47054848
      },
      "non-recursive-rule": {
       "CCTX_Deposit(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidERC20TokenDeposit(dst_chain_timestamp,dst_transaction_hash,deposit_id,beneficiary,dst_token,dst_chain_id,amount),\n   SC_ValidERC20TokenDeposit(origin_chain_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) <= dst_chain_timestamp.": {
@@ -41,12 +41,12 @@
         }
        },
        "maxRSS": {
-        "post": 45481984,
-        "pre": 45449216
+        "post": 47824896,
+        "pre": 47054848
        },
        "num-tuples": 4217,
-       "runtime": { "start": 521250010313, "end": 521250013748},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [80:1-87:73]"
+       "runtime": { "start": 1780945808137, "end": 1780945812421},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [116:1-123:73]"
       },
       "CCTX_Deposit(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidERC20TokenDeposit(dst_chain_timestamp,dst_transaction_hash,deposit_id,beneficiary,dst_token,dst_chain_id,amount),\n   SC_ValidNativeTokenDeposit(origin_chain_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) <= dst_chain_timestamp.": {
        "atom-frequency": {
@@ -66,24 +66,24 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45481984
+        "post": 49070080,
+        "pre": 47824896
        },
        "num-tuples": 7187,
-       "runtime": { "start": 521250013778, "end": 521250019042},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [80:1-87:73]"
+       "runtime": { "start": 1780945812445, "end": 1780945818737},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [116:1-123:73]"
       }
      },
      "num-tuples": 11404,
      "reads": 22827,
-     "runtime": { "start": 521250010310, "end": 521250019091},
-     "savetime": { "start": 521250019114, "end": 521250034245},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [77:7-77:19]"
+     "runtime": { "start": 1780945808134, "end": 1780945818771},
+     "savetime": { "start": 1780945818791, "end": 1780945828275},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [113:7-113:19]"
     },
     "CCTX_Deposit_FinalityBreak": {
      "maxRSS": {
-      "post": 45498368,
-      "pre": 45498368
+      "post": 49070080,
+      "pre": 49070080
      },
      "non-recursive-rule": {
       "CCTX_Deposit_FinalityBreak(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidERC20TokenDeposit(dst_chain_timestamp,dst_transaction_hash,deposit_id,beneficiary,dst_token,dst_chain_id,amount),\n   SC_ValidERC20TokenDeposit(origin_chain_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) > dst_chain_timestamp.": {
@@ -104,11 +104,11 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49070080,
+        "pre": 49070080
        },
        "num-tuples": 5,
-       "runtime": { "start": 521250034293, "end": 521250036512},
+       "runtime": { "start": 1780945828299, "end": 1780945831179},
        "source-locator": "misc-rules.dl [17:1-24:72]"
       },
       "CCTX_Deposit_FinalityBreak(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidERC20TokenDeposit(dst_chain_timestamp,dst_transaction_hash,deposit_id,beneficiary,dst_token,dst_chain_id,amount),\n   SC_ValidNativeTokenDeposit(origin_chain_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) > dst_chain_timestamp.": {
@@ -129,24 +129,24 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49070080,
+        "pre": 49070080
        },
        "num-tuples": 0,
-       "runtime": { "start": 521250036537, "end": 521250039266},
+       "runtime": { "start": 1780945831196, "end": 1780945834479},
        "source-locator": "misc-rules.dl [17:1-24:72]"
       }
      },
      "num-tuples": 5,
      "reads": 0,
-     "runtime": { "start": 521250034290, "end": 521250039289},
-     "savetime": { "start": 521250039296, "end": 521250039459},
+     "runtime": { "start": 1780945828297, "end": 1780945834496},
+     "savetime": { "start": 1780945834501, "end": 1780945834595},
      "source-locator": "misc-rules.dl [14:7-14:33]"
     },
     "CCTX_Withdrawal": {
      "maxRSS": {
-      "post": 45498368,
-      "pre": 45498368
+      "post": 49872896,
+      "pre": 49070080
      },
      "non-recursive-rule": {
       "CCTX_Withdrawal(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidERC20TokenWithdrawal(dst_chain_timestamp,dst_transaction_hash,withdrawal_id,beneficiary,dst_token,dst_chain_id,amount),\n   TC_ValidERC20TokenWithdrawal(origin_chain_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) <= dst_chain_timestamp.": {
@@ -167,12 +167,12 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49807360,
+        "pre": 49070080
        },
        "num-tuples": 4257,
-       "runtime": { "start": 521250039468, "end": 521250042205},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [165:1-172:73]"
+       "runtime": { "start": 1780945834603, "end": 1780945837417},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [249:1-256:73]"
       },
       "CCTX_Withdrawal(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidERC20TokenWithdrawal(dst_chain_timestamp,dst_transaction_hash,withdrawal_id,beneficiary,dst_token,dst_chain_id,amount),\n   TC_ValidNativeTokenWithdrawal(origin_chain_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) <= dst_chain_timestamp.": {
        "atom-frequency": {
@@ -192,24 +192,24 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49856512,
+        "pre": 49823744
        },
        "num-tuples": 225,
-       "runtime": { "start": 521250042234, "end": 521250042963},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [165:1-172:73]"
+       "runtime": { "start": 1780945837442, "end": 1780945838146},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [249:1-256:73]"
       }
      },
      "num-tuples": 4482,
      "reads": 10179,
-     "runtime": { "start": 521250039465, "end": 521250042994},
-     "savetime": { "start": 521250043006, "end": 521250049396},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [162:7-162:22]"
+     "runtime": { "start": 1780945834601, "end": 1780945838173},
+     "savetime": { "start": 1780945838183, "end": 1780945841888},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [246:7-246:22]"
     },
     "CCTX_Withdrawal_FinalityBreak": {
      "maxRSS": {
-      "post": 45498368,
-      "pre": 45498368
+      "post": 49872896,
+      "pre": 49872896
      },
      "non-recursive-rule": {
       "CCTX_Withdrawal_FinalityBreak(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidERC20TokenWithdrawal(dst_chain_timestamp,dst_transaction_hash,withdrawal_id,beneficiary,dst_token,dst_chain_id,amount),\n   TC_ValidERC20TokenWithdrawal(origin_chain_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) > dst_chain_timestamp.": {
@@ -230,11 +230,11 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49872896,
+        "pre": 49872896
        },
        "num-tuples": 0,
-       "runtime": { "start": 521250049416, "end": 521250050931},
+       "runtime": { "start": 1780945841904, "end": 1780945843288},
        "source-locator": "misc-rules.dl [4:1-11:72]"
       },
       "CCTX_Withdrawal_FinalityBreak(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidERC20TokenWithdrawal(dst_chain_timestamp,dst_transaction_hash,withdrawal_id,beneficiary,dst_token,dst_chain_id,amount),\n   TC_ValidNativeTokenWithdrawal(origin_chain_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) > dst_chain_timestamp.": {
@@ -255,24 +255,24 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49872896,
+        "pre": 49872896
        },
        "num-tuples": 0,
-       "runtime": { "start": 521250050960, "end": 521250051559},
+       "runtime": { "start": 1780945843306, "end": 1780945843881},
        "source-locator": "misc-rules.dl [4:1-11:72]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
-     "runtime": { "start": 521250049413, "end": 521250051584},
-     "savetime": { "start": 521250051593, "end": 521250051655},
+     "runtime": { "start": 1780945841898, "end": 1780945843897},
+     "savetime": { "start": 1780945843903, "end": 1780945843938},
      "source-locator": "misc-rules.dl [1:7-1:36]"
     },
     "RevertedTransactions": {
      "maxRSS": {
-      "post": 43483136,
-      "pre": 43417600
+      "post": 43876352,
+      "pre": 43810816
      },
      "non-recursive-rule": {
       "RevertedTransactions(timestamp,chain_id,transaction_hash,transaction_index,from,to,amount,fee) :- \n   transaction(timestamp,chain_id,transaction_hash,transaction_index,from,to,amount,0,fee).": {
@@ -285,24 +285,24 @@
         }
        },
        "maxRSS": {
-        "post": 43483136,
-        "pre": 43417600
+        "post": 43876352,
+        "pre": 43810816
        },
        "num-tuples": 0,
-       "runtime": { "start": 521249911675, "end": 521249912007},
+       "runtime": { "start": 1780945748949, "end": 1780945748960},
        "source-locator": "misc-rules.dl [76:1-77:101]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
-     "runtime": { "start": 521249911669, "end": 521249912026},
-     "savetime": { "start": 521249912035, "end": 521249912152},
+     "runtime": { "start": 1780945748946, "end": 1780945748974},
+     "savetime": { "start": 1780945748983, "end": 1780945749061},
      "source-locator": "misc-rules.dl [73:7-73:27]"
     },
     "SC_DepositsWithoutMatch": {
      "maxRSS": {
-      "post": 45498368,
-      "pre": 45498368
+      "post": 49922048,
+      "pre": 49922048
      },
      "non-recursive-rule": {
       "SC_DepositsWithoutMatch(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidERC20TokenDeposit(origin_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   !CCTX_Deposit(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,_,_,deposit_id,origin_token,dst_token,sender,beneficiary,amount).": {
@@ -315,11 +315,11 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49922048,
+        "pre": 49922048
        },
        "num-tuples": 6,
-       "runtime": { "start": 521250051665, "end": 521250053005},
+       "runtime": { "start": 1780945894056, "end": 1780945895007},
        "source-locator": "misc-rules.dl [114:1-119:165]"
       },
       "SC_DepositsWithoutMatch(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidNativeTokenDeposit(origin_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   !CCTX_Deposit(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,_,_,deposit_id,origin_token,dst_token,sender,beneficiary,amount).": {
@@ -332,24 +332,24 @@
         }
        },
        "maxRSS": {
-        "post": 45498368,
-        "pre": 45498368
+        "post": 49922048,
+        "pre": 49922048
        },
        "num-tuples": 0,
-       "runtime": { "start": 521250053028, "end": 521250055235},
+       "runtime": { "start": 1780945895022, "end": 1780945896587},
        "source-locator": "misc-rules.dl [114:1-119:165]"
       }
      },
      "num-tuples": 6,
      "reads": 0,
-     "runtime": { "start": 521250051663, "end": 521250055255},
-     "savetime": { "start": 521250055264, "end": 521250055660},
+     "runtime": { "start": 1780945894054, "end": 1780945896601},
+     "savetime": { "start": 1780945896607, "end": 1780945896715},
      "source-locator": "misc-rules.dl [111:7-111:30]"
     },
     "SC_RandomTransferEthToBridge": {
      "maxRSS": {
-      "post": 43483136,
-      "pre": 43483136
+      "post": 43925504,
+      "pre": 43925504
      },
      "non-recursive-rule": {
       "SC_RandomTransferEthToBridge(timestamp,1,transaction_hash,from,amount) :- \n   transaction(timestamp,1,transaction_hash,_,from,_,amount,1,_),\n   !sc_token_deposited(transaction_hash,_,_,_,_,_,_,_,_),\n   !sc_token_withdrew(transaction_hash,_,_,_,_,_).": {
@@ -362,24 +362,24 @@
         }
        },
        "maxRSS": {
-        "post": 43483136,
-        "pre": 43483136
+        "post": 43925504,
+        "pre": 43925504
        },
        "num-tuples": 0,
-       "runtime": { "start": 521249912161, "end": 521249912164},
+       "runtime": { "start": 1780945749066, "end": 1780945749068},
        "source-locator": "misc-rules.dl [86:1-89:57]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
-     "runtime": { "start": 521249912159, "end": 521249912182},
-     "savetime": { "start": 521249912189, "end": 521249912238},
+     "runtime": { "start": 1780945749065, "end": 1780945749084},
+     "savetime": { "start": 1780945749091, "end": 1780945749126},
      "source-locator": "misc-rules.dl [83:7-83:35]"
     },
     "SC_ValidERC20TokenDeposit": {
      "maxRSS": {
-      "post": 43909120,
-      "pre": 43483136
+      "post": 44597248,
+      "pre": 43925504
      },
      "non-recursive-rule": {
       "SC_ValidERC20TokenDeposit(timestamp,transaction_hash,deposit_id,from,bridge_address,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,standard,amount) :- \n   sc_token_deposited(transaction_hash,bridge_event_index,deposit_id,beneficiary,dst_token,origin_token,dst_chain_id,standard,amount),\n   erc20_transfer(transaction_hash,origin_chain_id,token_event_index,origin_token,_,bridge_address,amount),\n   transaction(timestamp,origin_chain_id,transaction_hash,_,from,_,\"0\",1,_),\n   token_mapping(origin_chain_id,dst_chain_id,origin_token,dst_token,standard),\n   bridge_controlled_address(origin_chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
@@ -400,24 +400,58 @@
         }
        },
        "maxRSS": {
-        "post": 43909120,
-        "pre": 43483136
+        "post": 44597248,
+        "pre": 43925504
        },
        "num-tuples": 4223,
-       "runtime": { "start": 521249912246, "end": 521249916699},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [40:1-46:44]"
+       "runtime": { "start": 1780945749132, "end": 1780945751919},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [50:1-56:44]"
       }
      },
      "num-tuples": 4223,
+     "reads": 46492,
+     "runtime": { "start": 1780945749130, "end": 1780945751944},
+     "savetime": { "start": 1780945751955, "end": 1780945755175},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [47:7-47:32]"
+    },
+    "SC_ValidERC20TokenDeposit_Anomalies": {
+     "maxRSS": {
+      "post": 49872896,
+      "pre": 49872896
+     },
+     "non-recursive-rule": {
+      "SC_ValidERC20TokenDeposit_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,origin_chain_id,_,origin_token,_,bridge_address,amount),\n   bridge_controlled_address(origin_chain_id,bridge_address),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !sc_token_withdrew(transaction_hash,_,_,_,_,_),\n   !SC_ValidERC20TokenDeposit(_,transaction_hash,_,_,_,_,_,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   token_mapping(origin_chain_id,dst_chain_id,_,_,_).": {
+       "atom-frequency": {
+        "SC_ValidERC20TokenDeposit_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,origin_chain_id,_,origin_token,_,bridge_address,amount),\n   bridge_controlled_address(origin_chain_id,bridge_address),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !sc_token_withdrew(transaction_hash,_,_,_,_,_),\n   !SC_ValidERC20TokenDeposit(_,transaction_hash,_,_,_,_,_,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   token_mapping(origin_chain_id,dst_chain_id,_,_,_).": {
+         "erc20_transfer": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "token_mapping": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49872896,
+        "pre": 49872896
+       },
+       "num-tuples": 39,
+       "runtime": { "start": 1780945843944, "end": 1780945852885},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [62:1-68:59]"
+      }
+     },
+     "num-tuples": 39,
      "reads": 0,
-     "runtime": { "start": 521249912244, "end": 521249916738},
-     "savetime": { "start": 521249916755, "end": 521249921978},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [37:7-37:32]"
+     "runtime": { "start": 1780945843943, "end": 1780945852902},
+     "savetime": { "start": 1780945852909, "end": 1780945853009},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [59:7-59:42]"
     },
     "SC_ValidERC20TokenWithdrawal": {
      "maxRSS": {
-      "post": 44220416,
-      "pre": 43925504
+      "post": 44777472,
+      "pre": 44597248
      },
      "non-recursive-rule": {
       "SC_ValidERC20TokenWithdrawal(timestamp,transaction_hash,withdrawal_id,beneficiary,dst_token,chain_id,amount) :- \n   sc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,beneficiary,dst_token,amount),\n   erc20_transfer(transaction_hash,chain_id,token_event_index,dst_token,bridge_address,beneficiary,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,_,_,_,1,_),\n   bridge_controlled_address(chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
@@ -438,12 +472,12 @@
         }
        },
        "maxRSS": {
-        "post": 44220416,
-        "pre": 43925504
+        "post": 44777472,
+        "pre": 44597248
        },
        "num-tuples": 4869,
-       "runtime": { "start": 521249922003, "end": 521249925000},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [147:1-155:44]"
+       "runtime": { "start": 1780945755188, "end": 1780945756907},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [210:1-218:44]"
       },
       "SC_ValidERC20TokenWithdrawal(timestamp,transaction_hash,withdrawal_id,beneficiary,dst_token,chain_id,amount) :- \n   sc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,beneficiary,dst_token,amount),\n   sc_withdrawal(transaction_hash,token_event_index,bridge_address,beneficiary,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,_,_,_,1,_),\n   bridge_controlled_address(chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
        "atom-frequency": {
@@ -463,24 +497,96 @@
         }
        },
        "maxRSS": {
-        "post": 44220416,
-        "pre": 44220416
+        "post": 44777472,
+        "pre": 44777472
        },
        "num-tuples": 0,
-       "runtime": { "start": 521249925030, "end": 521249925037},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [147:1-155:44]"
+       "runtime": { "start": 1780945756924, "end": 1780945756927},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [210:1-218:44]"
       }
      },
      "num-tuples": 4869,
+     "reads": 52725,
+     "runtime": { "start": 1780945755186, "end": 1780945756947},
+     "savetime": { "start": 1780945756954, "end": 1780945759103},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [207:7-207:35]"
+    },
+    "SC_ValidERC20TokenWithdrawal_Anomalies": {
+     "maxRSS": {
+      "post": 49889280,
+      "pre": 49872896
+     },
+     "non-recursive-rule": {
+      "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,chain_id,_,_,bridge_address,beneficiary,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
+       "atom-frequency": {
+        "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,chain_id,_,_,bridge_address,beneficiary,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
+         "erc20_transfer": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49872896,
+        "pre": 49872896
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 1780945853022, "end": 1780945864400},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
+      },
+      "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   sc_token_withdrew(transaction_hash,_,_,beneficiary,_,amount),\n   bridge_controlled_address(chain_id,_),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
+       "atom-frequency": {
+        "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   sc_token_withdrew(transaction_hash,_,_,beneficiary,_,amount),\n   bridge_controlled_address(chain_id,_),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
+         "bridge_controlled_address": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "sc_token_withdrew": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49889280,
+        "pre": 49889280
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 1780945864441, "end": 1780945865393},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
+      },
+      "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   sc_withdrawal(transaction_hash,_,bridge_address,beneficiary,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
+       "atom-frequency": {
+        "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   sc_withdrawal(transaction_hash,_,bridge_address,beneficiary,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
+         "bridge_controlled_address": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "sc_withdrawal": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49889280,
+        "pre": 49889280
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 1780945864419, "end": 1780945864421},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
+      }
+     },
+     "num-tuples": 2,
      "reads": 0,
-     "runtime": { "start": 521249921997, "end": 521249925064},
-     "savetime": { "start": 521249925077, "end": 521249928720},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [144:7-144:35]"
+     "runtime": { "start": 1780945853020, "end": 1780945865411},
+     "savetime": { "start": 1780945865419, "end": 1780945865509},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [221:7-221:45]"
     },
     "SC_ValidNativeTokenDeposit": {
      "maxRSS": {
-      "post": 44859392,
-      "pre": 44220416
+      "post": 45826048,
+      "pre": 44777472
      },
      "non-recursive-rule": {
       "SC_ValidNativeTokenDeposit(timestamp,transaction_hash,deposit_id,sender,bridge_address,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,standard,amount) :- \n   sc_token_deposited(transaction_hash,bridge_event_index,deposit_id,beneficiary,dst_token,origin_token,dst_chain_id,standard,amount),\n   sc_deposit(transaction_hash,token_event_index,sender,bridge_address,amount),\n   transaction(timestamp,origin_chain_id,transaction_hash,_,sender,_,amount,1,_),\n   token_mapping(origin_chain_id,dst_chain_id,origin_token,dst_token,standard),\n   wrapped_native_token(origin_chain_id,origin_token),\n   bridge_controlled_address(origin_chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
@@ -501,24 +607,54 @@
         }
        },
        "maxRSS": {
-        "post": 44843008,
-        "pre": 44220416
+        "post": 45809664,
+        "pre": 44777472
        },
        "num-tuples": 7187,
-       "runtime": { "start": 521249928741, "end": 521249933878},
+       "runtime": { "start": 1780945759111, "end": 1780945762968},
        "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [20:1-27:44]"
       }
      },
      "num-tuples": 7187,
-     "reads": 0,
-     "runtime": { "start": 521249928733, "end": 521249933925},
-     "savetime": { "start": 521249933947, "end": 521249942212},
+     "reads": 7188,
+     "runtime": { "start": 1780945759110, "end": 1780945762999},
+     "savetime": { "start": 1780945763014, "end": 1780945768441},
      "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [17:7-17:33]"
+    },
+    "SC_ValidNativeTokenDeposit_Anomalies": {
+     "maxRSS": {
+      "post": 49905664,
+      "pre": 49905664
+     },
+     "non-recursive-rule": {
+      "SC_ValidNativeTokenDeposit_Anomalies(transaction_hash) :- \n   sc_deposit(transaction_hash,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidNativeTokenDeposit(_,transaction_hash,_,_,_,_,_,_,_,_,_,amount).": {
+       "atom-frequency": {
+        "SC_ValidNativeTokenDeposit_Anomalies(transaction_hash) :- \n   sc_deposit(transaction_hash,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidNativeTokenDeposit(_,transaction_hash,_,_,_,_,_,_,_,_,_,amount).": {
+         "sc_deposit": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49905664,
+        "pre": 49905664
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 1780945865744, "end": 1780945866637},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [33:1-36:89]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 1780945865742, "end": 1780945866654},
+     "savetime": { "start": 1780945866662, "end": 1780945866688},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [30:7-30:43]"
     },
     "SC_WithdrawalsMatchWithAdditionalData": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "SC_WithdrawalsMatchWithAdditionalData(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_WithdrawalsWithoutMatch(dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,dst_token,beneficiary,amount),\n   additional_tc_token_withdrew(origin_transaction_hash,_,withdrawal_id,beneficiary,origin_token,dst_token,dst_chain_id,_,amount),\n   additional_transaction(origin_chain_timestamp,origin_chain_id,origin_transaction_hash,_,sender,_,_,1,_).": {
@@ -539,24 +675,24 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 0,
-       "runtime": { "start": 521250064735, "end": 521250064736},
+       "runtime": { "start": 1780945905673, "end": 1780945905674},
        "source-locator": "additional-rules.dl [36:1-39:117]"
       }
      },
      "num-tuples": 0,
      "reads": 387,
-     "runtime": { "start": 521250064732, "end": 521250064763},
-     "savetime": { "start": 521250064772, "end": 521250064820},
+     "runtime": { "start": 1780945905670, "end": 1780945905695},
+     "savetime": { "start": 1780945905702, "end": 1780945905729},
      "source-locator": "additional-rules.dl [33:7-33:44]"
     },
     "SC_WithdrawalsWithoutMatch": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "SC_WithdrawalsWithoutMatch(dst_chain_id,dst_timestamp,dst_transaction_hash,withdrawal_id,dst_token,beneficiary,amount) :- \n   SC_ValidERC20TokenWithdrawal(dst_timestamp,dst_transaction_hash,withdrawal_id,beneficiary,dst_token,dst_chain_id,amount),\n   !CCTX_Withdrawal(_,_,_,dst_chain_id,dst_timestamp,dst_transaction_hash,withdrawal_id,_,dst_token,_,beneficiary,amount).": {
@@ -569,24 +705,24 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 387,
-       "runtime": { "start": 521250055908, "end": 521250056999},
+       "runtime": { "start": 1780945897083, "end": 1780945898624},
        "source-locator": "misc-rules.dl [153:1-155:135]"
       }
      },
      "num-tuples": 387,
      "reads": 0,
-     "runtime": { "start": 521250055902, "end": 521250057020},
-     "savetime": { "start": 521250057028, "end": 521250057504},
+     "runtime": { "start": 1780945897081, "end": 1780945898639},
+     "savetime": { "start": 1780945898645, "end": 1780945899148},
      "source-locator": "misc-rules.dl [150:7-150:33]"
     },
     "SC_WithdrawalsWithoutMatchWithAdditionalData": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "SC_WithdrawalsWithoutMatchWithAdditionalData(dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,dst_token,beneficiary,amount) :- \n   SC_WithdrawalsWithoutMatch(dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,dst_token,beneficiary,amount),\n   !SC_WithdrawalsMatchWithAdditionalData(_,_,_,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,_,dst_token,_,beneficiary,amount).": {
@@ -599,24 +735,24 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 387,
-       "runtime": { "start": 521250065397, "end": 521250065455},
+       "runtime": { "start": 1780945906057, "end": 1780945906098},
        "source-locator": "additional-rules.dl [44:1-46:163]"
       }
      },
      "num-tuples": 387,
      "reads": 0,
-     "runtime": { "start": 521250065395, "end": 521250065477},
-     "savetime": { "start": 521250065485, "end": 521250065924},
+     "runtime": { "start": 1780945906055, "end": 1780945906112},
+     "savetime": { "start": 1780945906118, "end": 1780945906892},
      "source-locator": "additional-rules.dl [41:7-41:51]"
     },
     "SC_WithdrewTokensToBridge": {
      "maxRSS": {
-      "post": 44859392,
-      "pre": 44859392
+      "post": 45826048,
+      "pre": 45826048
      },
      "non-recursive-rule": {
       "SC_WithdrewTokensToBridge(timestamp,transaction_hash,withdrawal_id,beneficiary,dst_token,chain_id,amount) :- \n   sc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,bridge_address,dst_token,amount),\n   erc20_transfer(transaction_hash,chain_id,token_event_index,dst_token,bridge_address,bridge_address,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,beneficiary,bridge_address,_,1,_),\n   bridge_event_index > token_event_index.": {
@@ -637,11 +773,11 @@
         }
        },
        "maxRSS": {
-        "post": 44859392,
-        "pre": 44859392
+        "post": 45826048,
+        "pre": 45826048
        },
        "num-tuples": 0,
-       "runtime": { "start": 521249942236, "end": 521249943161},
+       "runtime": { "start": 1780945768457, "end": 1780945769033},
        "source-locator": "misc-rules.dl [98:1-105:44]"
       },
       "SC_WithdrewTokensToBridge(timestamp,transaction_hash,withdrawal_id,beneficiary,dst_token,chain_id,amount) :- \n   sc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,bridge_address,dst_token,amount),\n   sc_withdrawal(transaction_hash,token_event_index,bridge_address,bridge_address,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,beneficiary,bridge_address,_,1,_),\n   bridge_event_index > token_event_index.": {
@@ -662,24 +798,24 @@
         }
        },
        "maxRSS": {
-        "post": 44859392,
-        "pre": 44859392
+        "post": 45826048,
+        "pre": 45826048
        },
        "num-tuples": 0,
-       "runtime": { "start": 521249943183, "end": 521249943190},
+       "runtime": { "start": 1780945769048, "end": 1780945769050},
        "source-locator": "misc-rules.dl [98:1-105:44]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
-     "runtime": { "start": 521249942231, "end": 521249943210},
-     "savetime": { "start": 521249943218, "end": 521249943271},
+     "runtime": { "start": 1780945768455, "end": 1780945769068},
+     "savetime": { "start": 1780945769073, "end": 1780945769101},
      "source-locator": "misc-rules.dl [95:7-95:32]"
     },
     "SingleEventDeposit": {
      "maxRSS": {
-      "post": 44875776,
-      "pre": 44875776
+      "post": 45826048,
+      "pre": 45826048
      },
      "non-recursive-rule": {
       "SingleEventDeposit(timestamp,chain_id,transaction_hash,from,dst_token,amount) :- \n   sc_token_deposited(transaction_hash,_,_,_,dst_token,_,_,_,amount),\n   !erc20_transfer(transaction_hash,chain_id,_,_,_,_,amount),\n   !tc_withdrawal(transaction_hash,_,_,_,_),\n   !sc_deposit(transaction_hash,_,_,_,_),\n   transaction(timestamp,chain_id,transaction_hash,_,from,_,_,1,_).": {
@@ -696,11 +832,11 @@
         }
        },
        "maxRSS": {
-        "post": 44875776,
-        "pre": 44875776
+        "post": 45826048,
+        "pre": 45826048
        },
        "num-tuples": 0,
-       "runtime": { "start": 521249945698, "end": 521249948815},
+       "runtime": { "start": 1780945770762, "end": 1780945772891},
        "source-locator": "misc-rules.dl [47:1-55:77]"
       },
       "SingleEventDeposit(timestamp,chain_id,transaction_hash,from,dst_token,amount) :- \n   tc_token_withdrew(transaction_hash,_,_,_,_,dst_token,_,_,amount),\n   !erc20_transfer(transaction_hash,chain_id,_,_,_,_,amount),\n   !tc_withdrawal(transaction_hash,_,_,_,_),\n   !sc_deposit(transaction_hash,_,_,_,_),\n   transaction(timestamp,chain_id,transaction_hash,_,from,_,_,1,_).": {
@@ -717,24 +853,24 @@
         }
        },
        "maxRSS": {
-        "post": 44875776,
-        "pre": 44875776
+        "post": 45826048,
+        "pre": 45826048
        },
        "num-tuples": 7,
-       "runtime": { "start": 521249943281, "end": 521249945679},
+       "runtime": { "start": 1780945769108, "end": 1780945770750},
        "source-locator": "misc-rules.dl [47:1-55:77]"
       }
      },
      "num-tuples": 7,
      "reads": 0,
-     "runtime": { "start": 521249943278, "end": 521249948832},
-     "savetime": { "start": 521249948839, "end": 521249948991},
+     "runtime": { "start": 1780945769106, "end": 1780945772902},
+     "savetime": { "start": 1780945772907, "end": 1780945773002},
      "source-locator": "misc-rules.dl [44:7-44:25]"
     },
     "SingleTokenDeposits": {
      "maxRSS": {
-      "post": 44908544,
-      "pre": 44892160
+      "post": 45842432,
+      "pre": 45826048
      },
      "non-recursive-rule": {
       "SingleTokenDeposits(timestamp,chain_id,transaction_hash,token_event_index,dst_token,amount) :- \n   erc20_transfer(transaction_hash,chain_id,token_event_index,dst_token,from,bridge_address,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,_,_,_,1,_),\n   !sc_token_deposited(transaction_hash,_,_,_,_,_,_,_,_),\n   !tc_token_withdrew(transaction_hash,_,_,_,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,from),\n   from != \"0x0000000000000000000000000000000000000000\".": {
@@ -751,24 +887,24 @@
         }
        },
        "maxRSS": {
-        "post": 44892160,
-        "pre": 44892160
+        "post": 45826048,
+        "pre": 45826048
        },
        "num-tuples": 39,
-       "runtime": { "start": 521249949050, "end": 521249962957},
+       "runtime": { "start": 1780945773012, "end": 1780945782753},
        "source-locator": "misc-rules.dl [34:1-42:58]"
       }
      },
      "num-tuples": 39,
      "reads": 0,
-     "runtime": { "start": 521249949047, "end": 521249962986},
-     "savetime": { "start": 521249962993, "end": 521249963205},
+     "runtime": { "start": 1780945773010, "end": 1780945782771},
+     "savetime": { "start": 1780945782775, "end": 1780945782938},
      "source-locator": "misc-rules.dl [31:7-31:26]"
     },
     "SingleTokenWithdrawal": {
      "maxRSS": {
-      "post": 44908544,
-      "pre": 44908544
+      "post": 45842432,
+      "pre": 45842432
      },
      "non-recursive-rule": {
       "SingleTokenWithdrawal(timestamp,chain_id,transaction_hash,token_event_index,dst_token,amount) :- \n   erc20_transfer(transaction_hash,chain_id,token_event_index,dst_token,bridge_address,to,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,_,_,_,1,_),\n   !sc_token_withdrew(transaction_hash,_,_,_,_,_),\n   !tc_token_deposited(transaction_hash,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,to).": {
@@ -785,24 +921,24 @@
         }
        },
        "maxRSS": {
-        "post": 44908544,
-        "pre": 44908544
+        "post": 45842432,
+        "pre": 45842432
        },
        "num-tuples": 2,
-       "runtime": { "start": 521249963305, "end": 521249975173},
+       "runtime": { "start": 1780945782948, "end": 1780945791140},
        "source-locator": "misc-rules.dl [60:1-67:46]"
       }
      },
      "num-tuples": 2,
      "reads": 0,
-     "runtime": { "start": 521249963303, "end": 521249975195},
-     "savetime": { "start": 521249975201, "end": 521249975312},
+     "runtime": { "start": 1780945782946, "end": 1780945791155},
+     "savetime": { "start": 1780945791159, "end": 1780945791238},
      "source-locator": "misc-rules.dl [57:7-57:28]"
     },
     "TC_DepositsWithoutMatch": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "TC_DepositsWithoutMatch(dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,dst_token,beneficiary,amount) :- \n   TC_ValidERC20TokenDeposit(dst_chain_timestamp,dst_transaction_hash,deposit_id,beneficiary,dst_token,dst_chain_id,amount),\n   !CCTX_Deposit(_,_,_,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,_,dst_token,_,beneficiary,amount).": {
@@ -815,24 +951,24 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 13,
-       "runtime": { "start": 521250057561, "end": 521250060321},
+       "runtime": { "start": 1780945899170, "end": 1780945902803},
        "source-locator": "misc-rules.dl [128:1-130:135]"
       }
      },
      "num-tuples": 13,
      "reads": 0,
-     "runtime": { "start": 521250057559, "end": 521250060341},
-     "savetime": { "start": 521250060349, "end": 521250060462},
+     "runtime": { "start": 1780945899168, "end": 1780945902816},
+     "savetime": { "start": 1780945902821, "end": 1780945902896},
      "source-locator": "misc-rules.dl [125:7-125:30]"
     },
     "TC_ValidERC20TokenDeposit": {
      "maxRSS": {
-      "post": 45432832,
-      "pre": 44908544
+      "post": 46268416,
+      "pre": 45858816
      },
      "non-recursive-rule": {
       "TC_ValidERC20TokenDeposit(timestamp,transaction_hash,deposit_id,beneficiary,dst_token,chain_id,amount) :- \n   tc_token_deposited(transaction_hash,bridge_event_index,deposit_id,beneficiary,dst_token,amount),\n   erc20_transfer(transaction_hash,chain_id,token_event_index,dst_token,bridge_address_2,beneficiary,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,_,bridge_address_1,\"0\",1,_),\n   bridge_controlled_address(chain_id,bridge_address_1),\n   bridge_controlled_address(chain_id,bridge_address_2),\n   bridge_event_index > token_event_index.": {
@@ -853,24 +989,54 @@
         }
        },
        "maxRSS": {
-        "post": 45416448,
-        "pre": 44908544
+        "post": 46268416,
+        "pre": 45858816
        },
        "num-tuples": 11417,
-       "runtime": { "start": 521249975520, "end": 521249982219},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [64:1-70:44]"
+       "runtime": { "start": 1780945791247, "end": 1780945795083},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [86:1-92:44]"
       }
      },
      "num-tuples": 11417,
+     "reads": 47856,
+     "runtime": { "start": 1780945791245, "end": 1780945795105},
+     "savetime": { "start": 1780945795115, "end": 1780945800244},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [83:7-83:32]"
+    },
+    "TC_ValidERC20TokenDeposit_Anomalies": {
+     "maxRSS": {
+      "post": 49905664,
+      "pre": 49905664
+     },
+     "non-recursive-rule": {
+      "TC_ValidERC20TokenDeposit_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,chain_id,_,dst_token,bridge_address,_,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenDeposit(_,transaction_hash,_,_,dst_token,chain_id,amount),\n   token_mapping(_,chain_id,_,_,_).": {
+       "atom-frequency": {
+        "TC_ValidERC20TokenDeposit_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,chain_id,_,dst_token,bridge_address,_,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenDeposit(_,transaction_hash,_,_,dst_token,chain_id,amount),\n   token_mapping(_,chain_id,_,_,_).": {
+         "erc20_transfer": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49905664,
+        "pre": 49905664
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 1780945866713, "end": 1780945873401},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [97:1-102:41]"
+      }
+     },
+     "num-tuples": 0,
      "reads": 0,
-     "runtime": { "start": 521249975517, "end": 521249982260},
-     "savetime": { "start": 521249982281, "end": 521249991032},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [61:7-61:32]"
+     "runtime": { "start": 1780945866712, "end": 1780945873417},
+     "savetime": { "start": 1780945873424, "end": 1780945873460},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [94:7-94:42]"
     },
     "TC_ValidERC20TokenWithdrawal": {
      "maxRSS": {
-      "post": 45432832,
-      "pre": 45432832
+      "post": 46972928,
+      "pre": 46268416
      },
      "non-recursive-rule": {
       "TC_ValidERC20TokenWithdrawal(timestamp,transaction_hash,withdrawal_id,sender,bridge_address,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,standard,amount) :- \n   tc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,beneficiary,origin_token,dst_token,dst_chain_id,standard,amount),\n   erc20_transfer(transaction_hash,origin_chain_id,token_event_index,origin_token,_,bridge_address,amount),\n   transaction(timestamp,origin_chain_id,transaction_hash,_,sender,_,\"0\",1,_),\n   token_mapping(dst_chain_id,origin_chain_id,dst_token,origin_token,standard),\n   bridge_controlled_address(origin_chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
@@ -891,24 +1057,75 @@
         }
        },
        "maxRSS": {
-        "post": 45432832,
-        "pre": 45432832
+        "post": 46956544,
+        "pre": 46268416
        },
        "num-tuples": 4846,
-       "runtime": { "start": 521249991110, "end": 521249994295},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [124:1-130:44]"
+       "runtime": { "start": 1780945800255, "end": 1780945802789},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [170:1-176:44]"
       }
      },
      "num-tuples": 4846,
+     "reads": 14602,
+     "runtime": { "start": 1780945800253, "end": 1780945802817},
+     "savetime": { "start": 1780945802830, "end": 1780945806424},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [167:7-167:35]"
+    },
+    "TC_ValidERC20TokenWithdrawal_Anomalies": {
+     "maxRSS": {
+      "post": 49905664,
+      "pre": 49905664
+     },
+     "non-recursive-rule": {
+      "TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,chain_id,_,origin_token,_,bridge_address,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !tc_withdrawal(transaction_hash,_,_,_,amount),\n   !tc_token_deposited(transaction_hash,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenWithdrawal(_,transaction_hash,_,_,_,_,origin_token,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_),\n   bridge_address != \"0x0000000000000000000000000000000000000000\".": {
+       "atom-frequency": {
+        "TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   erc20_transfer(transaction_hash,chain_id,_,origin_token,_,bridge_address,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !tc_withdrawal(transaction_hash,_,_,_,amount),\n   !tc_token_deposited(transaction_hash,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenWithdrawal(_,transaction_hash,_,_,_,_,origin_token,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_),\n   bridge_address != \"0x0000000000000000000000000000000000000000\".": {
+         "erc20_transfer": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49905664,
+        "pre": 49905664
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 1780945873469, "end": 1780945882434},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [182:1-193:68]"
+      },
+      "TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   tc_token_withdrew(transaction_hash,_,_,_,origin_token,_,_,_,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !tc_withdrawal(transaction_hash,_,_,_,amount),\n   !tc_token_deposited(transaction_hash,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenWithdrawal(_,transaction_hash,_,_,_,_,origin_token,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_),\n   bridge_address != \"0x0000000000000000000000000000000000000000\".": {
+       "atom-frequency": {
+        "TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   tc_token_withdrew(transaction_hash,_,_,_,origin_token,_,_,_,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !tc_withdrawal(transaction_hash,_,_,_,amount),\n   !tc_token_deposited(transaction_hash,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenWithdrawal(_,transaction_hash,_,_,_,_,origin_token,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_),\n   bridge_address != \"0x0000000000000000000000000000000000000000\".": {
+         "bridge_controlled_address": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "tc_token_withdrew": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49905664,
+        "pre": 49905664
+       },
+       "num-tuples": 10,
+       "runtime": { "start": 1780945882452, "end": 1780945888638},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [182:1-193:68]"
+      }
+     },
+     "num-tuples": 10,
      "reads": 0,
-     "runtime": { "start": 521249991104, "end": 521249994336},
-     "savetime": { "start": 521249994355, "end": 521250000158},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [121:7-121:35]"
+     "runtime": { "start": 1780945873466, "end": 1780945888655},
+     "savetime": { "start": 1780945888663, "end": 1780945888751},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [179:7-179:45]"
     },
     "TC_ValidNativeTokenWithdrawal": {
      "maxRSS": {
-      "post": 45432832,
-      "pre": 45432832
+      "post": 47038464,
+      "pre": 46972928
      },
      "non-recursive-rule": {
       "TC_ValidNativeTokenWithdrawal(timestamp,transaction_hash,withdrawal_id,sender,bridge_address,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,standard,amount) :- \n   tc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,beneficiary,origin_token,dst_token,dst_chain_id,standard,amount),\n   tc_withdrawal(transaction_hash,token_event_index,sender,bridge_address,amount),\n   transaction(timestamp,origin_chain_id,transaction_hash,_,sender,_,amount,1,_),\n   token_mapping(dst_chain_id,origin_chain_id,dst_token,origin_token,standard),\n   wrapped_native_token(origin_chain_id,origin_token),\n   bridge_controlled_address(origin_chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
@@ -929,24 +1146,58 @@
         }
        },
        "maxRSS": {
-        "post": 45432832,
-        "pre": 45432832
+        "post": 47038464,
+        "pre": 46972928
        },
        "num-tuples": 464,
-       "runtime": { "start": 521250006120, "end": 521250006723},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [104:1-111:44]"
+       "runtime": { "start": 1780945806440, "end": 1780945806905},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [140:1-147:44]"
       }
      },
      "num-tuples": 464,
+     "reads": 464,
+     "runtime": { "start": 1780945806436, "end": 1780945806926},
+     "savetime": { "start": 1780945806933, "end": 1780945807395},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [137:7-137:36]"
+    },
+    "TC_ValidNativeTokenWithdrawal_Anomalies": {
+     "maxRSS": {
+      "post": 49905664,
+      "pre": 49905664
+     },
+     "non-recursive-rule": {
+      "TC_ValidNativeTokenWithdrawal_Anomalies(transaction_hash) :- \n   tc_withdrawal(transaction_hash,_,_,bridge_address,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidNativeTokenWithdrawal(_,transaction_hash,_,_,_,_,_,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_).": {
+       "atom-frequency": {
+        "TC_ValidNativeTokenWithdrawal_Anomalies(transaction_hash) :- \n   tc_withdrawal(transaction_hash,_,_,bridge_address,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidNativeTokenWithdrawal(_,transaction_hash,_,_,_,_,_,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_).": {
+         "bridge_controlled_address": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "tc_withdrawal": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 49905664,
+        "pre": 49905664
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 1780945893535, "end": 1780945893664},
+       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [152:1-157:41]"
+      }
+     },
+     "num-tuples": 0,
      "reads": 0,
-     "runtime": { "start": 521250006116, "end": 521250006756},
-     "savetime": { "start": 521250006767, "end": 521250007591},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [101:7-101:36]"
+     "runtime": { "start": 1780945893533, "end": 1780945893679},
+     "savetime": { "start": 1780945893685, "end": 1780945893720},
+     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [149:7-149:46]"
     },
     "TC_WithdrawalsMatchWithAdditionalData": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "TC_WithdrawalsMatchWithAdditionalData(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_WithdrawalsWithoutMatch(origin_chain_id,origin_timestamp,origin_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount),\n   additional_sc_token_withdrew(dst_transaction_hash,_,_,beneficiary,dst_token,amount),\n   additional_transaction(dst_chain_timestamp,dst_chain_id,dst_transaction_hash,_,_,_,_,1,_).": {
@@ -967,24 +1218,24 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 99,
-       "runtime": { "start": 521250064830, "end": 521250064999},
+       "runtime": { "start": 1780945905735, "end": 1780945905844},
        "source-locator": "additional-rules.dl [10:1-13:103]"
       }
      },
      "num-tuples": 99,
      "reads": 828,
-     "runtime": { "start": 521250064827, "end": 521250065024},
-     "savetime": { "start": 521250065032, "end": 521250065344},
+     "runtime": { "start": 1780945905733, "end": 1780945905860},
+     "savetime": { "start": 1780945905866, "end": 1780945906031},
      "source-locator": "additional-rules.dl [7:7-7:44]"
     },
     "TC_WithdrawalsWithoutMatch": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "TC_WithdrawalsWithoutMatch(origin_chain_id,origin_timestamp,origin_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidERC20TokenWithdrawal(origin_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   !CCTX_Withdrawal(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,_,_,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount).": {
@@ -997,11 +1248,11 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 589,
-       "runtime": { "start": 521250061754, "end": 521250063063},
+       "runtime": { "start": 1780945903491, "end": 1780945904491},
        "source-locator": "misc-rules.dl [139:1-144:171]"
       },
       "TC_WithdrawalsWithoutMatch(origin_chain_id,origin_timestamp,origin_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidNativeTokenWithdrawal(origin_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   !CCTX_Withdrawal(origin_chain_id,origin_timestamp,origin_transaction_hash,dst_chain_id,_,_,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount).": {
@@ -1014,24 +1265,24 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 239,
-       "runtime": { "start": 521250063088, "end": 521250063288},
+       "runtime": { "start": 1780945904507, "end": 1780945904653},
        "source-locator": "misc-rules.dl [139:1-144:171]"
       }
      },
      "num-tuples": 828,
      "reads": 0,
-     "runtime": { "start": 521250061751, "end": 521250063310},
-     "savetime": { "start": 521250063319, "end": 521250064432},
+     "runtime": { "start": 1780945903489, "end": 1780945904668},
+     "savetime": { "start": 1780945904674, "end": 1780945905300},
      "source-locator": "misc-rules.dl [136:7-136:33]"
     },
     "TC_WithdrawalsWithoutMatchWithAdditionalData": {
      "maxRSS": {
-      "post": 45514752,
-      "pre": 45514752
+      "post": 49954816,
+      "pre": 49954816
      },
      "non-recursive-rule": {
       "TC_WithdrawalsWithoutMatchWithAdditionalData(origin_chain_id,origin_timestamp,origin_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_WithdrawalsWithoutMatch(origin_chain_id,origin_timestamp,origin_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount),\n   !TC_WithdrawalsMatchWithAdditionalData(origin_chain_id,origin_timestamp,origin_transaction_hash,_,_,_,_,origin_token,dst_token,sender,beneficiary,amount).": {
@@ -1044,2391 +1295,2021 @@
         }
        },
        "maxRSS": {
-        "post": 45514752,
-        "pre": 45514752
+        "post": 49954816,
+        "pre": 49954816
        },
        "num-tuples": 729,
-       "runtime": { "start": 521250065937, "end": 521250066116},
+       "runtime": { "start": 1780945906902, "end": 1780945907040},
        "source-locator": "additional-rules.dl [22:1-24:170]"
       }
      },
      "num-tuples": 729,
      "reads": 0,
-     "runtime": { "start": 521250065934, "end": 521250066140},
-     "savetime": { "start": 521250066148, "end": 521250066987},
+     "runtime": { "start": 1780945906900, "end": 1780945907056},
+     "savetime": { "start": 1780945907061, "end": 1780945907830},
      "source-locator": "additional-rules.dl [19:7-19:51]"
     },
     "additional_sc_token_withdrew": {
-     "loadtime": { "start": 521249559104, "end": 521249562138},
+     "loadtime": { "start": 1780945508453, "end": 1780945512293},
      "num-tuples": 930,
      "reads": 0,
      "source-locator": "lib/declarations.dl [58:7-58:35]"
     },
     "additional_tc_token_withdrew": {
-     "loadtime": { "start": 521249562155, "end": 521249562225},
+     "loadtime": { "start": 1780945512308, "end": 1780945512358},
      "num-tuples": 0,
      "reads": 0,
      "source-locator": "lib/declarations.dl [64:7-64:35]"
     },
     "additional_transaction": {
-     "loadtime": { "start": 521249562237, "end": 521249566803},
+     "loadtime": { "start": 1780945512365, "end": 1780945515517},
      "num-tuples": 1774,
      "reads": 0,
      "source-locator": "lib/declarations.dl [61:7-61:29]"
     },
     "alternative_chains": {
-     "loadtime": { "start": 521249566815, "end": 521249608395},
+     "loadtime": { "start": 1780945515525, "end": 1780945544055},
      "num-tuples": 20309,
-     "reads": 39084,
+     "reads": 69529,
      "source-locator": "lib/declarations.dl [67:7-67:25]"
     },
     "bridge_controlled_address": {
-     "loadtime": { "start": 521249608430, "end": 521249608783},
+     "loadtime": { "start": 1780945544072, "end": 1780945544325},
      "num-tuples": 10,
-     "reads": 135874,
+     "reads": 269186,
      "source-locator": "lib/declarations.dl [44:7-44:32]"
     },
     "cctx_finality": {
-     "loadtime": { "start": 521249608796, "end": 521249609000},
+     "loadtime": { "start": 1780945544336, "end": 1780945544576},
      "num-tuples": 2,
      "reads": 0,
      "source-locator": "lib/declarations.dl [45:7-45:20]"
     },
     "erc20_transfer": {
-     "loadtime": { "start": 521249609010, "end": 521249730285},
+     "loadtime": { "start": 1780945544585, "end": 1780945626455},
      "num-tuples": 47856,
      "reads": 9079,
      "source-locator": "lib/declarations.dl [40:7-40:21]"
     },
     "sc_deposit": {
-     "loadtime": { "start": 521249730414, "end": 521249743687},
+     "loadtime": { "start": 1780945626518, "end": 1780945635134},
      "num-tuples": 7188,
      "reads": 16730,
      "source-locator": "lib/declarations.dl [6:7-6:17]"
     },
     "sc_token_deposited": {
-     "loadtime": { "start": 521249743707, "end": 521249770714},
+     "loadtime": { "start": 1780945635147, "end": 1780945653557},
      "num-tuples": 11410,
-     "reads": 31456,
+     "reads": 58746,
      "source-locator": "lib/declarations.dl [13:7-13:25]"
     },
     "sc_token_withdrew": {
-     "loadtime": { "start": 521249770753, "end": 521249780186},
+     "loadtime": { "start": 1780945653584, "end": 1780945659988},
      "num-tuples": 4869,
-     "reads": 16715,
+     "reads": 25841,
      "source-locator": "lib/declarations.dl [16:7-16:24]"
     },
     "sc_withdrawal": {
-     "loadtime": { "start": 521249780203, "end": 521249780270},
+     "loadtime": { "start": 1780945659999, "end": 1780945660039},
      "num-tuples": 0,
      "reads": 0,
      "source-locator": "lib/declarations.dl [9:7-9:20]"
     },
     "tc_token_deposited": {
-     "loadtime": { "start": 521249780280, "end": 521249799250},
+     "loadtime": { "start": 1780945660045, "end": 1780945674029},
      "num-tuples": 11417,
-     "reads": 28132,
+     "reads": 75870,
      "source-locator": "lib/declarations.dl [30:7-30:25]"
     },
     "tc_token_withdrew": {
-     "loadtime": { "start": 521249799282, "end": 521249812779},
+     "loadtime": { "start": 1780945674043, "end": 1780945683060},
      "num-tuples": 5320,
      "reads": 36309,
      "source-locator": "lib/declarations.dl [33:7-33:24]"
     },
     "tc_withdrawal": {
-     "loadtime": { "start": 521249812802, "end": 521249814108},
+     "loadtime": { "start": 1780945683071, "end": 1780945683956},
      "num-tuples": 464,
-     "reads": 9543,
+     "reads": 57745,
      "source-locator": "lib/declarations.dl [27:7-27:20]"
     },
     "token_mapping": {
-     "loadtime": { "start": 521249814119, "end": 521249814304},
+     "loadtime": { "start": 1780945683963, "end": 1780945684147},
      "num-tuples": 11,
-     "reads": 16723,
+     "reads": 139608,
      "source-locator": "lib/declarations.dl [43:7-43:20]"
     },
     "transaction": {
-     "loadtime": { "start": 521249814314, "end": 521249911144},
+     "loadtime": { "start": 1780945684154, "end": 1780945748625},
      "num-tuples": 37282,
      "reads": 0,
      "source-locator": "lib/declarations.dl [41:7-41:18]"
     },
     "wrapped_native_token": {
-     "loadtime": { "start": 521249911299, "end": 521249911657},
+     "loadtime": { "start": 1780945748705, "end": 1780945748934},
      "num-tuples": 2,
      "reads": 7651,
      "source-locator": "lib/declarations.dl [42:7-42:27]"
     }
    },
-   "runtime": { "start": 521249559075, "end": 521250067003},
-   "starttime": { "time": 521249558686},
+   "runtime": { "start": 1780945508439, "end": 1780945907842},
+   "starttime": { "time": 1780945508323},
    "usage": {
     "timepoint": {
-     "521249558694": {
-      "maxRSS": 6897664,
-      "systemtime": 5570,
-      "usertime": 45201
+     "1780945508332": {
+      "maxRSS": 7700480,
+      "systemtime": 2209,
+      "usertime": 45120
      },
-     "521249559104": {
-      "maxRSS": 6930432,
-      "systemtime": 5650,
-      "usertime": 45347
+     "1780945508461": {
+      "maxRSS": 7782400,
+      "systemtime": 2234,
+      "usertime": 45242
      },
-     "521249559119": {
-      "maxRSS": 6946816,
-      "systemtime": 5665,
-      "usertime": 45353
-     },
-     "521249560362": {
-      "maxRSS": 7208960,
-      "systemtime": 5856,
-      "usertime": 45551
-     },
-     "521249561618": {
-      "maxRSS": 7340032,
-      "systemtime": 5906,
-      "usertime": 46496
-     },
-     "521249562161": {
-      "maxRSS": 7487488,
-      "systemtime": 5938,
-      "usertime": 47095
-     },
-     "521249562240": {
-      "maxRSS": 7602176,
-      "systemtime": 5987,
-      "usertime": 47130
-     },
-     "521249563497": {
-      "maxRSS": 7667712,
-      "systemtime": 6104,
-      "usertime": 47818
-     },
-     "521249564756": {
-      "maxRSS": 7749632,
-      "systemtime": 6172,
-      "usertime": 48708
-     },
-     "521249566016": {
+     "1780945509727": {
       "maxRSS": 7962624,
-      "systemtime": 6223,
-      "usertime": 49921
+      "systemtime": 2333,
+      "usertime": 45271
      },
-     "521249566823": {
-      "maxRSS": 8028160,
-      "systemtime": 6253,
-      "usertime": 50803
+     "1780945510987": {
+      "maxRSS": 8044544,
+      "systemtime": 2410,
+      "usertime": 45411
      },
-     "521249568083": {
-      "maxRSS": 8126464,
-      "systemtime": 6349,
-      "usertime": 51431
+     "1780945512251": {
+      "maxRSS": 8159232,
+      "systemtime": 2462,
+      "usertime": 46395
      },
-     "521249569339": {
-      "maxRSS": 8306688,
-      "systemtime": 6403,
-      "usertime": 52673
+     "1780945512316": {
+      "maxRSS": 8208384,
+      "systemtime": 2479,
+      "usertime": 46465
      },
-     "521249570599": {
-      "maxRSS": 8470528,
-      "systemtime": 6458,
-      "usertime": 53897
+     "1780945512372": {
+      "maxRSS": 8273920,
+      "systemtime": 2512,
+      "usertime": 46493
      },
-     "521249571867": {
-      "maxRSS": 8847360,
-      "systemtime": 6520,
-      "usertime": 54920
+     "1780945513531": {
+      "maxRSS": 8290304,
+      "systemtime": 2596,
+      "usertime": 46971
      },
-     "521249573130": {
-      "maxRSS": 9043968,
-      "systemtime": 6562,
-      "usertime": 56160
+     "1780945514800": {
+      "maxRSS": 8454144,
+      "systemtime": 2632,
+      "usertime": 48151
      },
-     "521249574393": {
+     "1780945515538": {
+      "maxRSS": 8454144,
+      "systemtime": 2645,
+      "usertime": 49014
+     },
+     "1780945516798": {
+      "maxRSS": 8536064,
+      "systemtime": 2728,
+      "usertime": 49460
+     },
+     "1780945518058": {
+      "maxRSS": 8749056,
+      "systemtime": 2776,
+      "usertime": 50839
+     },
+     "1780945519318": {
       "maxRSS": 9207808,
-      "systemtime": 6634,
-      "usertime": 57345
+      "systemtime": 2842,
+      "usertime": 51850
      },
-     "521249575658": {
-      "maxRSS": 9371648,
-      "systemtime": 6676,
-      "usertime": 58540
+     "1780945520578": {
+      "maxRSS": 9469952,
+      "systemtime": 2905,
+      "usertime": 53086
      },
-     "521249576916": {
-      "maxRSS": 9535488,
-      "systemtime": 6718,
-      "usertime": 59758
+     "1780945521838": {
+      "maxRSS": 9715712,
+      "systemtime": 2938,
+      "usertime": 54318
      },
-     "521249578179": {
-      "maxRSS": 9699328,
-      "systemtime": 6760,
-      "usertime": 61032
+     "1780945523098": {
+      "maxRSS": 9961472,
+      "systemtime": 2973,
+      "usertime": 55550
      },
-     "521249579438": {
-      "maxRSS": 9846784,
-      "systemtime": 6859,
-      "usertime": 62181
+     "1780945524353": {
+      "maxRSS": 10190848,
+      "systemtime": 3044,
+      "usertime": 56703
      },
-     "521249580702": {
-      "maxRSS": 10469376,
-      "systemtime": 6982,
-      "usertime": 63251
+     "1780945525612": {
+      "maxRSS": 10878976,
+      "systemtime": 3094,
+      "usertime": 57907
      },
-     "521249581966": {
-      "maxRSS": 10633216,
-      "systemtime": 7031,
-      "usertime": 64504
-     },
-     "521249583229": {
-      "maxRSS": 10797056,
-      "systemtime": 7079,
-      "usertime": 65777
-     },
-     "521249584490": {
-      "maxRSS": 10944512,
-      "systemtime": 7122,
-      "usertime": 66933
-     },
-     "521249585753": {
+     "1780945526867": {
       "maxRSS": 11108352,
-      "systemtime": 7166,
-      "usertime": 68232
+      "systemtime": 3143,
+      "usertime": 59130
      },
-     "521249587016": {
-      "maxRSS": 11255808,
-      "systemtime": 7211,
-      "usertime": 69412
+     "1780945528121": {
+      "maxRSS": 11337728,
+      "systemtime": 3183,
+      "usertime": 60402
      },
-     "521249588278": {
-      "maxRSS": 11403264,
-      "systemtime": 7254,
-      "usertime": 70608
+     "1780945529378": {
+      "maxRSS": 11550720,
+      "systemtime": 3215,
+      "usertime": 61594
      },
-     "521249589540": {
-      "maxRSS": 11567104,
-      "systemtime": 7296,
-      "usertime": 71823
+     "1780945530634": {
+      "maxRSS": 11780096,
+      "systemtime": 3252,
+      "usertime": 62799
      },
-     "521249590800": {
-      "maxRSS": 11714560,
-      "systemtime": 7375,
-      "usertime": 73108
+     "1780945531895": {
+      "maxRSS": 12009472,
+      "systemtime": 3285,
+      "usertime": 64002
      },
-     "521249592069": {
-      "maxRSS": 11878400,
-      "systemtime": 7433,
-      "usertime": 74259
+     "1780945533155": {
+      "maxRSS": 12222464,
+      "systemtime": 3359,
+      "usertime": 65275
      },
-     "521249593328": {
-      "maxRSS": 12025856,
-      "systemtime": 7471,
-      "usertime": 75483
+     "1780945534409": {
+      "maxRSS": 12419072,
+      "systemtime": 3401,
+      "usertime": 66454
      },
-     "521249594588": {
-      "maxRSS": 12173312,
-      "systemtime": 7513,
-      "usertime": 76751
+     "1780945535669": {
+      "maxRSS": 12632064,
+      "systemtime": 3433,
+      "usertime": 67680
      },
-     "521249595848": {
-      "maxRSS": 12320768,
-      "systemtime": 7546,
-      "usertime": 77984
+     "1780945536929": {
+      "maxRSS": 12861440,
+      "systemtime": 3466,
+      "usertime": 68935
      },
-     "521249597114": {
-      "maxRSS": 12468224,
-      "systemtime": 7585,
-      "usertime": 79252
+     "1780945538188": {
+      "maxRSS": 13058048,
+      "systemtime": 3497,
+      "usertime": 70124
      },
-     "521249598385": {
-      "maxRSS": 12615680,
-      "systemtime": 7628,
-      "usertime": 80435
+     "1780945539448": {
+      "maxRSS": 13762560,
+      "systemtime": 3545,
+      "usertime": 71245
      },
-     "521249599668": {
-      "maxRSS": 12779520,
-      "systemtime": 7687,
-      "usertime": 81681
-     },
-     "521249600929": {
-      "maxRSS": 12910592,
-      "systemtime": 7730,
-      "usertime": 82904
-     },
-     "521249602189": {
-      "maxRSS": 13467648,
-      "systemtime": 7793,
-      "usertime": 83244
-     },
-     "521249603449": {
-      "maxRSS": 14123008,
-      "systemtime": 7860,
-      "usertime": 85383
-     },
-     "521249604713": {
-      "maxRSS": 14254080,
-      "systemtime": 7903,
-      "usertime": 86495
-     },
-     "521249605971": {
+     "1780945540707": {
       "maxRSS": 14401536,
-      "systemtime": 7947,
-      "usertime": 87774
+      "systemtime": 3586,
+      "usertime": 72507
      },
-     "521249607238": {
-      "maxRSS": 14532608,
-      "systemtime": 8030,
-      "usertime": 88938
+     "1780945541962": {
+      "maxRSS": 14614528,
+      "systemtime": 3614,
+      "usertime": 73771
      },
-     "521249608440": {
-      "maxRSS": 14663680,
-      "systemtime": 8075,
-      "usertime": 90145
+     "1780945543219": {
+      "maxRSS": 14827520,
+      "systemtime": 3639,
+      "usertime": 75077
      },
-     "521249608807": {
-      "maxRSS": 14696448,
-      "systemtime": 8217,
-      "usertime": 90198
+     "1780945544080": {
+      "maxRSS": 14974976,
+      "systemtime": 3668,
+      "usertime": 75910
      },
-     "521249609018": {
-      "maxRSS": 14696448,
-      "systemtime": 8248,
-      "usertime": 90232
+     "1780945544341": {
+      "maxRSS": 15007744,
+      "systemtime": 3713,
+      "usertime": 75950
      },
-     "521249610074": {
-      "maxRSS": 14745600,
-      "systemtime": 8344,
-      "usertime": 90627
+     "1780945544597": {
+      "maxRSS": 15171584,
+      "systemtime": 3776,
+      "usertime": 75980
      },
-     "521249611338": {
-      "maxRSS": 14876672,
-      "systemtime": 8431,
-      "usertime": 91594
+     "1780945545858": {
+      "maxRSS": 15286272,
+      "systemtime": 3869,
+      "usertime": 76521
      },
-     "521249612597": {
-      "maxRSS": 15040512,
-      "systemtime": 8474,
-      "usertime": 92771
+     "1780945547116": {
+      "maxRSS": 15548416,
+      "systemtime": 3922,
+      "usertime": 77779
      },
-     "521249613854": {
-      "maxRSS": 15187968,
-      "systemtime": 8556,
-      "usertime": 93824
+     "1780945548371": {
+      "maxRSS": 15761408,
+      "systemtime": 3963,
+      "usertime": 78880
      },
-     "521249615113": {
-      "maxRSS": 15335424,
-      "systemtime": 8610,
-      "usertime": 95010
+     "1780945549631": {
+      "maxRSS": 16039936,
+      "systemtime": 4019,
+      "usertime": 80077
      },
-     "521249616376": {
-      "maxRSS": 15532032,
-      "systemtime": 8702,
-      "usertime": 96236
+     "1780945550886": {
+      "maxRSS": 16302080,
+      "systemtime": 4067,
+      "usertime": 81268
      },
-     "521249617639": {
-      "maxRSS": 15745024,
-      "systemtime": 8750,
-      "usertime": 97485
+     "1780945552140": {
+      "maxRSS": 16531456,
+      "systemtime": 4095,
+      "usertime": 82553
      },
-     "521249618901": {
-      "maxRSS": 15876096,
-      "systemtime": 8794,
-      "usertime": 98647
+     "1780945553396": {
+      "maxRSS": 16760832,
+      "systemtime": 4120,
+      "usertime": 83798
      },
-     "521249620159": {
-      "maxRSS": 16023552,
-      "systemtime": 8836,
-      "usertime": 99851
+     "1780945554652": {
+      "maxRSS": 17006592,
+      "systemtime": 4174,
+      "usertime": 84955
      },
-     "521249621422": {
-      "maxRSS": 16154624,
-      "systemtime": 8880,
-      "usertime": 101039
+     "1780945555913": {
+      "maxRSS": 17203200,
+      "systemtime": 4207,
+      "usertime": 86152
      },
-     "521249622682": {
-      "maxRSS": 16334848,
-      "systemtime": 8977,
-      "usertime": 102268
+     "1780945557178": {
+      "maxRSS": 17399808,
+      "systemtime": 4242,
+      "usertime": 87423
      },
-     "521249623945": {
-      "maxRSS": 16515072,
-      "systemtime": 9020,
-      "usertime": 103492
+     "1780945558439": {
+      "maxRSS": 17661952,
+      "systemtime": 4279,
+      "usertime": 88702
      },
-     "521249625207": {
-      "maxRSS": 16662528,
-      "systemtime": 9074,
-      "usertime": 104716
+     "1780945559695": {
+      "maxRSS": 17891328,
+      "systemtime": 4308,
+      "usertime": 89921
      },
-     "521249626463": {
-      "maxRSS": 16793600,
-      "systemtime": 9119,
-      "usertime": 105961
+     "1780945560952": {
+      "maxRSS": 18120704,
+      "systemtime": 4331,
+      "usertime": 91182
      },
-     "521249627726": {
-      "maxRSS": 16924672,
-      "systemtime": 9169,
-      "usertime": 107199
+     "1780945562207": {
+      "maxRSS": 18317312,
+      "systemtime": 4423,
+      "usertime": 92273
      },
-     "521249628986": {
-      "maxRSS": 17088512,
-      "systemtime": 9201,
-      "usertime": 108366
+     "1780945563464": {
+      "maxRSS": 18513920,
+      "systemtime": 4452,
+      "usertime": 93547
      },
-     "521249630251": {
-      "maxRSS": 17268736,
-      "systemtime": 9256,
-      "usertime": 109638
+     "1780945564724": {
+      "maxRSS": 18710528,
+      "systemtime": 4475,
+      "usertime": 94769
      },
-     "521249631509": {
-      "maxRSS": 17416192,
-      "systemtime": 9307,
-      "usertime": 110831
+     "1780945565979": {
+      "maxRSS": 18907136,
+      "systemtime": 4506,
+      "usertime": 95981
      },
-     "521249632770": {
-      "maxRSS": 17580032,
-      "systemtime": 9353,
-      "usertime": 112054
+     "1780945567236": {
+      "maxRSS": 19152896,
+      "systemtime": 4548,
+      "usertime": 97198
      },
-     "521249634029": {
-      "maxRSS": 17727488,
-      "systemtime": 9393,
-      "usertime": 113331
+     "1780945568492": {
+      "maxRSS": 19365888,
+      "systemtime": 4578,
+      "usertime": 98474
      },
-     "521249635289": {
-      "maxRSS": 17874944,
-      "systemtime": 9525,
-      "usertime": 114482
+     "1780945569748": {
+      "maxRSS": 19546112,
+      "systemtime": 4598,
+      "usertime": 99720
      },
-     "521249636549": {
-      "maxRSS": 18006016,
-      "systemtime": 9561,
-      "usertime": 115604
+     "1780945571005": {
+      "maxRSS": 19791872,
+      "systemtime": 4637,
+      "usertime": 100952
      },
-     "521249637809": {
-      "maxRSS": 18137088,
-      "systemtime": 9595,
-      "usertime": 116871
+     "1780945572266": {
+      "maxRSS": 19988480,
+      "systemtime": 4674,
+      "usertime": 102161
      },
-     "521249639070": {
-      "maxRSS": 18268160,
-      "systemtime": 9630,
-      "usertime": 118043
+     "1780945573524": {
+      "maxRSS": 20168704,
+      "systemtime": 4699,
+      "usertime": 103392
      },
-     "521249640328": {
-      "maxRSS": 18399232,
-      "systemtime": 9684,
-      "usertime": 119342
+     "1780945574784": {
+      "maxRSS": 20365312,
+      "systemtime": 4728,
+      "usertime": 104619
      },
-     "521249641592": {
-      "maxRSS": 18579456,
-      "systemtime": 9719,
-      "usertime": 120587
+     "1780945576042": {
+      "maxRSS": 20611072,
+      "systemtime": 4761,
+      "usertime": 105819
      },
-     "521249642851": {
-      "maxRSS": 18743296,
-      "systemtime": 9775,
-      "usertime": 121703
+     "1780945577299": {
+      "maxRSS": 21725184,
+      "systemtime": 4833,
+      "usertime": 107045
      },
-     "521249644111": {
-      "maxRSS": 18874368,
-      "systemtime": 9810,
-      "usertime": 123016
+     "1780945578560": {
+      "maxRSS": 22872064,
+      "systemtime": 4915,
+      "usertime": 108222
      },
-     "521249645376": {
-      "maxRSS": 18989056,
-      "systemtime": 9847,
-      "usertime": 124202
+     "1780945579817": {
+      "maxRSS": 23052288,
+      "systemtime": 4947,
+      "usertime": 109450
      },
-     "521249646639": {
-      "maxRSS": 19120128,
-      "systemtime": 9891,
-      "usertime": 125418
+     "1780945581072": {
+      "maxRSS": 23248896,
+      "systemtime": 5130,
+      "usertime": 110544
      },
-     "521249647898": {
-      "maxRSS": 19300352,
-      "systemtime": 9933,
-      "usertime": 126740
-     },
-     "521249649162": {
-      "maxRSS": 19431424,
-      "systemtime": 9977,
-      "usertime": 127948
-     },
-     "521249650426": {
-      "maxRSS": 19562496,
-      "systemtime": 10008,
-      "usertime": 129124
-     },
-     "521249651690": {
-      "maxRSS": 19677184,
-      "systemtime": 10052,
-      "usertime": 130354
-     },
-     "521249652959": {
-      "maxRSS": 19824640,
-      "systemtime": 10104,
-      "usertime": 131554
-     },
-     "521249654220": {
-      "maxRSS": 19972096,
-      "systemtime": 10134,
-      "usertime": 132822
-     },
-     "521249655479": {
-      "maxRSS": 20152320,
-      "systemtime": 10180,
-      "usertime": 134102
-     },
-     "521249656738": {
-      "maxRSS": 21266432,
-      "systemtime": 10313,
-      "usertime": 134642
-     },
-     "521249658000": {
-      "maxRSS": 21266432,
-      "systemtime": 10321,
-      "usertime": 134646
-     },
-     "521249659264": {
-      "maxRSS": 22380544,
-      "systemtime": 10450,
-      "usertime": 137577
-     },
-     "521249660525": {
-      "maxRSS": 22511616,
-      "systemtime": 10512,
-      "usertime": 138869
-     },
-     "521249661789": {
-      "maxRSS": 22626304,
-      "systemtime": 10560,
-      "usertime": 140002
-     },
-     "521249663047": {
-      "maxRSS": 22757376,
-      "systemtime": 10856,
-      "usertime": 141079
-     },
-     "521249664305": {
-      "maxRSS": 22953984,
-      "systemtime": 10934,
-      "usertime": 142255
-     },
-     "521249665564": {
-      "maxRSS": 23117824,
-      "systemtime": 10973,
-      "usertime": 143464
-     },
-     "521249666822": {
-      "maxRSS": 23232512,
-      "systemtime": 11021,
-      "usertime": 144555
-     },
-     "521249668085": {
-      "maxRSS": 23379968,
-      "systemtime": 11078,
-      "usertime": 145877
-     },
-     "521249669350": {
+     "1780945582332": {
       "maxRSS": 23494656,
-      "systemtime": 11126,
-      "usertime": 147084
+      "systemtime": 5180,
+      "usertime": 111715
      },
-     "521249670610": {
-      "maxRSS": 23642112,
-      "systemtime": 11175,
-      "usertime": 148320
+     "1780945583593": {
+      "maxRSS": 23707648,
+      "systemtime": 5221,
+      "usertime": 113003
      },
-     "521249671873": {
-      "maxRSS": 23789568,
-      "systemtime": 11220,
-      "usertime": 149545
+     "1780945584852": {
+      "maxRSS": 23887872,
+      "systemtime": 5258,
+      "usertime": 114141
      },
-     "521249673133": {
-      "maxRSS": 23953408,
-      "systemtime": 11262,
-      "usertime": 150686
+     "1780945586111": {
+      "maxRSS": 24100864,
+      "systemtime": 5294,
+      "usertime": 115456
      },
-     "521249674392": {
-      "maxRSS": 24117248,
-      "systemtime": 11319,
-      "usertime": 151875
+     "1780945587365": {
+      "maxRSS": 24330240,
+      "systemtime": 5329,
+      "usertime": 116686
      },
-     "521249675652": {
-      "maxRSS": 24231936,
-      "systemtime": 11366,
-      "usertime": 153066
+     "1780945588622": {
+      "maxRSS": 24559616,
+      "systemtime": 5374,
+      "usertime": 117788
      },
-     "521249676917": {
-      "maxRSS": 24346624,
-      "systemtime": 11398,
-      "usertime": 154313
+     "1780945589880": {
+      "maxRSS": 24739840,
+      "systemtime": 5402,
+      "usertime": 119065
      },
-     "521249678183": {
-      "maxRSS": 24510464,
-      "systemtime": 11451,
-      "usertime": 155521
+     "1780945591136": {
+      "maxRSS": 24952832,
+      "systemtime": 5433,
+      "usertime": 120353
      },
-     "521249679454": {
-      "maxRSS": 24674304,
-      "systemtime": 11505,
-      "usertime": 156789
+     "1780945592396": {
+      "maxRSS": 25165824,
+      "systemtime": 5470,
+      "usertime": 121544
      },
-     "521249680715": {
-      "maxRSS": 24788992,
-      "systemtime": 11544,
-      "usertime": 157938
-     },
-     "521249681976": {
-      "maxRSS": 24903680,
-      "systemtime": 11575,
-      "usertime": 159202
-     },
-     "521249683237": {
-      "maxRSS": 25051136,
-      "systemtime": 11604,
-      "usertime": 160485
-     },
-     "521249684502": {
-      "maxRSS": 25214976,
-      "systemtime": 11655,
-      "usertime": 161677
-     },
-     "521249685763": {
+     "1780945593655": {
       "maxRSS": 25346048,
-      "systemtime": 11715,
-      "usertime": 162791
+      "systemtime": 5493,
+      "usertime": 122830
      },
-     "521249687028": {
-      "maxRSS": 25444352,
-      "systemtime": 11759,
-      "usertime": 164023
+     "1780945594915": {
+      "maxRSS": 25526272,
+      "systemtime": 5524,
+      "usertime": 124031
      },
-     "521249688291": {
-      "maxRSS": 25559040,
-      "systemtime": 11816,
-      "usertime": 165343
+     "1780945596175": {
+      "maxRSS": 25772032,
+      "systemtime": 5552,
+      "usertime": 125231
      },
-     "521249689559": {
-      "maxRSS": 25673728,
-      "systemtime": 11853,
-      "usertime": 166463
+     "1780945597435": {
+      "maxRSS": 25952256,
+      "systemtime": 5579,
+      "usertime": 126531
      },
-     "521249690821": {
-      "maxRSS": 25837568,
-      "systemtime": 11911,
-      "usertime": 167817
+     "1780945598695": {
+      "maxRSS": 26116096,
+      "systemtime": 5608,
+      "usertime": 127709
      },
-     "521249692083": {
-      "maxRSS": 26001408,
-      "systemtime": 11964,
-      "usertime": 168910
+     "1780945599950": {
+      "maxRSS": 26345472,
+      "systemtime": 5638,
+      "usertime": 128959
      },
-     "521249693346": {
-      "maxRSS": 26165248,
-      "systemtime": 12018,
-      "usertime": 170198
+     "1780945601210": {
+      "maxRSS": 26591232,
+      "systemtime": 5670,
+      "usertime": 130246
      },
-     "521249694607": {
-      "maxRSS": 26279936,
-      "systemtime": 12047,
-      "usertime": 171380
+     "1780945602469": {
+      "maxRSS": 26771456,
+      "systemtime": 5705,
+      "usertime": 131430
      },
-     "521249695866": {
-      "maxRSS": 26394624,
-      "systemtime": 12076,
-      "usertime": 172595
-     },
-     "521249697127": {
-      "maxRSS": 26640384,
-      "systemtime": 12128,
-      "usertime": 173883
-     },
-     "521249698213": {
-      "maxRSS": 26869760,
-      "systemtime": 12158,
-      "usertime": 174928
-     },
-     "521249699474": {
+     "1780945603730": {
       "maxRSS": 27017216,
-      "systemtime": 12188,
-      "usertime": 176168
+      "systemtime": 5732,
+      "usertime": 132720
      },
-     "521249700734": {
-      "maxRSS": 27197440,
-      "systemtime": 12224,
-      "usertime": 177416
+     "1780945604986": {
+      "maxRSS": 27377664,
+      "systemtime": 5771,
+      "usertime": 133872
      },
-     "521249701974": {
-      "maxRSS": 27344896,
-      "systemtime": 12251,
-      "usertime": 178695
+     "1780945606243": {
+      "maxRSS": 27607040,
+      "systemtime": 5792,
+      "usertime": 135174
      },
-     "521249703232": {
-      "maxRSS": 27459584,
-      "systemtime": 12276,
-      "usertime": 179843
+     "1780945607504": {
+      "maxRSS": 27836416,
+      "systemtime": 5828,
+      "usertime": 136346
      },
-     "521249704493": {
-      "maxRSS": 27574272,
-      "systemtime": 12304,
-      "usertime": 181127
+     "1780945608764": {
+      "maxRSS": 28000256,
+      "systemtime": 5852,
+      "usertime": 137623
      },
-     "521249705751": {
-      "maxRSS": 27721728,
-      "systemtime": 12335,
-      "usertime": 182397
-     },
-     "521249707024": {
-      "maxRSS": 27901952,
-      "systemtime": 12375,
-      "usertime": 183574
-     },
-     "521249708285": {
-      "maxRSS": 28049408,
-      "systemtime": 12410,
-      "usertime": 184858
-     },
-     "521249709544": {
+     "1780945610024": {
       "maxRSS": 28196864,
-      "systemtime": 12445,
-      "usertime": 186021
+      "systemtime": 5886,
+      "usertime": 138861
      },
-     "521249710804": {
-      "maxRSS": 28377088,
-      "systemtime": 12493,
-      "usertime": 187327
+     "1780945611282": {
+      "maxRSS": 28409856,
+      "systemtime": 5919,
+      "usertime": 140041
      },
-     "521249712068": {
-      "maxRSS": 28475392,
-      "systemtime": 12529,
-      "usertime": 188396
+     "1780945612538": {
+      "maxRSS": 28639232,
+      "systemtime": 5951,
+      "usertime": 141323
      },
-     "521249713332": {
-      "maxRSS": 28590080,
-      "systemtime": 12605,
-      "usertime": 189715
+     "1780945613795": {
+      "maxRSS": 28868608,
+      "systemtime": 5986,
+      "usertime": 142553
      },
-     "521249714595": {
-      "maxRSS": 28721152,
-      "systemtime": 12660,
-      "usertime": 190983
+     "1780945615056": {
+      "maxRSS": 29016064,
+      "systemtime": 6029,
+      "usertime": 143695
      },
-     "521249715858": {
-      "maxRSS": 28835840,
-      "systemtime": 12694,
-      "usertime": 192143
+     "1780945616315": {
+      "maxRSS": 29212672,
+      "systemtime": 6057,
+      "usertime": 144992
      },
-     "521249717122": {
-      "maxRSS": 28966912,
-      "systemtime": 12745,
-      "usertime": 193380
+     "1780945617571": {
+      "maxRSS": 29409280,
+      "systemtime": 6087,
+      "usertime": 146253
      },
-     "521249718382": {
-      "maxRSS": 29114368,
-      "systemtime": 12799,
-      "usertime": 194601
+     "1780945618830": {
+      "maxRSS": 29622272,
+      "systemtime": 6110,
+      "usertime": 147420
      },
-     "521249719643": {
-      "maxRSS": 29294592,
-      "systemtime": 12838,
-      "usertime": 195893
-     },
-     "521249720908": {
-      "maxRSS": 29425664,
-      "systemtime": 12878,
-      "usertime": 197096
-     },
-     "521249722166": {
-      "maxRSS": 29523968,
-      "systemtime": 12914,
-      "usertime": 198219
-     },
-     "521249723429": {
-      "maxRSS": 29638656,
-      "systemtime": 12952,
-      "usertime": 199586
-     },
-     "521249724690": {
-      "maxRSS": 29736960,
-      "systemtime": 12978,
-      "usertime": 200704
-     },
-     "521249725951": {
+     "1780945620089": {
       "maxRSS": 29868032,
-      "systemtime": 13017,
-      "usertime": 202017
+      "systemtime": 6140,
+      "usertime": 148694
      },
-     "521249727211": {
-      "maxRSS": 29982720,
-      "systemtime": 13054,
-      "usertime": 203241
+     "1780945621344": {
+      "maxRSS": 30015488,
+      "systemtime": 6163,
+      "usertime": 149947
      },
-     "521249728476": {
-      "maxRSS": 30113792,
-      "systemtime": 13088,
-      "usertime": 204418
+     "1780945622604": {
+      "maxRSS": 30179328,
+      "systemtime": 6185,
+      "usertime": 151209
      },
-     "521249729737": {
-      "maxRSS": 30277632,
-      "systemtime": 13121,
-      "usertime": 205732
-     },
-     "521249730426": {
+     "1780945623861": {
       "maxRSS": 30359552,
-      "systemtime": 13149,
-      "usertime": 206442
+      "systemtime": 6222,
+      "usertime": 152438
      },
-     "521249731690": {
-      "maxRSS": 30425088,
-      "systemtime": 13358,
-      "usertime": 207092
+     "1780945625117": {
+      "maxRSS": 30539776,
+      "systemtime": 6240,
+      "usertime": 153630
      },
-     "521249732955": {
-      "maxRSS": 30507008,
-      "systemtime": 13466,
-      "usertime": 207905
+     "1780945626377": {
+      "maxRSS": 30769152,
+      "systemtime": 6271,
+      "usertime": 154888
      },
-     "521249734217": {
-      "maxRSS": 30621696,
-      "systemtime": 13513,
-      "usertime": 209038
+     "1780945626526": {
+      "maxRSS": 30785536,
+      "systemtime": 6279,
+      "usertime": 155065
      },
-     "521249735477": {
-      "maxRSS": 30736384,
-      "systemtime": 13596,
-      "usertime": 210162
-     },
-     "521249736735": {
+     "1780945627637": {
       "maxRSS": 30851072,
-      "systemtime": 13632,
-      "usertime": 211367
+      "systemtime": 6357,
+      "usertime": 155519
      },
-     "521249737993": {
-      "maxRSS": 30965760,
-      "systemtime": 13710,
-      "usertime": 212598
+     "1780945628895": {
+      "maxRSS": 31047680,
+      "systemtime": 6429,
+      "usertime": 156685
      },
-     "521249739256": {
-      "maxRSS": 31096832,
-      "systemtime": 13753,
+     "1780945630150": {
+      "maxRSS": 31227904,
+      "systemtime": 6485,
+      "usertime": 157732
+     },
+     "1780945631407": {
+      "maxRSS": 31408128,
+      "systemtime": 6523,
+      "usertime": 158986
+     },
+     "1780945632667": {
+      "maxRSS": 31588352,
+      "systemtime": 6559,
+      "usertime": 160211
+     },
+     "1780945633923": {
+      "maxRSS": 31768576,
+      "systemtime": 6599,
+      "usertime": 161442
+     },
+     "1780945635152": {
+      "maxRSS": 31948800,
+      "systemtime": 6625,
+      "usertime": 162655
+     },
+     "1780945636406": {
+      "maxRSS": 31965184,
+      "systemtime": 6685,
+      "usertime": 163104
+     },
+     "1780945637669": {
+      "maxRSS": 32014336,
+      "systemtime": 6723,
+      "usertime": 164500
+     },
+     "1780945638931": {
+      "maxRSS": 32030720,
+      "systemtime": 6767,
+      "usertime": 165651
+     },
+     "1780945640189": {
+      "maxRSS": 32079872,
+      "systemtime": 6814,
+      "usertime": 166884
+     },
+     "1780945641449": {
+      "maxRSS": 32112640,
+      "systemtime": 6834,
+      "usertime": 168071
+     },
+     "1780945642709": {
+      "maxRSS": 32145408,
+      "systemtime": 6853,
+      "usertime": 169228
+     },
+     "1780945643972": {
+      "maxRSS": 32145408,
+      "systemtime": 6937,
+      "usertime": 170333
+     },
+     "1780945645232": {
+      "maxRSS": 32145408,
+      "systemtime": 6960,
+      "usertime": 171644
+     },
+     "1780945646488": {
+      "maxRSS": 32145408,
+      "systemtime": 6974,
+      "usertime": 173010
+     },
+     "1780945647748": {
+      "maxRSS": 32145408,
+      "systemtime": 6989,
+      "usertime": 173884
+     },
+     "1780945649004": {
+      "maxRSS": 32145408,
+      "systemtime": 7009,
+      "usertime": 175500
+     },
+     "1780945650263": {
+      "maxRSS": 32145408,
+      "systemtime": 7023,
+      "usertime": 176773
+     },
+     "1780945651524": {
+      "maxRSS": 32145408,
+      "systemtime": 7039,
+      "usertime": 177641
+     },
+     "1780945652778": {
+      "maxRSS": 32161792,
+      "systemtime": 7059,
+      "usertime": 178912
+     },
+     "1780945653596": {
+      "maxRSS": 32194560,
+      "systemtime": 7081,
+      "usertime": 180064
+     },
+     "1780945654858": {
+      "maxRSS": 32358400,
+      "systemtime": 7222,
+      "usertime": 180663
+     },
+     "1780945656119": {
+      "maxRSS": 32391168,
+      "systemtime": 7254,
+      "usertime": 181772
+     },
+     "1780945657375": {
+      "maxRSS": 32440320,
+      "systemtime": 7290,
+      "usertime": 182605
+     },
+     "1780945658634": {
+      "maxRSS": 32473088,
+      "systemtime": 7322,
+      "usertime": 184038
+     },
+     "1780945659890": {
+      "maxRSS": 32505856,
+      "systemtime": 7340,
+      "usertime": 185069
+     },
+     "1780945660006": {
+      "maxRSS": 32505856,
+      "systemtime": 7357,
+      "usertime": 185472
+     },
+     "1780945660048": {
+      "maxRSS": 32505856,
+      "systemtime": 7385,
+      "usertime": 185490
+     },
+     "1780945661154": {
+      "maxRSS": 32522240,
+      "systemtime": 7440,
+      "usertime": 185903
+     },
+     "1780945662316": {
+      "maxRSS": 32555008,
+      "systemtime": 7463,
+      "usertime": 186963
+     },
+     "1780945663575": {
+      "maxRSS": 32571392,
+      "systemtime": 7501,
+      "usertime": 188077
+     },
+     "1780945664830": {
+      "maxRSS": 32604160,
+      "systemtime": 7542,
+      "usertime": 189393
+     },
+     "1780945666089": {
+      "maxRSS": 32636928,
+      "systemtime": 7562,
+      "usertime": 190679
+     },
+     "1780945667346": {
+      "maxRSS": 32669696,
+      "systemtime": 7588,
+      "usertime": 191952
+     },
+     "1780945668607": {
+      "maxRSS": 32718848,
+      "systemtime": 7606,
+      "usertime": 193204
+     },
+     "1780945669865": {
+      "maxRSS": 32735232,
+      "systemtime": 7646,
+      "usertime": 194071
+     },
+     "1780945671125": {
+      "maxRSS": 32768000,
+      "systemtime": 7662,
+      "usertime": 195326
+     },
+     "1780945672380": {
+      "maxRSS": 32800768,
+      "systemtime": 7688,
+      "usertime": 196575
+     },
+     "1780945673643": {
+      "maxRSS": 32833536,
+      "systemtime": 7707,
+      "usertime": 197851
+     },
+     "1780945674049": {
+      "maxRSS": 32849920,
+      "systemtime": 7722,
+      "usertime": 198566
+     },
+     "1780945675302": {
+      "maxRSS": 32866304,
+      "systemtime": 7785,
+      "usertime": 199026
+     },
+     "1780945676556": {
+      "maxRSS": 32915456,
+      "systemtime": 7817,
+      "usertime": 200317
+     },
+     "1780945677813": {
+      "maxRSS": 32964608,
+      "systemtime": 7847,
+      "usertime": 201520
+     },
+     "1780945679068": {
+      "maxRSS": 32997376,
+      "systemtime": 7883,
+      "usertime": 202762
+     },
+     "1780945680324": {
+      "maxRSS": 33046528,
+      "systemtime": 7902,
+      "usertime": 203852
+     },
+     "1780945681580": {
+      "maxRSS": 33095680,
+      "systemtime": 7919,
+      "usertime": 205163
+     },
+     "1780945682836": {
+      "maxRSS": 33144832,
+      "systemtime": 7937,
+      "usertime": 206471
+     },
+     "1780945683074": {
+      "maxRSS": 33144832,
+      "systemtime": 7943,
+      "usertime": 206775
+     },
+     "1780945683966": {
+      "maxRSS": 33161216,
+      "systemtime": 7989,
+      "usertime": 207248
+     },
+     "1780945684157": {
+      "maxRSS": 33161216,
+      "systemtime": 8017,
+      "usertime": 207277
+     },
+     "1780945685224": {
+      "maxRSS": 33226752,
+      "systemtime": 8068,
+      "usertime": 207762
+     },
+     "1780945686479": {
+      "maxRSS": 33390592,
+      "systemtime": 8098,
+      "usertime": 209018
+     },
+     "1780945687737": {
+      "maxRSS": 33619968,
+      "systemtime": 8144,
+      "usertime": 210118
+     },
+     "1780945688997": {
+      "maxRSS": 33816576,
+      "systemtime": 8174,
+      "usertime": 211264
+     },
+     "1780945690255": {
+      "maxRSS": 33947648,
+      "systemtime": 8217,
+      "usertime": 212615
+     },
+     "1780945691511": {
+      "maxRSS": 34078720,
+      "systemtime": 8243,
       "usertime": 213833
      },
-     "521249740515": {
-      "maxRSS": 31211520,
-      "systemtime": 13789,
-      "usertime": 215026
-     },
-     "521249741777": {
-      "maxRSS": 31358976,
-      "systemtime": 13833,
-      "usertime": 216300
-     },
-     "521249743040": {
-      "maxRSS": 31457280,
-      "systemtime": 13984,
-      "usertime": 217293
-     },
-     "521249743719": {
-      "maxRSS": 31522816,
-      "systemtime": 14019,
-      "usertime": 218072
-     },
-     "521249744980": {
-      "maxRSS": 31637504,
-      "systemtime": 14143,
-      "usertime": 218717
-     },
-     "521249746239": {
-      "maxRSS": 31670272,
-      "systemtime": 14185,
-      "usertime": 219947
-     },
-     "521249747496": {
-      "maxRSS": 31686656,
-      "systemtime": 14199,
-      "usertime": 221198
-     },
-     "521249748764": {
-      "maxRSS": 31703040,
-      "systemtime": 14249,
-      "usertime": 221828
-     },
-     "521249750025": {
-      "maxRSS": 31735808,
-      "systemtime": 14277,
-      "usertime": 223348
-     },
-     "521249751285": {
-      "maxRSS": 31752192,
-      "systemtime": 14339,
-      "usertime": 224320
-     },
-     "521249752545": {
-      "maxRSS": 31768576,
-      "systemtime": 14362,
-      "usertime": 225575
-     },
-     "521249753805": {
-      "maxRSS": 31801344,
-      "systemtime": 14389,
-      "usertime": 226882
-     },
-     "521249755063": {
-      "maxRSS": 31817728,
-      "systemtime": 14412,
-      "usertime": 228094
-     },
-     "521249756320": {
-      "maxRSS": 31850496,
-      "systemtime": 14488,
-      "usertime": 229491
-     },
-     "521249757580": {
-      "maxRSS": 31866880,
-      "systemtime": 14512,
-      "usertime": 230625
-     },
-     "521249758845": {
-      "maxRSS": 31883264,
-      "systemtime": 14537,
-      "usertime": 231919
-     },
-     "521249760107": {
-      "maxRSS": 31916032,
-      "systemtime": 14570,
-      "usertime": 233260
-     },
-     "521249761366": {
-      "maxRSS": 31932416,
-      "systemtime": 14593,
-      "usertime": 234570
-     },
-     "521249762629": {
-      "maxRSS": 31965184,
-      "systemtime": 14620,
-      "usertime": 235851
-     },
-     "521249763891": {
-      "maxRSS": 31981568,
-      "systemtime": 14638,
-      "usertime": 236603
-     },
-     "521249765153": {
-      "maxRSS": 31997952,
-      "systemtime": 14668,
-      "usertime": 238210
-     },
-     "521249766417": {
-      "maxRSS": 32030720,
-      "systemtime": 14692,
-      "usertime": 239218
-     },
-     "521249767679": {
-      "maxRSS": 32047104,
-      "systemtime": 14719,
-      "usertime": 240841
-     },
-     "521249768944": {
-      "maxRSS": 32079872,
-      "systemtime": 14743,
-      "usertime": 241837
-     },
-     "521249770208": {
-      "maxRSS": 32096256,
-      "systemtime": 14764,
-      "usertime": 242816
-     },
-     "521249770762": {
-      "maxRSS": 32112640,
-      "systemtime": 14785,
-      "usertime": 243877
-     },
-     "521249772023": {
-      "maxRSS": 32112640,
-      "systemtime": 14936,
-      "usertime": 244535
-     },
-     "521249773282": {
-      "maxRSS": 32129024,
-      "systemtime": 14981,
-      "usertime": 245422
-     },
-     "521249774544": {
-      "maxRSS": 32161792,
-      "systemtime": 15008,
-      "usertime": 246674
-     },
-     "521249775805": {
-      "maxRSS": 32178176,
-      "systemtime": 15055,
-      "usertime": 247763
-     },
-     "521249777067": {
-      "maxRSS": 32194560,
-      "systemtime": 15077,
-      "usertime": 249036
-     },
-     "521249778332": {
-      "maxRSS": 32210944,
-      "systemtime": 15110,
-      "usertime": 250287
-     },
-     "521249779593": {
-      "maxRSS": 32227328,
-      "systemtime": 15133,
-      "usertime": 251512
-     },
-     "521249780217": {
-      "maxRSS": 32243712,
-      "systemtime": 15156,
-      "usertime": 252195
-     },
-     "521249780284": {
-      "maxRSS": 32243712,
-      "systemtime": 15212,
-      "usertime": 252224
-     },
-     "521249781539": {
-      "maxRSS": 32243712,
-      "systemtime": 15295,
-      "usertime": 252839
-     },
-     "521249782798": {
-      "maxRSS": 32260096,
-      "systemtime": 15347,
-      "usertime": 254022
-     },
-     "521249784060": {
-      "maxRSS": 32292864,
-      "systemtime": 15388,
-      "usertime": 255205
-     },
-     "521249785318": {
-      "maxRSS": 32309248,
-      "systemtime": 15420,
-      "usertime": 255996
-     },
-     "521249786576": {
-      "maxRSS": 32325632,
-      "systemtime": 15486,
-      "usertime": 257589
-     },
-     "521249787834": {
-      "maxRSS": 32358400,
-      "systemtime": 15509,
-      "usertime": 258821
-     },
-     "521249789096": {
-      "maxRSS": 32374784,
-      "systemtime": 15536,
-      "usertime": 259896
-     },
-     "521249790355": {
-      "maxRSS": 32391168,
-      "systemtime": 15554,
-      "usertime": 261043
-     },
-     "521249791613": {
-      "maxRSS": 32423936,
-      "systemtime": 15574,
-      "usertime": 262481
-     },
-     "521249792870": {
-      "maxRSS": 32440320,
-      "systemtime": 15617,
-      "usertime": 263387
-     },
-     "521249794128": {
-      "maxRSS": 32456704,
-      "systemtime": 15647,
-      "usertime": 265013
-     },
-     "521249795386": {
-      "maxRSS": 32489472,
-      "systemtime": 15670,
-      "usertime": 266141
-     },
-     "521249796648": {
-      "maxRSS": 32505856,
-      "systemtime": 15692,
-      "usertime": 267275
-     },
-     "521249797907": {
-      "maxRSS": 32522240,
-      "systemtime": 15716,
-      "usertime": 268432
-     },
-     "521249799169": {
-      "maxRSS": 32571392,
-      "systemtime": 15753,
-      "usertime": 269791
-     },
-     "521249799289": {
-      "maxRSS": 32571392,
-      "systemtime": 15768,
-      "usertime": 270112
-     },
-     "521249800433": {
-      "maxRSS": 32587776,
-      "systemtime": 15901,
-      "usertime": 270852
-     },
-     "521249801696": {
-      "maxRSS": 32587776,
-      "systemtime": 16030,
-      "usertime": 271799
-     },
-     "521249802960": {
-      "maxRSS": 32587776,
-      "systemtime": 16057,
-      "usertime": 272978
-     },
-     "521249804230": {
-      "maxRSS": 32587776,
-      "systemtime": 16145,
-      "usertime": 273863
-     },
-     "521249805500": {
-      "maxRSS": 32604160,
-      "systemtime": 16173,
-      "usertime": 275253
-     },
-     "521249806766": {
-      "maxRSS": 32604160,
-      "systemtime": 16228,
-      "usertime": 276580
-     },
-     "521249807912": {
-      "maxRSS": 32604160,
-      "systemtime": 16252,
-      "usertime": 277631
-     },
-     "521249809179": {
-      "maxRSS": 32604160,
-      "systemtime": 16274,
-      "usertime": 278928
-     },
-     "521249810444": {
-      "maxRSS": 32604160,
-      "systemtime": 16298,
-      "usertime": 280198
-     },
-     "521249811707": {
-      "maxRSS": 32604160,
-      "systemtime": 16310,
-      "usertime": 281474
-     },
-     "521249812813": {
-      "maxRSS": 32636928,
-      "systemtime": 16347,
-      "usertime": 282556
-     },
-     "521249814073": {
-      "maxRSS": 32751616,
-      "systemtime": 16495,
-      "usertime": 283103
-     },
-     "521249814123": {
-      "maxRSS": 32751616,
-      "systemtime": 16506,
-      "usertime": 283245
-     },
-     "521249814324": {
-      "maxRSS": 32751616,
-      "systemtime": 16546,
-      "usertime": 283291
-     },
-     "521249815585": {
-      "maxRSS": 32800768,
-      "systemtime": 16634,
-      "usertime": 284076
-     },
-     "521249816842": {
-      "maxRSS": 32882688,
-      "systemtime": 16687,
-      "usertime": 285049
-     },
-     "521249818106": {
-      "maxRSS": 33030144,
-      "systemtime": 16728,
-      "usertime": 286393
-     },
-     "521249819365": {
-      "maxRSS": 33177600,
-      "systemtime": 16782,
-      "usertime": 287462
-     },
-     "521249820626": {
-      "maxRSS": 33325056,
-      "systemtime": 16811,
-      "usertime": 288645
-     },
-     "521249821886": {
-      "maxRSS": 33423360,
-      "systemtime": 16847,
-      "usertime": 289905
-     },
-     "521249823145": {
-      "maxRSS": 33505280,
-      "systemtime": 16909,
-      "usertime": 291058
-     },
-     "521249824409": {
-      "maxRSS": 33587200,
-      "systemtime": 16930,
-      "usertime": 292183
-     },
-     "521249825673": {
-      "maxRSS": 33685504,
-      "systemtime": 16961,
-      "usertime": 293517
-     },
-     "521249826934": {
-      "maxRSS": 33783808,
-      "systemtime": 17007,
-      "usertime": 294861
-     },
-     "521249828197": {
-      "maxRSS": 33849344,
-      "systemtime": 17027,
-      "usertime": 295895
-     },
-     "521249829459": {
-      "maxRSS": 33947648,
-      "systemtime": 17121,
-      "usertime": 297268
-     },
-     "521249830721": {
-      "maxRSS": 34029568,
-      "systemtime": 17147,
-      "usertime": 298433
-     },
-     "521249831983": {
-      "maxRSS": 34095104,
-      "systemtime": 17170,
-      "usertime": 299500
-     },
-     "521249833250": {
+     "1780945692767": {
       "maxRSS": 34193408,
-      "systemtime": 17206,
-      "usertime": 300811
+      "systemtime": 8264,
+      "usertime": 215046
      },
-     "521249834513": {
-      "maxRSS": 34291712,
-      "systemtime": 17235,
-      "usertime": 302214
+     "1780945694022": {
+      "maxRSS": 34308096,
+      "systemtime": 8283,
+      "usertime": 216245
      },
-     "521249835773": {
-      "maxRSS": 34373632,
-      "systemtime": 17265,
-      "usertime": 303402
-     },
-     "521249837035": {
+     "1780945695282": {
       "maxRSS": 34439168,
-      "systemtime": 17303,
-      "usertime": 304488
+      "systemtime": 8333,
+      "usertime": 217480
      },
-     "521249838295": {
-      "maxRSS": 34537472,
-      "systemtime": 17327,
-      "usertime": 305970
+     "1780945696378": {
+      "maxRSS": 34553856,
+      "systemtime": 8353,
+      "usertime": 218618
      },
-     "521249839556": {
-      "maxRSS": 34619392,
-      "systemtime": 17356,
-      "usertime": 307112
+     "1780945697634": {
+      "maxRSS": 34668544,
+      "systemtime": 8382,
+      "usertime": 219833
      },
-     "521249840819": {
-      "maxRSS": 34701312,
-      "systemtime": 17391,
-      "usertime": 308321
-     },
-     "521249842080": {
+     "1780945698889": {
       "maxRSS": 34783232,
-      "systemtime": 17412,
-      "usertime": 309708
+      "systemtime": 8399,
+      "usertime": 220999
      },
-     "521249843341": {
-      "maxRSS": 34865152,
-      "systemtime": 17554,
-      "usertime": 310680
+     "1780945700148": {
+      "maxRSS": 34897920,
+      "systemtime": 8426,
+      "usertime": 222361
      },
-     "521249844603": {
-      "maxRSS": 34963456,
-      "systemtime": 17586,
-      "usertime": 312062
-     },
-     "521249845866": {
+     "1780945701407": {
       "maxRSS": 35028992,
-      "systemtime": 17606,
-      "usertime": 313063
+      "systemtime": 8453,
+      "usertime": 223548
      },
-     "521249847127": {
-      "maxRSS": 35110912,
-      "systemtime": 17632,
-      "usertime": 314407
+     "1780945702663": {
+      "maxRSS": 35143680,
+      "systemtime": 8472,
+      "usertime": 224757
      },
-     "521249848386": {
-      "maxRSS": 35192832,
-      "systemtime": 17657,
-      "usertime": 315714
+     "1780945703917": {
+      "maxRSS": 35258368,
+      "systemtime": 8545,
+      "usertime": 226010
      },
-     "521249849649": {
-      "maxRSS": 35291136,
-      "systemtime": 17679,
-      "usertime": 316989
-     },
-     "521249850909": {
+     "1780945705173": {
       "maxRSS": 35373056,
-      "systemtime": 17704,
-      "usertime": 318260
+      "systemtime": 8566,
+      "usertime": 227272
      },
-     "521249852168": {
-      "maxRSS": 35438592,
-      "systemtime": 17730,
-      "usertime": 319323
+     "1780945706432": {
+      "maxRSS": 35487744,
+      "systemtime": 8587,
+      "usertime": 228383
      },
-     "521249853433": {
-      "maxRSS": 35520512,
-      "systemtime": 17751,
-      "usertime": 320653
+     "1780945707692": {
+      "maxRSS": 35618816,
+      "systemtime": 8628,
+      "usertime": 229621
      },
-     "521249854692": {
-      "maxRSS": 35602432,
-      "systemtime": 17786,
-      "usertime": 321895
+     "1780945708956": {
+      "maxRSS": 35749888,
+      "systemtime": 8647,
+      "usertime": 230881
      },
-     "521249855952": {
-      "maxRSS": 35684352,
-      "systemtime": 17826,
-      "usertime": 323160
-     },
-     "521249857212": {
-      "maxRSS": 35766272,
-      "systemtime": 17852,
-      "usertime": 324354
-     },
-     "521249858476": {
+     "1780945710217": {
       "maxRSS": 35864576,
-      "systemtime": 17914,
-      "usertime": 325661
+      "systemtime": 8681,
+      "usertime": 232173
      },
-     "521249859740": {
-      "maxRSS": 35946496,
-      "systemtime": 17948,
-      "usertime": 326901
+     "1780945711476": {
+      "maxRSS": 35962880,
+      "systemtime": 8700,
+      "usertime": 233295
      },
-     "521249861000": {
-      "maxRSS": 36028416,
-      "systemtime": 17981,
-      "usertime": 328065
-     },
-     "521249862264": {
+     "1780945712734": {
       "maxRSS": 36093952,
-      "systemtime": 18018,
-      "usertime": 329195
+      "systemtime": 8738,
+      "usertime": 234548
      },
-     "521249863528": {
-      "maxRSS": 36175872,
-      "systemtime": 18058,
-      "usertime": 330570
+     "1780945713990": {
+      "maxRSS": 36208640,
+      "systemtime": 8763,
+      "usertime": 235760
      },
-     "521249864788": {
-      "maxRSS": 36257792,
-      "systemtime": 18081,
-      "usertime": 331680
+     "1780945715248": {
+      "maxRSS": 36339712,
+      "systemtime": 8790,
+      "usertime": 237157
      },
-     "521249866048": {
-      "maxRSS": 36356096,
-      "systemtime": 18117,
-      "usertime": 333101
+     "1780945716508": {
+      "maxRSS": 36454400,
+      "systemtime": 8810,
+      "usertime": 238312
      },
-     "521249867309": {
-      "maxRSS": 36421632,
-      "systemtime": 18147,
-      "usertime": 334352
-     },
-     "521249868571": {
-      "maxRSS": 36503552,
-      "systemtime": 18170,
-      "usertime": 335535
-     },
-     "521249869832": {
+     "1780945717769": {
       "maxRSS": 36585472,
-      "systemtime": 18333,
-      "usertime": 336674
+      "systemtime": 8833,
+      "usertime": 239629
      },
-     "521249871091": {
-      "maxRSS": 36667392,
-      "systemtime": 18355,
-      "usertime": 337844
+     "1780945719029": {
+      "maxRSS": 36732928,
+      "systemtime": 8861,
+      "usertime": 240864
      },
-     "521249872359": {
-      "maxRSS": 36765696,
-      "systemtime": 18397,
-      "usertime": 339087
-     },
-     "521249873623": {
+     "1780945720285": {
       "maxRSS": 36847616,
-      "systemtime": 18434,
-      "usertime": 340364
+      "systemtime": 8879,
+      "usertime": 242119
      },
-     "521249874883": {
-      "maxRSS": 36929536,
-      "systemtime": 18462,
-      "usertime": 341441
+     "1780945721498": {
+      "maxRSS": 36945920,
+      "systemtime": 8902,
+      "usertime": 243191
      },
-     "521249875991": {
-      "maxRSS": 36995072,
-      "systemtime": 18492,
-      "usertime": 342579
+     "1780945722760": {
+      "maxRSS": 37076992,
+      "systemtime": 8992,
+      "usertime": 244474
      },
-     "521249877255": {
-      "maxRSS": 37093376,
-      "systemtime": 18520,
-      "usertime": 343970
+     "1780945724021": {
+      "maxRSS": 37191680,
+      "systemtime": 9009,
+      "usertime": 245658
      },
-     "521249878513": {
-      "maxRSS": 37175296,
-      "systemtime": 18556,
-      "usertime": 345143
+     "1780945725281": {
+      "maxRSS": 37306368,
+      "systemtime": 9045,
+      "usertime": 246894
      },
-     "521249879774": {
-      "maxRSS": 37257216,
-      "systemtime": 18590,
-      "usertime": 346419
+     "1780945726540": {
+      "maxRSS": 37421056,
+      "systemtime": 9070,
+      "usertime": 248113
      },
-     "521249881035": {
-      "maxRSS": 37322752,
-      "systemtime": 18614,
-      "usertime": 347540
-     },
-     "521249882295": {
-      "maxRSS": 37404672,
-      "systemtime": 18649,
-      "usertime": 348767
-     },
-     "521249883554": {
-      "maxRSS": 37486592,
-      "systemtime": 18688,
-      "usertime": 350104
-     },
-     "521249884818": {
+     "1780945727799": {
       "maxRSS": 37552128,
-      "systemtime": 18710,
-      "usertime": 351184
+      "systemtime": 9100,
+      "usertime": 249408
      },
-     "521249886081": {
-      "maxRSS": 37650432,
-      "systemtime": 18744,
-      "usertime": 352613
+     "1780945729059": {
+      "maxRSS": 37666816,
+      "systemtime": 9119,
+      "usertime": 250620
      },
-     "521249887344": {
-      "maxRSS": 37765120,
-      "systemtime": 18786,
-      "usertime": 353841
+     "1780945730316": {
+      "maxRSS": 37797888,
+      "systemtime": 9140,
+      "usertime": 251815
      },
-     "521249888602": {
+     "1780945731577": {
       "maxRSS": 37912576,
-      "systemtime": 18814,
-      "usertime": 355045
+      "systemtime": 9164,
+      "usertime": 253122
      },
-     "521249889865": {
-      "maxRSS": 38076416,
-      "systemtime": 18870,
-      "usertime": 356281
+     "1780945732660": {
+      "maxRSS": 38010880,
+      "systemtime": 9186,
+      "usertime": 254202
      },
-     "521249891125": {
-      "maxRSS": 38223872,
-      "systemtime": 18908,
-      "usertime": 357480
+     "1780945733921": {
+      "maxRSS": 38158336,
+      "systemtime": 9206,
+      "usertime": 255430
      },
-     "521249892385": {
-      "maxRSS": 40353792,
-      "systemtime": 19109,
-      "usertime": 357805
+     "1780945735182": {
+      "maxRSS": 38387712,
+      "systemtime": 9232,
+      "usertime": 256650
      },
-     "521249893650": {
-      "maxRSS": 40353792,
-      "systemtime": 19115,
-      "usertime": 357809
+     "1780945736443": {
+      "maxRSS": 38617088,
+      "systemtime": 9266,
+      "usertime": 257895
      },
-     "521249894911": {
-      "maxRSS": 40353792,
-      "systemtime": 19120,
-      "usertime": 357814
+     "1780945737703": {
+      "maxRSS": 40747008,
+      "systemtime": 9402,
+      "usertime": 258814
      },
-     "521249896180": {
-      "maxRSS": 40353792,
-      "systemtime": 19125,
-      "usertime": 357822
+     "1780945738963": {
+      "maxRSS": 40747008,
+      "systemtime": 9407,
+      "usertime": 258818
      },
-     "521249897451": {
-      "maxRSS": 40353792,
-      "systemtime": 19132,
-      "usertime": 357832
+     "1780945740224": {
+      "maxRSS": 40747008,
+      "systemtime": 9413,
+      "usertime": 258822
      },
-     "521249898723": {
-      "maxRSS": 40353792,
-      "systemtime": 19139,
-      "usertime": 357842
+     "1780945741485": {
+      "maxRSS": 43008000,
+      "systemtime": 9554,
+      "usertime": 262660
      },
-     "521249899989": {
-      "maxRSS": 42516480,
-      "systemtime": 19432,
-      "usertime": 365928
-     },
-     "521249901250": {
-      "maxRSS": 42680320,
-      "systemtime": 19482,
-      "usertime": 367170
-     },
-     "521249902509": {
-      "maxRSS": 42844160,
-      "systemtime": 19512,
-      "usertime": 368386
-     },
-     "521249903777": {
-      "maxRSS": 42909696,
-      "systemtime": 19550,
-      "usertime": 369404
-     },
-     "521249905039": {
-      "maxRSS": 42991616,
-      "systemtime": 19589,
-      "usertime": 370753
-     },
-     "521249906300": {
-      "maxRSS": 43073536,
-      "systemtime": 19614,
-      "usertime": 372126
-     },
-     "521249907564": {
-      "maxRSS": 43155456,
-      "systemtime": 19652,
-      "usertime": 373329
-     },
-     "521249908823": {
+     "1780945742747": {
       "maxRSS": 43253760,
-      "systemtime": 19693,
-      "usertime": 374481
+      "systemtime": 9586,
+      "usertime": 263937
      },
-     "521249910086": {
-      "maxRSS": 43335680,
-      "systemtime": 19723,
-      "usertime": 375694
+     "1780945744004": {
+      "maxRSS": 43368448,
+      "systemtime": 9616,
+      "usertime": 265139
      },
-     "521249911309": {
-      "maxRSS": 43417600,
-      "systemtime": 19773,
-      "usertime": 377031
-     },
-     "521249911680": {
-      "maxRSS": 43417600,
-      "systemtime": 19907,
-      "usertime": 377084
-     },
-     "521249912049": {
+     "1780945745260": {
       "maxRSS": 43483136,
-      "systemtime": 20017,
-      "usertime": 377128
+      "systemtime": 9635,
+      "usertime": 266436
      },
-     "521249912167": {
-      "maxRSS": 43483136,
-      "systemtime": 20112,
-      "usertime": 377169
+     "1780945746517": {
+      "maxRSS": 43597824,
+      "systemtime": 9657,
+      "usertime": 267616
      },
-     "521249912196": {
-      "maxRSS": 43483136,
-      "systemtime": 20117,
-      "usertime": 377200
+     "1780945747774": {
+      "maxRSS": 43728896,
+      "systemtime": 9675,
+      "usertime": 268823
      },
-     "521249912251": {
-      "maxRSS": 43483136,
-      "systemtime": 20157,
-      "usertime": 377226
+     "1780945748713": {
+      "maxRSS": 43810816,
+      "systemtime": 9728,
+      "usertime": 269831
      },
-     "521249913315": {
-      "maxRSS": 43630592,
-      "systemtime": 20258,
-      "usertime": 377870
+     "1780945748955": {
+      "maxRSS": 43827200,
+      "systemtime": 9782,
+      "usertime": 269869
      },
-     "521249914576": {
-      "maxRSS": 43778048,
-      "systemtime": 20285,
-      "usertime": 379168
+     "1780945748990": {
+      "maxRSS": 43876352,
+      "systemtime": 9790,
+      "usertime": 269900
      },
-     "521249915840": {
-      "maxRSS": 43909120,
-      "systemtime": 20411,
-      "usertime": 380328
-     },
-     "521249916771": {
-      "maxRSS": 43909120,
-      "systemtime": 20419,
-      "usertime": 381293
-     },
-     "521249918035": {
+     "1780945749072": {
       "maxRSS": 43925504,
-      "systemtime": 20903,
-      "usertime": 382073
+      "systemtime": 9851,
+      "usertime": 269932
      },
-     "521249919301": {
+     "1780945749098": {
       "maxRSS": 43925504,
-      "systemtime": 21136,
-      "usertime": 383125
-     },
-     "521249920562": {
-      "maxRSS": 43925504,
-      "systemtime": 21356,
-      "usertime": 384177
-     },
-     "521249921823": {
-      "maxRSS": 43925504,
-      "systemtime": 21557,
-      "usertime": 385243
-     },
-     "521249922007": {
-      "maxRSS": 43925504,
-      "systemtime": 21681,
-      "usertime": 385311
-     },
-     "521249923083": {
-      "maxRSS": 44040192,
-      "systemtime": 21720,
-      "usertime": 386329
-     },
-     "521249924344": {
-      "maxRSS": 44154880,
-      "systemtime": 21742,
-      "usertime": 387576
-     },
-     "521249925048": {
-      "maxRSS": 44220416,
-      "systemtime": 21760,
-      "usertime": 388287
-     },
-     "521249925083": {
-      "maxRSS": 44220416,
-      "systemtime": 21764,
-      "usertime": 388334
-     },
-     "521249926344": {
-      "maxRSS": 44220416,
-      "systemtime": 22174,
-      "usertime": 389185
-     },
-     "521249927608": {
-      "maxRSS": 44220416,
-      "systemtime": 22390,
-      "usertime": 390253
-     },
-     "521249928747": {
-      "maxRSS": 44220416,
-      "systemtime": 22646,
-      "usertime": 391139
-     },
-     "521249930010": {
-      "maxRSS": 44367872,
-      "systemtime": 22691,
-      "usertime": 392365
-     },
-     "521249931273": {
-      "maxRSS": 44531712,
-      "systemtime": 22729,
-      "usertime": 393543
-     },
-     "521249932531": {
-      "maxRSS": 44679168,
-      "systemtime": 22751,
-      "usertime": 394748
-     },
-     "521249933791": {
-      "maxRSS": 44843008,
-      "systemtime": 22775,
-      "usertime": 396080
-     },
-     "521249933963": {
-      "maxRSS": 44859392,
-      "systemtime": 22785,
-      "usertime": 396260
-     },
-     "521249935055": {
-      "maxRSS": 44859392,
-      "systemtime": 23203,
-      "usertime": 396946
-     },
-     "521249936315": {
-      "maxRSS": 44859392,
-      "systemtime": 23430,
-      "usertime": 397989
-     },
-     "521249937577": {
-      "maxRSS": 44859392,
-      "systemtime": 23658,
-      "usertime": 399024
-     },
-     "521249938836": {
-      "maxRSS": 44859392,
-      "systemtime": 23887,
-      "usertime": 400061
-     },
-     "521249940094": {
-      "maxRSS": 44859392,
-      "systemtime": 24096,
-      "usertime": 401121
-     },
-     "521249941359": {
-      "maxRSS": 44859392,
-      "systemtime": 24303,
-      "usertime": 402188
-     },
-     "521249942243": {
-      "maxRSS": 44859392,
-      "systemtime": 24547,
-      "usertime": 402835
-     },
-     "521249943197": {
-      "maxRSS": 44859392,
-      "systemtime": 24559,
-      "usertime": 403780
-     },
-     "521249943221": {
-      "maxRSS": 44859392,
-      "systemtime": 24568,
-      "usertime": 403814
-     },
-     "521249943282": {
-      "maxRSS": 44875776,
-      "systemtime": 24614,
-      "usertime": 403837
-     },
-     "521249944541": {
-      "maxRSS": 44875776,
-      "systemtime": 24620,
-      "usertime": 404184
-     },
-     "521249945712": {
-      "maxRSS": 44875776,
-      "systemtime": 24635,
-      "usertime": 406249
-     },
-     "521249946979": {
-      "maxRSS": 44875776,
-      "systemtime": 24645,
-      "usertime": 406812
-     },
-     "521249948240": {
-      "maxRSS": 44875776,
-      "systemtime": 24652,
-      "usertime": 406816
-     },
-     "521249948852": {
-      "maxRSS": 44875776,
-      "systemtime": 24660,
-      "usertime": 409397
-     },
-     "521249949051": {
-      "maxRSS": 44892160,
-      "systemtime": 24807,
-      "usertime": 409453
-     },
-     "521249950309": {
-      "maxRSS": 44892160,
-      "systemtime": 24810,
-      "usertime": 409458
-     },
-     "521249951572": {
-      "maxRSS": 44892160,
-      "systemtime": 24814,
-      "usertime": 409462
-     },
-     "521249952836": {
-      "maxRSS": 44892160,
-      "systemtime": 24819,
-      "usertime": 412961
-     },
-     "521249954098": {
-      "maxRSS": 44892160,
-      "systemtime": 24824,
-      "usertime": 412966
-     },
-     "521249955362": {
-      "maxRSS": 44892160,
-      "systemtime": 24829,
-      "usertime": 412970
-     },
-     "521249956624": {
-      "maxRSS": 44892160,
-      "systemtime": 24834,
-      "usertime": 412974
-     },
-     "521249957887": {
-      "maxRSS": 44892160,
-      "systemtime": 24838,
-      "usertime": 412979
-     },
-     "521249959150": {
-      "maxRSS": 44892160,
-      "systemtime": 24843,
-      "usertime": 412983
-     },
-     "521249960411": {
-      "maxRSS": 44892160,
-      "systemtime": 24848,
-      "usertime": 412988
-     },
-     "521249961669": {
-      "maxRSS": 44892160,
-      "systemtime": 24851,
-      "usertime": 412992
-     },
-     "521249962931": {
-      "maxRSS": 44892160,
-      "systemtime": 24855,
-      "usertime": 422993
-     },
-     "521249963000": {
-      "maxRSS": 44908544,
-      "systemtime": 24865,
-      "usertime": 423434
-     },
-     "521249963311": {
-      "maxRSS": 44908544,
-      "systemtime": 25029,
-      "usertime": 423582
-     },
-     "521249964577": {
-      "maxRSS": 44908544,
-      "systemtime": 25034,
-      "usertime": 423587
-     },
-     "521249965838": {
-      "maxRSS": 44908544,
-      "systemtime": 25039,
-      "usertime": 423592
-     },
-     "521249967102": {
-      "maxRSS": 44908544,
-      "systemtime": 25044,
-      "usertime": 423596
-     },
-     "521249968364": {
-      "maxRSS": 44908544,
-      "systemtime": 25049,
-      "usertime": 423600
-     },
-     "521249969622": {
-      "maxRSS": 44908544,
-      "systemtime": 25052,
-      "usertime": 423605
-     },
-     "521249970885": {
-      "maxRSS": 44908544,
-      "systemtime": 25056,
-      "usertime": 423609
-     },
-     "521249972145": {
-      "maxRSS": 44908544,
-      "systemtime": 25059,
-      "usertime": 423614
-     },
-     "521249973402": {
-      "maxRSS": 44908544,
-      "systemtime": 25063,
-      "usertime": 432857
-     },
-     "521249974663": {
-      "maxRSS": 44908544,
-      "systemtime": 25066,
-      "usertime": 432862
-     },
-     "521249975210": {
-      "maxRSS": 44908544,
-      "systemtime": 25073,
-      "usertime": 435523
-     },
-     "521249975527": {
-      "maxRSS": 44908544,
-      "systemtime": 25176,
-      "usertime": 435724
-     },
-     "521249976792": {
-      "maxRSS": 44908544,
-      "systemtime": 25182,
-      "usertime": 435729
-     },
-     "521249978055": {
-      "maxRSS": 45023232,
-      "systemtime": 25198,
-      "usertime": 438255
-     },
-     "521249979315": {
-      "maxRSS": 45137920,
-      "systemtime": 25219,
-      "usertime": 439334
-     },
-     "521249980573": {
-      "maxRSS": 45268992,
-      "systemtime": 25235,
-      "usertime": 440634
-     },
-     "521249981830": {
-      "maxRSS": 45383680,
-      "systemtime": 25248,
-      "usertime": 441884
-     },
-     "521249982299": {
-      "maxRSS": 45432832,
-      "systemtime": 25260,
-      "usertime": 442469
-     },
-     "521249983556": {
-      "maxRSS": 45432832,
-      "systemtime": 25661,
-      "usertime": 443331
-     },
-     "521249984816": {
-      "maxRSS": 45432832,
-      "systemtime": 25875,
-      "usertime": 444377
-     },
-     "521249986075": {
-      "maxRSS": 45432832,
-      "systemtime": 26122,
-      "usertime": 445404
-     },
-     "521249987335": {
-      "maxRSS": 45432832,
-      "systemtime": 26380,
-      "usertime": 446419
-     },
-     "521249988597": {
-      "maxRSS": 45432832,
-      "systemtime": 26623,
-      "usertime": 447438
-     },
-     "521249989856": {
-      "maxRSS": 45432832,
-      "systemtime": 26869,
-      "usertime": 448459
-     },
-     "521249991114": {
-      "maxRSS": 45432832,
-      "systemtime": 27185,
-      "usertime": 449117
-     },
-     "521249992378": {
-      "maxRSS": 45432832,
-      "systemtime": 27192,
-      "usertime": 449123
-     },
-     "521249993637": {
-      "maxRSS": 45432832,
-      "systemtime": 27198,
-      "usertime": 449128
-     },
-     "521249994371": {
-      "maxRSS": 45432832,
-      "systemtime": 27207,
-      "usertime": 452383
-     },
-     "521249995631": {
-      "maxRSS": 45432832,
-      "systemtime": 27631,
-      "usertime": 453232
-     },
-     "521249996893": {
-      "maxRSS": 45432832,
-      "systemtime": 27856,
-      "usertime": 454275
-     },
-     "521249998154": {
-      "maxRSS": 45432832,
-      "systemtime": 28089,
-      "usertime": 455322
-     },
-     "521249999413": {
-      "maxRSS": 45432832,
-      "systemtime": 28334,
-      "usertime": 456343
-     },
-     "521250000677": {
-      "maxRSS": 45432832,
-      "systemtime": 28548,
-      "usertime": 456873
-     },
-     "521250001937": {
-      "maxRSS": 45432832,
-      "systemtime": 28552,
-      "usertime": 456878
-     },
-     "521250003205": {
-      "maxRSS": 45432832,
-      "systemtime": 28559,
-      "usertime": 456883
-     },
-     "521250004471": {
-      "maxRSS": 45432832,
-      "systemtime": 28566,
-      "usertime": 456889
-     },
-     "521250005731": {
-      "maxRSS": 45432832,
-      "systemtime": 28569,
-      "usertime": 456895
-     },
-     "521250006127": {
-      "maxRSS": 45432832,
-      "systemtime": 28576,
-      "usertime": 462707
-     },
-     "521250006776": {
-      "maxRSS": 45432832,
-      "systemtime": 28586,
-      "usertime": 463359
-     },
-     "521250008037": {
-      "maxRSS": 45432832,
-      "systemtime": 28970,
-      "usertime": 463818
-     },
-     "521250009303": {
-      "maxRSS": 45449216,
-      "systemtime": 29010,
-      "usertime": 464370
-     },
-     "521250010320": {
-      "maxRSS": 45449216,
-      "systemtime": 29049,
-      "usertime": 466489
-     },
-     "521250011582": {
+      "systemtime": 9857,
+      "usertime": 269964
+     },
+     "1780945749138": {
+      "maxRSS": 43941888,
+      "systemtime": 9887,
+      "usertime": 269982
+     },
+     "1780945750214": {
+      "maxRSS": 44269568,
+      "systemtime": 9907,
+      "usertime": 270992
+     },
+     "1780945751471": {
+      "maxRSS": 44597248,
+      "systemtime": 9925,
+      "usertime": 272223
+     },
+     "1780945751966": {
+      "maxRSS": 44597248,
+      "systemtime": 9930,
+      "usertime": 272780
+     },
+     "1780945753224": {
+      "maxRSS": 44597248,
+      "systemtime": 10244,
+      "usertime": 273737
+     },
+     "1780945754484": {
+      "maxRSS": 44597248,
+      "systemtime": 10465,
+      "usertime": 274775
+     },
+     "1780945755195": {
+      "maxRSS": 44613632,
+      "systemtime": 10632,
+      "usertime": 275332
+     },
+     "1780945756453": {
+      "maxRSS": 44728320,
+      "systemtime": 10650,
+      "usertime": 276515
+     },
+     "1780945756932": {
+      "maxRSS": 44777472,
+      "systemtime": 10656,
+      "usertime": 277052
+     },
+     "1780945756957": {
+      "maxRSS": 44777472,
+      "systemtime": 10660,
+      "usertime": 277083
+     },
+     "1780945758217": {
+      "maxRSS": 44777472,
+      "systemtime": 10952,
+      "usertime": 278051
+     },
+     "1780945759117": {
+      "maxRSS": 44777472,
+      "systemtime": 11123,
+      "usertime": 278780
+     },
+     "1780945760374": {
+      "maxRSS": 45121536,
+      "systemtime": 11144,
+      "usertime": 279985
+     },
+     "1780945761637": {
       "maxRSS": 45481984,
-      "systemtime": 29130,
-      "usertime": 466496
-     },
-     "521250012845": {
-      "maxRSS": 45481984,
-      "systemtime": 29134,
-      "usertime": 466501
-     },
-     "521250013793": {
-      "maxRSS": 45481984,
-      "systemtime": 29146,
-      "usertime": 469634
-     },
-     "521250015054": {
-      "maxRSS": 45481984,
-      "systemtime": 29155,
-      "usertime": 469639
-     },
-     "521250016317": {
-      "maxRSS": 45481984,
-      "systemtime": 29160,
-      "usertime": 469643
-     },
-     "521250017585": {
-      "maxRSS": 45498368,
-      "systemtime": 29170,
-      "usertime": 472633
-     },
-     "521250018722": {
-      "maxRSS": 45498368,
-      "systemtime": 29179,
-      "usertime": 472640
-     },
-     "521250019131": {
-      "maxRSS": 45498368,
-      "systemtime": 29187,
-      "usertime": 474996
-     },
-     "521250020266": {
-      "maxRSS": 45498368,
-      "systemtime": 29470,
-      "usertime": 475551
-     },
-     "521250021389": {
-      "maxRSS": 45498368,
-      "systemtime": 29657,
-      "usertime": 476503
-     },
-     "521250022658": {
-      "maxRSS": 45498368,
-      "systemtime": 29865,
-      "usertime": 477578
-     },
-     "521250023924": {
-      "maxRSS": 45498368,
-      "systemtime": 30081,
-      "usertime": 478640
-     },
-     "521250025183": {
-      "maxRSS": 45498368,
-      "systemtime": 30289,
-      "usertime": 479696
-     },
-     "521250026450": {
-      "maxRSS": 45498368,
-      "systemtime": 30483,
-      "usertime": 480793
-     },
-     "521250027712": {
-      "maxRSS": 45498368,
-      "systemtime": 30683,
-      "usertime": 481856
-     },
-     "521250028977": {
-      "maxRSS": 45498368,
-      "systemtime": 30904,
-      "usertime": 482914
-     },
-     "521250030242": {
-      "maxRSS": 45498368,
-      "systemtime": 31111,
-      "usertime": 483986
-     },
-     "521250031504": {
-      "maxRSS": 45498368,
-      "systemtime": 31337,
-      "usertime": 485023
-     },
-     "521250032768": {
-      "maxRSS": 45498368,
-      "systemtime": 31556,
-      "usertime": 486087
-     },
-     "521250034029": {
-      "maxRSS": 45498368,
-      "systemtime": 31777,
-      "usertime": 487136
-     },
-     "521250034298": {
-      "maxRSS": 45498368,
-      "systemtime": 31978,
-      "usertime": 487201
-     },
-     "521250035535": {
-      "maxRSS": 45498368,
-      "systemtime": 31987,
-      "usertime": 487512
-     },
-     "521250036550": {
-      "maxRSS": 45498368,
-      "systemtime": 31999,
-      "usertime": 489448
-     },
-     "521250037814": {
-      "maxRSS": 45498368,
-      "systemtime": 32008,
-      "usertime": 489453
-     },
-     "521250039079": {
-      "maxRSS": 45498368,
-      "systemtime": 32013,
-      "usertime": 489458
-     },
-     "521250039300": {
-      "maxRSS": 45498368,
-      "systemtime": 32018,
-      "usertime": 492217
-     },
-     "521250039469": {
-      "maxRSS": 45498368,
-      "systemtime": 32157,
-      "usertime": 492252
-     },
-     "521250040728": {
-      "maxRSS": 45498368,
-      "systemtime": 32161,
-      "usertime": 493387
-     },
-     "521250041992": {
-      "maxRSS": 45498368,
-      "systemtime": 32166,
-      "usertime": 493392
-     },
-     "521250042240": {
-      "maxRSS": 45498368,
-      "systemtime": 32172,
-      "usertime": 495028
-     },
-     "521250043023": {
-      "maxRSS": 45498368,
-      "systemtime": 32180,
-      "usertime": 495793
-     },
-     "521250044286": {
-      "maxRSS": 45498368,
-      "systemtime": 32618,
-      "usertime": 496638
-     },
-     "521250045546": {
-      "maxRSS": 45498368,
-      "systemtime": 32871,
-      "usertime": 497653
-     },
-     "521250046810": {
-      "maxRSS": 45498368,
-      "systemtime": 33134,
-      "usertime": 498660
-     },
-     "521250048075": {
-      "maxRSS": 45498368,
-      "systemtime": 33364,
-      "usertime": 499698
-     },
-     "521250049335": {
-      "maxRSS": 45498368,
-      "systemtime": 33601,
-      "usertime": 500309
-     },
-     "521250049417": {
-      "maxRSS": 45498368,
-      "systemtime": 33664,
-      "usertime": 500339
-     },
-     "521250050596": {
-      "maxRSS": 45498368,
-      "systemtime": 33668,
-      "usertime": 500344
-     },
-     "521250050965": {
-      "maxRSS": 45498368,
-      "systemtime": 33675,
-      "usertime": 501892
-     },
-     "521250051602": {
-      "maxRSS": 45498368,
-      "systemtime": 33683,
-      "usertime": 502527
-     },
-     "521250051666": {
-      "maxRSS": 45498368,
-      "systemtime": 33729,
-      "usertime": 502559
-     },
-     "521250052925": {
-      "maxRSS": 45498368,
-      "systemtime": 33734,
-      "usertime": 502659
-     },
-     "521250053032": {
-      "maxRSS": 45498368,
-      "systemtime": 33740,
-      "usertime": 503924
-     },
-     "521250054185": {
-      "maxRSS": 45498368,
-      "systemtime": 33744,
-      "usertime": 503929
-     },
-     "521250055273": {
-      "maxRSS": 45498368,
-      "systemtime": 33751,
-      "usertime": 506167
-     },
-     "521250055911": {
-      "maxRSS": 45514752,
-      "systemtime": 33904,
-      "usertime": 506422
-     },
-     "521250057038": {
-      "maxRSS": 45514752,
-      "systemtime": 33914,
-      "usertime": 507546
-     },
-     "521250057567": {
-      "maxRSS": 45514752,
-      "systemtime": 34166,
-      "usertime": 507840
-     },
-     "521250058829": {
-      "maxRSS": 45514752,
-      "systemtime": 34169,
-      "usertime": 507845
-     },
-     "521250060091": {
-      "maxRSS": 45514752,
-      "systemtime": 34174,
-      "usertime": 507851
-     },
-     "521250060355": {
-      "maxRSS": 45514752,
-      "systemtime": 34183,
-      "usertime": 510642
-     },
-     "521250061614": {
-      "maxRSS": 45514752,
-      "systemtime": 34332,
-      "usertime": 511127
-     },
-     "521250061756": {
-      "maxRSS": 45514752,
-      "systemtime": 34392,
-      "usertime": 511854
-     },
-     "521250062873": {
-      "maxRSS": 45514752,
-      "systemtime": 34396,
-      "usertime": 511858
-     },
-     "521250063094": {
-      "maxRSS": 45514752,
-      "systemtime": 34403,
-      "usertime": 513195
-     },
-     "521250063325": {
-      "maxRSS": 45514752,
-      "systemtime": 34412,
-      "usertime": 513428
-     },
-     "521250064585": {
-      "maxRSS": 45514752,
-      "systemtime": 34872,
-      "usertime": 514086
-     },
-     "521250064737": {
-      "maxRSS": 45514752,
-      "systemtime": 34880,
-      "usertime": 514392
-     },
-     "521250064778": {
-      "maxRSS": 45514752,
-      "systemtime": 34887,
-      "usertime": 514432
-     },
-     "521250064832": {
-      "maxRSS": 45514752,
-      "systemtime": 34925,
-      "usertime": 514459
-     },
-     "521250065038": {
-      "maxRSS": 45514752,
-      "systemtime": 34933,
-      "usertime": 514664
-     },
-     "521250065401": {
-      "maxRSS": 45514752,
-      "systemtime": 35145,
-      "usertime": 514823
-     },
-     "521250065495": {
-      "maxRSS": 45514752,
-      "systemtime": 35151,
-      "usertime": 514921
-     },
-     "521250065947": {
-      "maxRSS": 45514752,
-      "systemtime": 35371,
-      "usertime": 515150
-     },
-     "521250066154": {
-      "maxRSS": 45514752,
-      "systemtime": 35379,
-      "usertime": 515365
+      "systemtime": 11172,
+      "usertime": 281257
+     },
+     "1780945762897": {
+      "maxRSS": 45793280,
+      "systemtime": 11197,
+      "usertime": 282464
+     },
+     "1780945763023": {
+      "maxRSS": 45826048,
+      "systemtime": 11203,
+      "usertime": 282637
+     },
+     "1780945764157": {
+      "maxRSS": 45826048,
+      "systemtime": 11473,
+      "usertime": 283502
+     },
+     "1780945765417": {
+      "maxRSS": 45826048,
+      "systemtime": 11683,
+      "usertime": 284561
+     },
+     "1780945766674": {
+      "maxRSS": 45826048,
+      "systemtime": 11886,
+      "usertime": 285616
+     },
+     "1780945767936": {
+      "maxRSS": 45826048,
+      "systemtime": 12074,
+      "usertime": 286700
+     },
+     "1780945768462": {
+      "maxRSS": 45826048,
+      "systemtime": 12203,
+      "usertime": 287103
+     },
+     "1780945769055": {
+      "maxRSS": 45826048,
+      "systemtime": 12212,
+      "usertime": 287688
+     },
+     "1780945769075": {
+      "maxRSS": 45826048,
+      "systemtime": 12215,
+      "usertime": 287715
+     },
+     "1780945769108": {
+      "maxRSS": 45826048,
+      "systemtime": 12236,
+      "usertime": 287731
+     },
+     "1780945770367": {
+      "maxRSS": 45826048,
+      "systemtime": 12239,
+      "usertime": 287733
+     },
+     "1780945770764": {
+      "maxRSS": 45826048,
+      "systemtime": 12243,
+      "usertime": 289390
+     },
+     "1780945772023": {
+      "maxRSS": 45826048,
+      "systemtime": 12245,
+      "usertime": 289392
+     },
+     "1780945772915": {
+      "maxRSS": 45826048,
+      "systemtime": 12256,
+      "usertime": 291531
+     },
+     "1780945773013": {
+      "maxRSS": 45826048,
+      "systemtime": 12339,
+      "usertime": 291554
+     },
+     "1780945774274": {
+      "maxRSS": 45826048,
+      "systemtime": 12342,
+      "usertime": 291557
+     },
+     "1780945775530": {
+      "maxRSS": 45826048,
+      "systemtime": 12345,
+      "usertime": 291560
+     },
+     "1780945776786": {
+      "maxRSS": 45826048,
+      "systemtime": 12348,
+      "usertime": 291563
+     },
+     "1780945778047": {
+      "maxRSS": 45826048,
+      "systemtime": 12352,
+      "usertime": 291566
+     },
+     "1780945779307": {
+      "maxRSS": 45826048,
+      "systemtime": 12355,
+      "usertime": 297476
+     },
+     "1780945780562": {
+      "maxRSS": 45826048,
+      "systemtime": 12357,
+      "usertime": 297479
+     },
+     "1780945781822": {
+      "maxRSS": 45826048,
+      "systemtime": 12361,
+      "usertime": 299485
+     },
+     "1780945782786": {
+      "maxRSS": 45842432,
+      "systemtime": 12370,
+      "usertime": 301332
+     },
+     "1780945782949": {
+      "maxRSS": 45842432,
+      "systemtime": 12509,
+      "usertime": 301364
+     },
+     "1780945784208": {
+      "maxRSS": 45842432,
+      "systemtime": 12513,
+      "usertime": 301367
+     },
+     "1780945785467": {
+      "maxRSS": 45842432,
+      "systemtime": 12516,
+      "usertime": 301370
+     },
+     "1780945786726": {
+      "maxRSS": 45842432,
+      "systemtime": 12519,
+      "usertime": 301373
+     },
+     "1780945787986": {
+      "maxRSS": 45842432,
+      "systemtime": 12522,
+      "usertime": 301376
+     },
+     "1780945789245": {
+      "maxRSS": 45842432,
+      "systemtime": 12526,
+      "usertime": 307349
+     },
+     "1780945790504": {
+      "maxRSS": 45842432,
+      "systemtime": 12529,
+      "usertime": 307352
+     },
+     "1780945791165": {
+      "maxRSS": 45842432,
+      "systemtime": 12532,
+      "usertime": 309591
+     },
+     "1780945791249": {
+      "maxRSS": 45858816,
+      "systemtime": 12605,
+      "usertime": 309612
+     },
+     "1780945792508": {
+      "maxRSS": 45973504,
+      "systemtime": 12625,
+      "usertime": 310719
+     },
+     "1780945793767": {
+      "maxRSS": 46137344,
+      "systemtime": 12648,
+      "usertime": 312018
+     },
+     "1780945795022": {
+      "maxRSS": 46252032,
+      "systemtime": 12663,
+      "usertime": 313187
+     },
+     "1780945795120": {
+      "maxRSS": 46268416,
+      "systemtime": 12666,
+      "usertime": 313444
+     },
+     "1780945796282": {
+      "maxRSS": 46268416,
+      "systemtime": 12998,
+      "usertime": 314275
+     },
+     "1780945797541": {
+      "maxRSS": 46268416,
+      "systemtime": 13211,
+      "usertime": 315332
+     },
+     "1780945798801": {
+      "maxRSS": 46268416,
+      "systemtime": 13410,
+      "usertime": 316393
+     },
+     "1780945800058": {
+      "maxRSS": 46268416,
+      "systemtime": 13601,
+      "usertime": 317464
+     },
+     "1780945800256": {
+      "maxRSS": 46268416,
+      "systemtime": 13685,
+      "usertime": 317588
+     },
+     "1780945801313": {
+      "maxRSS": 46563328,
+      "systemtime": 13707,
+      "usertime": 318561
+     },
+     "1780945802573": {
+      "maxRSS": 46907392,
+      "systemtime": 13744,
+      "usertime": 319797
+     },
+     "1780945802836": {
+      "maxRSS": 46972928,
+      "systemtime": 13751,
+      "usertime": 320112
+     },
+     "1780945804095": {
+      "maxRSS": 46972928,
+      "systemtime": 14025,
+      "usertime": 321103
+     },
+     "1780945805355": {
+      "maxRSS": 46972928,
+      "systemtime": 14234,
+      "usertime": 322155
+     },
+     "1780945806446": {
+      "maxRSS": 46972928,
+      "systemtime": 14449,
+      "usertime": 323037
+     },
+     "1780945806936": {
+      "maxRSS": 47038464,
+      "systemtime": 14466,
+      "usertime": 323521
+     },
+     "1780945808138": {
+      "maxRSS": 47054848,
+      "systemtime": 14647,
+      "usertime": 324547
+     },
+     "1780945809399": {
+      "maxRSS": 47316992,
+      "systemtime": 14668,
+      "usertime": 325706
+     },
+     "1780945810656": {
+      "maxRSS": 47529984,
+      "systemtime": 14686,
+      "usertime": 326976
+     },
+     "1780945811916": {
+      "maxRSS": 47726592,
+      "systemtime": 14704,
+      "usertime": 328200
+     },
+     "1780945812456": {
+      "maxRSS": 47824896,
+      "systemtime": 14733,
+      "usertime": 328792
+     },
+     "1780945813715": {
+      "maxRSS": 48070656,
+      "systemtime": 14760,
+      "usertime": 329959
+     },
+     "1780945814971": {
+      "maxRSS": 48332800,
+      "systemtime": 14776,
+      "usertime": 331218
+     },
+     "1780945816232": {
+      "maxRSS": 48578560,
+      "systemtime": 14798,
+      "usertime": 332502
+     },
+     "1780945817492": {
+      "maxRSS": 48840704,
+      "systemtime": 14822,
+      "usertime": 333757
+     },
+     "1780945818748": {
+      "maxRSS": 49070080,
+      "systemtime": 14836,
+      "usertime": 335003
+     },
+     "1780945818804": {
+      "maxRSS": 49070080,
+      "systemtime": 14839,
+      "usertime": 335070
+     },
+     "1780945820004": {
+      "maxRSS": 49070080,
+      "systemtime": 15111,
+      "usertime": 336002
+     },
+     "1780945821261": {
+      "maxRSS": 49070080,
+      "systemtime": 15308,
+      "usertime": 337069
+     },
+     "1780945822515": {
+      "maxRSS": 49070080,
+      "systemtime": 15510,
+      "usertime": 338128
+     },
+     "1780945823771": {
+      "maxRSS": 49070080,
+      "systemtime": 15822,
+      "usertime": 339072
+     },
+     "1780945825027": {
+      "maxRSS": 49070080,
+      "systemtime": 16129,
+      "usertime": 340033
+     },
+     "1780945826285": {
+      "maxRSS": 49070080,
+      "systemtime": 16418,
+      "usertime": 341001
+     },
+     "1780945827545": {
+      "maxRSS": 49070080,
+      "systemtime": 16613,
+      "usertime": 342074
+     },
+     "1780945828304": {
+      "maxRSS": 49070080,
+      "systemtime": 16810,
+      "usertime": 342643
+     },
+     "1780945829562": {
+      "maxRSS": 49070080,
+      "systemtime": 16818,
+      "usertime": 343833
+     },
+     "1780945830822": {
+      "maxRSS": 49070080,
+      "systemtime": 16821,
+      "usertime": 343836
+     },
+     "1780945831207": {
+      "maxRSS": 49070080,
+      "systemtime": 16829,
+      "usertime": 345516
+     },
+     "1780945832463": {
+      "maxRSS": 49070080,
+      "systemtime": 16835,
+      "usertime": 345520
+     },
+     "1780945833724": {
+      "maxRSS": 49070080,
+      "systemtime": 16838,
+      "usertime": 345523
+     },
+     "1780945834511": {
+      "maxRSS": 49070080,
+      "systemtime": 16844,
+      "usertime": 348835
+     },
+     "1780945834605": {
+      "maxRSS": 49070080,
+      "systemtime": 16923,
+      "usertime": 348855
+     },
+     "1780945835865": {
+      "maxRSS": 49430528,
+      "systemtime": 16970,
+      "usertime": 350024
+     },
+     "1780945837124": {
+      "maxRSS": 49758208,
+      "systemtime": 16999,
+      "usertime": 351303
+     },
+     "1780945837448": {
+      "maxRSS": 49823744,
+      "systemtime": 17009,
+      "usertime": 351631
+     },
+     "1780945838197": {
+      "maxRSS": 49872896,
+      "systemtime": 17021,
+      "usertime": 352364
+     },
+     "1780945839456": {
+      "maxRSS": 49872896,
+      "systemtime": 17304,
+      "usertime": 353344
+     },
+     "1780945840712": {
+      "maxRSS": 49872896,
+      "systemtime": 17526,
+      "usertime": 354378
+     },
+     "1780945841910": {
+      "maxRSS": 49872896,
+      "systemtime": 17764,
+      "usertime": 355338
+     },
+     "1780945843170": {
+      "maxRSS": 49872896,
+      "systemtime": 17774,
+      "usertime": 355423
+     },
+     "1780945843308": {
+      "maxRSS": 49872896,
+      "systemtime": 17776,
+      "usertime": 356741
+     },
+     "1780945843910": {
+      "maxRSS": 49872896,
+      "systemtime": 17782,
+      "usertime": 357334
+     },
+     "1780945843945": {
+      "maxRSS": 49872896,
+      "systemtime": 17808,
+      "usertime": 357354
+     },
+     "1780945845204": {
+      "maxRSS": 49872896,
+      "systemtime": 17811,
+      "usertime": 357357
+     },
+     "1780945846459": {
+      "maxRSS": 49872896,
+      "systemtime": 17813,
+      "usertime": 357360
+     },
+     "1780945847498": {
+      "maxRSS": 49872896,
+      "systemtime": 17815,
+      "usertime": 357364
+     },
+     "1780945848756": {
+      "maxRSS": 49872896,
+      "systemtime": 17820,
+      "usertime": 357368
+     },
+     "1780945850016": {
+      "maxRSS": 49872896,
+      "systemtime": 17824,
+      "usertime": 362348
+     },
+     "1780945851277": {
+      "maxRSS": 49872896,
+      "systemtime": 17828,
+      "usertime": 362351
+     },
+     "1780945852536": {
+      "maxRSS": 49872896,
+      "systemtime": 17831,
+      "usertime": 362355
+     },
+     "1780945852920": {
+      "maxRSS": 49872896,
+      "systemtime": 17842,
+      "usertime": 366342
+     },
+     "1780945853025": {
+      "maxRSS": 49872896,
+      "systemtime": 17937,
+      "usertime": 366363
+     },
+     "1780945854284": {
+      "maxRSS": 49872896,
+      "systemtime": 17940,
+      "usertime": 366367
+     },
+     "1780945855378": {
+      "maxRSS": 49872896,
+      "systemtime": 17943,
+      "usertime": 366371
+     },
+     "1780945856636": {
+      "maxRSS": 49872896,
+      "systemtime": 17946,
+      "usertime": 366375
+     },
+     "1780945857895": {
+      "maxRSS": 49872896,
+      "systemtime": 17949,
+      "usertime": 370555
+     },
+     "1780945859152": {
+      "maxRSS": 49872896,
+      "systemtime": 17951,
+      "usertime": 372272
+     },
+     "1780945860408": {
+      "maxRSS": 49872896,
+      "systemtime": 17954,
+      "usertime": 372276
+     },
+     "1780945861667": {
+      "maxRSS": 49872896,
+      "systemtime": 17959,
+      "usertime": 374467
+     },
+     "1780945862923": {
+      "maxRSS": 49872896,
+      "systemtime": 17962,
+      "usertime": 375920
+     },
+     "1780945864179": {
+      "maxRSS": 49872896,
+      "systemtime": 17965,
+      "usertime": 375923
+     },
+     "1780945864427": {
+      "maxRSS": 49889280,
+      "systemtime": 17971,
+      "usertime": 377776
+     },
+     "1780945864449": {
+      "maxRSS": 49889280,
+      "systemtime": 17975,
+      "usertime": 377800
+     },
+     "1780945865422": {
+      "maxRSS": 49889280,
+      "systemtime": 17979,
+      "usertime": 378779
+     },
+     "1780945865749": {
+      "maxRSS": 49905664,
+      "systemtime": 18068,
+      "usertime": 379021
+     },
+     "1780945866665": {
+      "maxRSS": 49905664,
+      "systemtime": 18073,
+      "usertime": 379942
+     },
+     "1780945866714": {
+      "maxRSS": 49905664,
+      "systemtime": 18097,
+      "usertime": 379976
+     },
+     "1780945867921": {
+      "maxRSS": 49905664,
+      "systemtime": 18098,
+      "usertime": 379978
+     },
+     "1780945869177": {
+      "maxRSS": 49905664,
+      "systemtime": 18101,
+      "usertime": 382184
+     },
+     "1780945870432": {
+      "maxRSS": 49905664,
+      "systemtime": 18104,
+      "usertime": 382187
+     },
+     "1780945871689": {
+      "maxRSS": 49905664,
+      "systemtime": 18107,
+      "usertime": 382190
+     },
+     "1780945872946": {
+      "maxRSS": 49905664,
+      "systemtime": 18111,
+      "usertime": 382193
+     },
+     "1780945873432": {
+      "maxRSS": 49905664,
+      "systemtime": 18117,
+      "usertime": 386703
+     },
+     "1780945873470": {
+      "maxRSS": 49905664,
+      "systemtime": 18149,
+      "usertime": 386718
+     },
+     "1780945874728": {
+      "maxRSS": 49905664,
+      "systemtime": 18152,
+      "usertime": 386720
+     },
+     "1780945875986": {
+      "maxRSS": 49905664,
+      "systemtime": 18155,
+      "usertime": 386723
+     },
+     "1780945877244": {
+      "maxRSS": 49905664,
+      "systemtime": 18158,
+      "usertime": 386727
+     },
+     "1780945878501": {
+      "maxRSS": 49905664,
+      "systemtime": 18162,
+      "usertime": 386730
+     },
+     "1780945879759": {
+      "maxRSS": 49905664,
+      "systemtime": 18164,
+      "usertime": 392186
+     },
+     "1780945881016": {
+      "maxRSS": 49905664,
+      "systemtime": 18167,
+      "usertime": 392189
+     },
+     "1780945882273": {
+      "maxRSS": 49905664,
+      "systemtime": 18170,
+      "usertime": 392192
+     },
+     "1780945882460": {
+      "maxRSS": 49905664,
+      "systemtime": 18175,
+      "usertime": 395725
+     },
+     "1780945883530": {
+      "maxRSS": 49905664,
+      "systemtime": 18178,
+      "usertime": 395729
+     },
+     "1780945884787": {
+      "maxRSS": 49905664,
+      "systemtime": 18181,
+      "usertime": 395732
+     },
+     "1780945886045": {
+      "maxRSS": 49905664,
+      "systemtime": 18184,
+      "usertime": 395735
+     },
+     "1780945887300": {
+      "maxRSS": 49905664,
+      "systemtime": 18187,
+      "usertime": 395738
+     },
+     "1780945888557": {
+      "maxRSS": 49905664,
+      "systemtime": 18189,
+      "usertime": 395741
+     },
+     "1780945888669": {
+      "maxRSS": 49905664,
+      "systemtime": 18193,
+      "usertime": 401958
+     },
+     "1780945889815": {
+      "maxRSS": 49905664,
+      "systemtime": 18276,
+      "usertime": 402138
+     },
+     "1780945891073": {
+      "maxRSS": 49905664,
+      "systemtime": 18287,
+      "usertime": 403548
+     },
+     "1780945892330": {
+      "maxRSS": 49905664,
+      "systemtime": 18290,
+      "usertime": 403551
+     },
+     "1780945893540": {
+      "maxRSS": 49905664,
+      "systemtime": 18338,
+      "usertime": 406732
+     },
+     "1780945893688": {
+      "maxRSS": 49905664,
+      "systemtime": 18342,
+      "usertime": 406886
+     },
+     "1780945894061": {
+      "maxRSS": 49922048,
+      "systemtime": 18382,
+      "usertime": 407221
+     },
+     "1780945895026": {
+      "maxRSS": 49922048,
+      "systemtime": 18386,
+      "usertime": 408192
+     },
+     "1780945896282": {
+      "maxRSS": 49922048,
+      "systemtime": 18389,
+      "usertime": 408195
+     },
+     "1780945896614": {
+      "maxRSS": 49922048,
+      "systemtime": 18393,
+      "usertime": 409781
+     },
+     "1780945897088": {
+      "maxRSS": 49954816,
+      "systemtime": 18521,
+      "usertime": 410137
+     },
+     "1780945898345": {
+      "maxRSS": 49954816,
+      "systemtime": 18525,
+      "usertime": 410140
+     },
+     "1780945898652": {
+      "maxRSS": 49954816,
+      "systemtime": 18528,
+      "usertime": 411711
+     },
+     "1780945899172": {
+      "maxRSS": 49954816,
+      "systemtime": 18700,
+      "usertime": 411896
+     },
+     "1780945900431": {
+      "maxRSS": 49954816,
+      "systemtime": 18703,
+      "usertime": 411900
+     },
+     "1780945901687": {
+      "maxRSS": 49954816,
+      "systemtime": 18706,
+      "usertime": 411904
+     },
+     "1780945902828": {
+      "maxRSS": 49954816,
+      "systemtime": 18709,
+      "usertime": 415565
+     },
+     "1780945903495": {
+      "maxRSS": 49954816,
+      "systemtime": 18863,
+      "usertime": 416080
+     },
+     "1780945904513": {
+      "maxRSS": 49954816,
+      "systemtime": 18867,
+      "usertime": 417100
+     },
+     "1780945904676": {
+      "maxRSS": 49954816,
+      "systemtime": 18870,
+      "usertime": 417270
+     },
+     "1780945905677": {
+      "maxRSS": 49954816,
+      "systemtime": 19127,
+      "usertime": 418018
+     },
+     "1780945905704": {
+      "maxRSS": 49954816,
+      "systemtime": 19130,
+      "usertime": 418050
+     },
+     "1780945905736": {
+      "maxRSS": 49954816,
+      "systemtime": 19148,
+      "usertime": 418067
+     },
+     "1780945905868": {
+      "maxRSS": 49954816,
+      "systemtime": 19152,
+      "usertime": 418200
+     },
+     "1780945906058": {
+      "maxRSS": 49954816,
+      "systemtime": 19251,
+      "usertime": 418295
+     },
+     "1780945906120": {
+      "maxRSS": 49954816,
+      "systemtime": 19253,
+      "usertime": 418359
+     },
+     "1780945906903": {
+      "maxRSS": 49954816,
+      "systemtime": 19423,
+      "usertime": 418516
+     },
+     "1780945907064": {
+      "maxRSS": 49954816,
+      "systemtime": 19427,
+      "usertime": 418679
      }
     }
    }

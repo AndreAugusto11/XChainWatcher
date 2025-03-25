@@ -26,6 +26,16 @@ SC_ValidNativeTokenDeposit(timestamp, transaction_hash, deposit_id, sender, brid
     bridge_controlled_address(origin_chain_id, bridge_address),
     bridge_event_index > token_event_index.
 
+
+.decl SC_ValidNativeTokenDeposit_Anomalies(transaction_hash:symbol)
+.output SC_ValidNativeTokenDeposit_Anomalies
+
+SC_ValidNativeTokenDeposit_Anomalies(transaction_hash) :-
+    sc_deposit(transaction_hash, _, _, _, amount),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    !SC_ValidNativeTokenDeposit(_, transaction_hash, _, _, _, _, _, _, _, _, _, amount).
+
+
 // Valid deposit of ERC20 tokens in the source chain
 //    there is an event emitted by the bridge contract
 //    there is an event emitted by the token contract. This event and the one above are in the same transaction (and consq. int the same block), and move the same amount of tokens
@@ -46,8 +56,20 @@ SC_ValidERC20TokenDeposit(timestamp, transaction_hash, deposit_id, from, bridge_
     bridge_event_index > token_event_index.
 
 
+.decl SC_ValidERC20TokenDeposit_Anomalies(transaction_hash:symbol)
+.output SC_ValidERC20TokenDeposit_Anomalies
+
+SC_ValidERC20TokenDeposit_Anomalies(transaction_hash) :-
+    erc20_transfer(transaction_hash, origin_chain_id, _, origin_token, _, bridge_address, amount),
+    bridge_controlled_address(origin_chain_id, bridge_address),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    !sc_token_withdrew(transaction_hash, _, _, _, _, _),
+    !SC_ValidERC20TokenDeposit(_, transaction_hash, _, _, _, _, _, origin_token, origin_chain_id, dst_chain_id, _, amount),
+    token_mapping(origin_chain_id, dst_chain_id, _, _, _). // we don't really need the token mapping, but it is a way of ensuring we are only capturing deposits in SC and not in the other direction
+
+
 /******************************************************************************************************/
-/************************************** DEPOSIT ON TARGET CHAIN ***************************************/
+/******************************** DEPOSIT ON TARGET CHAIN (ISOLATED) **********************************/
 /******************************************************************************************************/
 
 // Valid deposit of ERC20 tokens in the target chain (ISOLATED)
@@ -69,6 +91,20 @@ TC_ValidERC20TokenDeposit(timestamp, transaction_hash, deposit_id, beneficiary, 
     bridge_controlled_address(chain_id, bridge_address_2),
     bridge_event_index > token_event_index.
 
+.decl TC_ValidERC20TokenDeposit_Anomalies(transaction_hash:symbol)
+.output TC_ValidERC20TokenDeposit_Anomalies
+
+TC_ValidERC20TokenDeposit_Anomalies(transaction_hash) :-
+    erc20_transfer(transaction_hash, chain_id, _, dst_token, bridge_address, _, amount),
+    bridge_controlled_address(chain_id, bridge_address),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    !TC_ValidERC20TokenDeposit(_, transaction_hash, _, _, dst_token, chain_id, amount),
+    token_mapping(_, chain_id, _, _, _).
+
+
+/******************************************************************************************************/
+/******************************** DEPOSIT ON TARGET CHAIN (DEPENDENT) *********************************/
+/******************************************************************************************************/
 
 // Valid deposit of ERC20 tokens in the target chain (DEPENDENT ON SOURCE CHAIN DEPOSIT)
 //     there must be a valid local deposit of tokens using TC_ValidERC20TokenDeposit
@@ -110,6 +146,16 @@ TC_ValidNativeTokenWithdrawal(timestamp, transaction_hash, withdrawal_id, sender
     bridge_controlled_address(origin_chain_id, bridge_address),
     bridge_event_index > token_event_index.
 
+.decl TC_ValidNativeTokenWithdrawal_Anomalies(transaction_hash:symbol)
+.output TC_ValidNativeTokenWithdrawal_Anomalies
+
+TC_ValidNativeTokenWithdrawal_Anomalies(transaction_hash) :-
+    tc_withdrawal(transaction_hash, _, _, bridge_address, amount),
+    bridge_controlled_address(chain_id, bridge_address),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    !TC_ValidNativeTokenWithdrawal(_, transaction_hash, _, _, _, _, _, _, _, chain_id, _, amount),
+    token_mapping(_, chain_id, _, _, _).
+
 
 // Valid withdrawal of ERC20 tokens in the target chain
 //    there is an event emitted by the bridge contract
@@ -129,8 +175,25 @@ TC_ValidERC20TokenWithdrawal(timestamp, transaction_hash, withdrawal_id, sender,
     bridge_controlled_address(origin_chain_id, bridge_address),
     bridge_event_index > token_event_index.
 
+
+.decl TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash:symbol)
+.output TC_ValidERC20TokenWithdrawal_Anomalies
+
+TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :-
+    (
+        erc20_transfer(transaction_hash, chain_id, _, origin_token, _, bridge_address, amount);
+        tc_token_withdrew(transaction_hash, _, _, _, origin_token, _, _, _, amount)
+    ),
+    bridge_controlled_address(chain_id, bridge_address),
+    !tc_withdrawal(transaction_hash, _, _, _, amount),
+    !tc_token_deposited(transaction_hash, _, _, _, _, _),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    !TC_ValidERC20TokenWithdrawal(_, transaction_hash, _, _, _, _, origin_token, _, _, chain_id, _, amount),
+    token_mapping(_, chain_id, _, _, _),
+    bridge_address != "0x0000000000000000000000000000000000000000".
+
 /******************************************************************************************************/
-/************************************* WITHDRAWAL ON SOURCE CHAIN *************************************/
+/******************************** WITHDRAWAL ON SOURCE CHAIN (ISOLATED) *******************************/
 /******************************************************************************************************/
 
 // Valid withdrawal of ERC20 tokens in the source chain (ISOLATED)
@@ -154,6 +217,27 @@ SC_ValidERC20TokenWithdrawal(timestamp, transaction_hash, withdrawal_id, benefic
     bridge_controlled_address(chain_id, bridge_address),
     bridge_event_index > token_event_index.
 
+
+.decl SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash:symbol)
+.output SC_ValidERC20TokenWithdrawal_Anomalies
+
+SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :-
+    (
+        erc20_transfer(transaction_hash, chain_id, _, _, bridge_address, beneficiary, amount) ;
+        sc_withdrawal(transaction_hash, _, bridge_address, beneficiary, amount) ;
+        sc_token_withdrew(transaction_hash, _, _, beneficiary, _, amount)
+    ),
+    bridge_controlled_address(chain_id, bridge_address),
+    !bridge_controlled_address(chain_id, beneficiary), // to avoid 
+    !sc_token_deposited(transaction_hash, _, _, beneficiary, _, _, _, _, amount),
+    !alternative_chains(_, transaction_hash, _, _, _, _),
+    !SC_ValidERC20TokenWithdrawal(_, transaction_hash, _, beneficiary, _, _, amount),
+    token_mapping(chain_id, _, _, _, _).
+
+
+/******************************************************************************************************/
+/******************************* WITHDRAWAL ON SOURCE CHAIN (DEPENDENT) *******************************/
+/******************************************************************************************************/
 
 // Valid withdrawal of ERC20 tokens in the source chain (DEPENDENT ON TARGET CHAIN WITHDRAWAL)
 //     there must be a valid local withdrawal of tokens using SC_ValidERC20TokenWithdrawal
