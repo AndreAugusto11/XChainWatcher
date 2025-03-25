@@ -46,7 +46,7 @@
        },
        "num-tuples": 4217,
        "runtime": { "start": 1780945808137, "end": 1780945812421},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [116:1-123:73]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [116:1-123:73]"
       },
       "CCTX_Deposit(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,deposit_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   TC_ValidERC20TokenDeposit(dst_chain_timestamp,dst_transaction_hash,deposit_id,beneficiary,dst_token,dst_chain_id,amount),\n   SC_ValidNativeTokenDeposit(origin_chain_timestamp,origin_transaction_hash,deposit_id,sender,_,beneficiary,dst_token,origin_token,origin_chain_id,dst_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) <= dst_chain_timestamp.": {
        "atom-frequency": {
@@ -71,14 +71,14 @@
        },
        "num-tuples": 7187,
        "runtime": { "start": 1780945812445, "end": 1780945818737},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [116:1-123:73]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [116:1-123:73]"
       }
      },
      "num-tuples": 11404,
      "reads": 22827,
      "runtime": { "start": 1780945808134, "end": 1780945818771},
      "savetime": { "start": 1780945818791, "end": 1780945828275},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [113:7-113:19]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [113:7-113:19]"
     },
     "CCTX_Deposit_FinalityBreak": {
      "maxRSS": {
@@ -172,7 +172,7 @@
        },
        "num-tuples": 4257,
        "runtime": { "start": 1780945834603, "end": 1780945837417},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [249:1-256:73]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [249:1-256:73]"
       },
       "CCTX_Withdrawal(origin_chain_id,origin_chain_timestamp,origin_transaction_hash,dst_chain_id,dst_chain_timestamp,dst_transaction_hash,withdrawal_id,origin_token,dst_token,sender,beneficiary,amount) :- \n   SC_ValidERC20TokenWithdrawal(dst_chain_timestamp,dst_transaction_hash,withdrawal_id,beneficiary,dst_token,dst_chain_id,amount),\n   TC_ValidNativeTokenWithdrawal(origin_chain_timestamp,origin_transaction_hash,withdrawal_id,sender,_,beneficiary,origin_token,dst_token,dst_chain_id,origin_chain_id,_,amount),\n   cctx_finality(origin_chain_id,orig_chain_finality),\n   (origin_chain_timestamp+orig_chain_finality) <= dst_chain_timestamp.": {
        "atom-frequency": {
@@ -197,14 +197,14 @@
        },
        "num-tuples": 225,
        "runtime": { "start": 1780945837442, "end": 1780945838146},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [249:1-256:73]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [249:1-256:73]"
       }
      },
      "num-tuples": 4482,
      "reads": 10179,
      "runtime": { "start": 1780945834601, "end": 1780945838173},
      "savetime": { "start": 1780945838183, "end": 1780945841888},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [246:7-246:22]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [246:7-246:22]"
     },
     "CCTX_Withdrawal_FinalityBreak": {
      "maxRSS": {
@@ -405,14 +405,14 @@
        },
        "num-tuples": 4223,
        "runtime": { "start": 1780945749132, "end": 1780945751919},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [50:1-56:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [50:1-56:44]"
       }
      },
      "num-tuples": 4223,
      "reads": 46492,
      "runtime": { "start": 1780945749130, "end": 1780945751944},
      "savetime": { "start": 1780945751955, "end": 1780945755175},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [47:7-47:32]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [47:7-47:32]"
     },
     "SC_ValidERC20TokenDeposit_Anomalies": {
      "maxRSS": {
@@ -439,14 +439,14 @@
        },
        "num-tuples": 39,
        "runtime": { "start": 1780945843944, "end": 1780945852885},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [62:1-68:59]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [62:1-68:59]"
       }
      },
      "num-tuples": 39,
      "reads": 0,
      "runtime": { "start": 1780945843943, "end": 1780945852902},
      "savetime": { "start": 1780945852909, "end": 1780945853009},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [59:7-59:42]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [59:7-59:42]"
     },
     "SC_ValidERC20TokenWithdrawal": {
      "maxRSS": {
@@ -477,7 +477,7 @@
        },
        "num-tuples": 4869,
        "runtime": { "start": 1780945755188, "end": 1780945756907},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [210:1-218:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [210:1-218:44]"
       },
       "SC_ValidERC20TokenWithdrawal(timestamp,transaction_hash,withdrawal_id,beneficiary,dst_token,chain_id,amount) :- \n   sc_token_withdrew(transaction_hash,bridge_event_index,withdrawal_id,beneficiary,dst_token,amount),\n   sc_withdrawal(transaction_hash,token_event_index,bridge_address,beneficiary,amount),\n   transaction(timestamp,chain_id,transaction_hash,_,_,_,_,1,_),\n   bridge_controlled_address(chain_id,bridge_address),\n   bridge_event_index > token_event_index.": {
        "atom-frequency": {
@@ -502,14 +502,14 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945756924, "end": 1780945756927},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [210:1-218:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [210:1-218:44]"
       }
      },
      "num-tuples": 4869,
      "reads": 52725,
      "runtime": { "start": 1780945755186, "end": 1780945756947},
      "savetime": { "start": 1780945756954, "end": 1780945759103},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [207:7-207:35]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [207:7-207:35]"
     },
     "SC_ValidERC20TokenWithdrawal_Anomalies": {
      "maxRSS": {
@@ -532,7 +532,7 @@
        },
        "num-tuples": 2,
        "runtime": { "start": 1780945853022, "end": 1780945864400},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
       },
       "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   sc_token_withdrew(transaction_hash,_,_,beneficiary,_,amount),\n   bridge_controlled_address(chain_id,_),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
        "atom-frequency": {
@@ -553,7 +553,7 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945864441, "end": 1780945865393},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
       },
       "SC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   sc_withdrawal(transaction_hash,_,bridge_address,beneficiary,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !bridge_controlled_address(chain_id,beneficiary),\n   !sc_token_deposited(transaction_hash,_,_,beneficiary,_,_,_,_,amount),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !SC_ValidERC20TokenWithdrawal(_,transaction_hash,_,beneficiary,_,_,amount),\n   token_mapping(chain_id,_,_,_,_).": {
        "atom-frequency": {
@@ -574,14 +574,14 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945864419, "end": 1780945864421},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [224:1-235:41]"
       }
      },
      "num-tuples": 2,
      "reads": 0,
      "runtime": { "start": 1780945853020, "end": 1780945865411},
      "savetime": { "start": 1780945865419, "end": 1780945865509},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [221:7-221:45]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [221:7-221:45]"
     },
     "SC_ValidNativeTokenDeposit": {
      "maxRSS": {
@@ -612,14 +612,14 @@
        },
        "num-tuples": 7187,
        "runtime": { "start": 1780945759111, "end": 1780945762968},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [20:1-27:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [20:1-27:44]"
       }
      },
      "num-tuples": 7187,
      "reads": 7188,
      "runtime": { "start": 1780945759110, "end": 1780945762999},
      "savetime": { "start": 1780945763014, "end": 1780945768441},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [17:7-17:33]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [17:7-17:33]"
     },
     "SC_ValidNativeTokenDeposit_Anomalies": {
      "maxRSS": {
@@ -642,14 +642,14 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945865744, "end": 1780945866637},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [33:1-36:89]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [33:1-36:89]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
      "runtime": { "start": 1780945865742, "end": 1780945866654},
      "savetime": { "start": 1780945866662, "end": 1780945866688},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [30:7-30:43]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [30:7-30:43]"
     },
     "SC_WithdrawalsMatchWithAdditionalData": {
      "maxRSS": {
@@ -994,14 +994,14 @@
        },
        "num-tuples": 11417,
        "runtime": { "start": 1780945791247, "end": 1780945795083},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [86:1-92:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [86:1-92:44]"
       }
      },
      "num-tuples": 11417,
      "reads": 47856,
      "runtime": { "start": 1780945791245, "end": 1780945795105},
      "savetime": { "start": 1780945795115, "end": 1780945800244},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [83:7-83:32]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [83:7-83:32]"
     },
     "TC_ValidERC20TokenDeposit_Anomalies": {
      "maxRSS": {
@@ -1024,14 +1024,14 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945866713, "end": 1780945873401},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [97:1-102:41]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [97:1-102:41]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
      "runtime": { "start": 1780945866712, "end": 1780945873417},
      "savetime": { "start": 1780945873424, "end": 1780945873460},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [94:7-94:42]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [94:7-94:42]"
     },
     "TC_ValidERC20TokenWithdrawal": {
      "maxRSS": {
@@ -1062,14 +1062,14 @@
        },
        "num-tuples": 4846,
        "runtime": { "start": 1780945800255, "end": 1780945802789},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [170:1-176:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [170:1-176:44]"
       }
      },
      "num-tuples": 4846,
      "reads": 14602,
      "runtime": { "start": 1780945800253, "end": 1780945802817},
      "savetime": { "start": 1780945802830, "end": 1780945806424},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [167:7-167:35]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [167:7-167:35]"
     },
     "TC_ValidERC20TokenWithdrawal_Anomalies": {
      "maxRSS": {
@@ -1092,7 +1092,7 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945873469, "end": 1780945882434},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [182:1-193:68]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [182:1-193:68]"
       },
       "TC_ValidERC20TokenWithdrawal_Anomalies(transaction_hash) :- \n   tc_token_withdrew(transaction_hash,_,_,_,origin_token,_,_,_,amount),\n   bridge_controlled_address(chain_id,bridge_address),\n   !tc_withdrawal(transaction_hash,_,_,_,amount),\n   !tc_token_deposited(transaction_hash,_,_,_,_,_),\n   !alternative_chains(_,transaction_hash,_,_,_,_),\n   !TC_ValidERC20TokenWithdrawal(_,transaction_hash,_,_,_,_,origin_token,_,_,chain_id,_,amount),\n   token_mapping(_,chain_id,_,_,_),\n   bridge_address != \"0x0000000000000000000000000000000000000000\".": {
        "atom-frequency": {
@@ -1113,14 +1113,14 @@
        },
        "num-tuples": 10,
        "runtime": { "start": 1780945882452, "end": 1780945888638},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [182:1-193:68]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [182:1-193:68]"
       }
      },
      "num-tuples": 10,
      "reads": 0,
      "runtime": { "start": 1780945873466, "end": 1780945888655},
      "savetime": { "start": 1780945888663, "end": 1780945888751},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [179:7-179:45]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [179:7-179:45]"
     },
     "TC_ValidNativeTokenWithdrawal": {
      "maxRSS": {
@@ -1151,14 +1151,14 @@
        },
        "num-tuples": 464,
        "runtime": { "start": 1780945806440, "end": 1780945806905},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [140:1-147:44]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [140:1-147:44]"
       }
      },
      "num-tuples": 464,
      "reads": 464,
      "runtime": { "start": 1780945806436, "end": 1780945806926},
      "savetime": { "start": 1780945806933, "end": 1780945807395},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [137:7-137:36]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [137:7-137:36]"
     },
     "TC_ValidNativeTokenWithdrawal_Anomalies": {
      "maxRSS": {
@@ -1185,14 +1185,14 @@
        },
        "num-tuples": 0,
        "runtime": { "start": 1780945893535, "end": 1780945893664},
-       "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [152:1-157:41]"
+       "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [152:1-157:41]"
       }
      },
      "num-tuples": 0,
      "reads": 0,
      "runtime": { "start": 1780945893533, "end": 1780945893679},
      "savetime": { "start": 1780945893685, "end": 1780945893720},
-     "source-locator": "/Users/andre/Documents/GitHub/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [149:7-149:46]"
+     "source-locator": "~/XChainWatcher/cross-chain-rules-validator/datalog/acceptance-rules.dl [149:7-149:46]"
     },
     "TC_WithdrawalsMatchWithAdditionalData": {
      "maxRSS": {

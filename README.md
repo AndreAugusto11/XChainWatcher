@@ -1,8 +1,5 @@
 # XChainWatcher
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub issues](https://img.shields.io/github/issues/AndreAugusto11/XChainWatcher)](https://github.com/AndreAugusto11/XChainWatcher/issues) [![GitHub stars](https://img.shields.io/github/stars/AndreAugusto11/XChainWatcher)](https://github.com/AndreAugusto11/XChainWatcher/stargazers)
-[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/release/python-3110/) [![Datalog](https://img.shields.io/badge/Datalog-powered-brightgreen)](https://en.wikipedia.org/wiki/Datalog) [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/AndreAugusto11/XChainWatcher/blob/main/CONTRIBUTING.md)
-
 XChainWatcher is a pluggable monitoring and detection mechanism for cross-chain bridges, powered by a cross-chain model. It uses the [Souffle Datalog engine](https://souffle-lang.github.io/) to identify deviations from expected behavior defined in terms of cross-chain rules.
 
 Here's an example of a basic cross-chain transaction rule:
@@ -154,26 +151,11 @@ To generate figures, run each corresponding R script in [`data-visualizations`](
 ### token-price-data
 Token price data is an util that processes token data information for usage in the figure generation.
 
-### License
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
 ### Suggested Citation
 This work is an implementation of the paper XChainWatcher. It can be obtained here:
 ```bibtex
-@misc{augusto2024xchainwatcher,
-      title={XChainWatcher: Monitoring and Identifying Attacks in Cross-Chain Bridges}, 
-      author={André Augusto and Rafael Belchior and Jonas Pfannschmidt and André Vasconcelos and Miguel Correia},
-      year={2024},
-      eprint={2410.02029},
-      archivePrefix={arXiv},
-      primaryClass={cs.CR},
-      url={https://arxiv.org/abs/2410.02029}, 
-}
+TBD
 ```
 
 ### Contact
 For bugs, feature requests, and other issues, please use the GitHub issue tracker.
-
-### Team
-[André Augusto](https://andreaugusto11.github.io/) (maintainer)
-[Rafael Belchior](https://rafaelapb.github.io/) (contributor)
